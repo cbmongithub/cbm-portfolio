@@ -54,7 +54,7 @@ export const SOCIAL_LINKS = {
 export const SITE_METADATA = {
   name: "Christian B. Martinez — Full-Stack Engineer",
   url: BASE_URL,
-  ogImage: `${BASE_URL}/og-image.webp`,
+  ogImage: `${BASE_URL}/og-image.png`,
   description:
     "Portfolio of Christian B. Martinez showcasing full-stack projects, product thinking, and experiments.",
   links: {
