@@ -1,0 +1,24 @@
+# dependencies & package managers
+/node_modules
+*.lock
+bun.lock
+bun.lockb
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# build output
+/.next/
+/build
+/dist
+/out
+/coverage
+/.turbo
+/.vercel
+
+# logs & caches
+*.log
+.eslintcache
+
+# environment files
+.env*

@@ -1,0 +1,32 @@
+# dependencies & package managers
+/node_modules
+*.lock
+bun.lock
+bun.lockb
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# next.js / builds
+/.next/
+/out/
+/build
+/dist
+/.turbo
+/.vercel
+
+# coverage & logs
+/coverage
+*.log
+.eslintcache
+
+# misc
+.DS_Store
+*.pem
+
+# env
+.env*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
