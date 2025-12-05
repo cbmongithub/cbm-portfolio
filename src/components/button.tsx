@@ -17,14 +17,12 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const cls = BUTTON_VARIANTS[variant];
-
   return (
     <button
       type="button"
-      className={`group text-foreground relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded ${cls} ${
-        className ?? ""
-      }`}
+      className={`group text-foreground hover:bg-foreground/4 relative inline-flex cursor-pointer items-center justify-center overflow-hidden ${
+        BUTTON_VARIANTS[variant]
+      } ${className ?? ""}`}
       {...props}
     >
       {icon && (

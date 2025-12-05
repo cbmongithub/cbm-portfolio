@@ -1,49 +1,61 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
+import NextImage, { type ImageProps } from "next/image";
 import Link, { type LinkProps } from "next/link";
 
-import { slugify } from "@/lib/utils";
-
 import { CodeBlock } from "./code-block";
+import {
+  CodeInline,
+  Heading,
+  Lead,
+  List,
+  Prose,
+  Quote,
+  Small,
+  Surface,
+  Table,
+  Td,
+  Text,
+  Th,
+  Tr,
+} from "./typography";
 
-type HeadingLevel = 1 | 2 | 3 | 4;
+type MDXImageProps = ImageProps & { className?: string };
 
-type HeadingProps = React.PropsWithChildren<{ level: HeadingLevel }>;
-
-const headingMap = {
-  1: "h1",
-  2: "h2",
-  3: "h3",
-  4: "h4",
-} satisfies Record<HeadingLevel, keyof React.JSX.IntrinsicElements>;
-
-/* Heading with auto-anchors  */
-function Heading({ level, children }: HeadingProps) {
-  const Heading = headingMap[level];
-  // Strip non‑string children so we can safely slugify the text
-  const text = Array.isArray(children)
-    ? children.join("")
-    : typeof children === "string"
-      ? children
-      : "";
-  const id = slugify(text);
-
-  return (
-    <Heading id={id} className="group">
-      <Link href={`#${id}`} aria-label={`Link to heading ${text}`} className="anchor">
-        {children}
-      </Link>
-    </Heading>
-  );
-}
+const MDXImage = ({ className, ...props }: MDXImageProps) => (
+  <div className={`overflow-hidden ${className ?? ""}`}>
+    <NextImage {...props} />
+  </div>
+);
 
 /* MDX element overrides */
 const components = {
-  h1: (props: React.PropsWithChildren) => <Heading level={1} {...props} />,
-  h2: (props: React.PropsWithChildren) => <Heading level={2} {...props} />,
-  h3: (props: React.PropsWithChildren) => <Heading level={3} {...props} />,
-  h4: (props: React.PropsWithChildren) => <Heading level={4} {...props} />,
+  h1: (props: React.ComponentPropsWithoutRef<"h1">) => <Heading level={1} {...props} />,
+  h2: (props: React.ComponentPropsWithoutRef<"h2">) => <Heading level={2} {...props} />,
+  h3: (props: React.ComponentPropsWithoutRef<"h3">) => <Heading level={3} {...props} />,
+  h4: (props: React.ComponentPropsWithoutRef<"h4">) => <Heading level={4} {...props} />,
+  p: (props: React.ComponentPropsWithoutRef<"p">) => <Text {...props} />,
+  code: (props: React.ComponentPropsWithoutRef<"code">) => <CodeInline {...props} />,
   a: (props: LinkProps) => <Link {...props} />,
+  img: (props: ImageProps) => (
+    <MDXImage
+      className={props.className ?? ""}
+      alt={props.alt ?? ""}
+      src={props.src}
+      width={props.width ?? 1200}
+      height={props.height ?? 630}
+    />
+  ),
   pre: CodeBlock,
+  Lead,
+  Small,
+  Quote,
+  Surface,
+  Prose,
+  List,
+  Table,
+  Tr,
+  Td,
+  Th,
 };
 
 type MDXComponentsProps = { source: string };

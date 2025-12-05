@@ -1,37 +1,73 @@
 ---
 title: "Design system smoke test"
 publishedAt: "2025-12-05"
-summary: "Checking MDX rendering: typography, links, code highlighting, and tables."
+summary: "Exercising headings, anchors, links, lists, tables, code, and images."
 ---
+
+<Lead>
+  This post exercises our typography set, custom headings with anchor links, lists,
+  tables, code fences with titles, and images.
+</Lead>
+
+{" "}
+<Prose>
+  <img
+    src="https://cdn.sanity.io/images/599r6htc/regionalized/6dd0b818bf5d087b52c4f01736ec167558efc67b-1200x630.png"
+    alt="Testing cover"
+    width="1200"
+    height="630"
+    className="border-border border"
+  />
+  <Small className="mt-2">Figure 1. Remote test image with rounding.</Small>
+</Prose>
 
 # H1 Heading
 
-Intro paragraph with a link to [Next.js](https://nextjs.org) and some inline code `const pi = 3.14` plus **bold** and _italic_ text.
-
 ## H2 Heading
 
-> Blockquote to verify prose styling.
+### H3 Heading
 
-- Unordered list item one
-- Unordered list item two
-  - Nested item
+#### H4 Heading
 
-1. Ordered item one
-2. Ordered item two
+<Quote>Blockquote to verify styling and left border.</Quote>
 
-Horizontal rule:
+<List>
+  <li>Unordered item one</li>
+  <li>Unordered item two</li>
+  <li>Unordered item three</li>
+</List>
 
----
+<List as="ol">
+  <li>Ordered item one</li>
+  <li>Ordered item two</li>
+</List>
 
-### Table
-
-| Feature        | Status | Notes               |
-| -------------- | ------ | ------------------- |
-| Typography     | ✅     | Check headings/body |
-| Code Highlight | ✅     | SugarHigh + OKLCH   |
-| Links          | ✅     | Uses Next.js `Link` |
-
-### Code sample (SugarHigh tokens)
+<Table>
+  <thead>
+    <tr>
+      <Th>Feature</Th>
+      <Th>Status</Th>
+      <Th>Notes</Th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <Td>Typography</Td>
+      <Td>✅</Td>
+      <Td>Headings, lists, blockquote</Td>
+    </tr>
+    <tr>
+      <Td>Code Highlight</Td>
+      <Td>✅</Td>
+      <Td>SugarHigh + titles</Td>
+    </tr>
+    <tr>
+      <Td>Links & Anchors</Td>
+      <Td>✅</Td>
+      <Td>Custom anchor styling</Td>
+    </tr>
+  </tbody>
+</Table>
 
 ```ts title="highlight-demo.ts"
 // comment: uses keyword, class, property, string, entity, sign
@@ -48,7 +84,7 @@ export class Widget {
   }
 
   render(props: { title: string; count: number }) {
-    const { title, count } = props; // destructured properties
+    const { title, count } = props; // property + comment
     return `${title} (#${this.id}) has ${count} items`;
   }
 }
@@ -64,7 +100,3 @@ const widget = Widget.from({
 
 console.log(widget.render({ title: "Demo", count: add(2, 3) }));
 ```
-
-### Another paragraph
-
-This should show standard body copy after the code block.

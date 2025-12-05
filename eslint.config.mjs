@@ -43,6 +43,7 @@ const eslintConfig = defineConfig([
             ["^@/components"],
             ["^@/lib"],
             ["^@/types"],
+            ["^@/styles"],
             ["^@/"],
             ["^\\u0000"],
             ["^\\.", "^\\.."],
