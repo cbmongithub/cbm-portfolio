@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { SITE_METADATA } from "@/lib/config";
 
-import "./globals.css";
+import "@/styles/globals.css";
 
 const geist = Geist({
   variable: "--font-geist-sans",

@@ -29,13 +29,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-10">
       <article>
         <header className="space-y-2">
-          <p className="text-muted text-sm">{published}</p>
+          <p className="text-muted-foreground text-sm">{published}</p>
           <h1 className="text-foreground text-3xl font-semibold">
             {post.metadata.title}
           </h1>
-          {post.metadata.summary ? (
-            <p className="text-muted">{post.metadata.summary}</p>
-          ) : null}
+          <p className="text-muted-foreground">{post.metadata.summary}</p>
         </header>
 
         <div className="max-w-none">
