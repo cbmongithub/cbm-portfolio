@@ -55,6 +55,17 @@ Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts 
 - Routes: `/home`, `/about`, `/portfolio`, `/blog`, `/blog/:slug`, `/contact`
 - SEO helpers: `robots.ts`, `sitemap.ts`, metadata in `layout.tsx`
 
+## Dependencies (at a glance)
+
+| Category  | Packages (version)                                                                                                                                  |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Core      | `next ^16.0.x`, `react ^19.x`, `react-dom ^19.x`                                                                                                    |
+| Styling   | `tailwindcss ^4.x`, `prettier-plugin-tailwindcss ^0.7.x`                                                                                            |
+| MDX       | `next-mdx-remote ^5.0.x`, `sugar-high ^0.9.x`                                                                                                       |
+| Lint/Type | `eslint ^9.x`, `eslint-config-next ^16.x`, `eslint-plugin-simple-import-sort ^12.x`, `eslint-plugin-tailwindcss ^4.0.0-beta.x`, `typescript ^5.9.x` |
+| Runtime   | `bun 1.2.x`                                                                                                                                         |
+| Analytics | `@vercel/analytics ^1.6.x`, `@vercel/speed-insights ^1.3.x`                                                                                         |
+
 ## Roadmap (living)
 
 - [x] Scaffolded core routes (home, about, portfolio, blog index/detail, contact)
