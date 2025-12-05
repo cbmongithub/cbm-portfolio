@@ -21,12 +21,25 @@
 
 ## Tooling
 
-- Formatting: Prettier with `prettier-plugin-tailwindcss` (tailwind class sorting), runs in CI with `--write`.
-- Linting: ESLint flat config with Next core-web-vitals + TypeScript presets; `eslint-plugin-simple-import-sort` enforces grouped imports; `eslint-plugin-tailwindcss` checks class ordering/syntax (v4 aware).
-- Class ordering: Tailwind classes auto-sorted by Prettier; keep semantic grouping minimal, the formatter will reorder.
-- Imports: Sorted into groups (react/next/external → hooks → components → lib → types → alias → relative → relative parent) via simple-import-sort.
-- Styles: Global tokens and theme toggles live in `src/app/globals.css`; dark-first via `html.dark`, light via `prefers-color-scheme: light`.
-- Content path: MDX lives in `src/content/blog`; `src/lib/posts.ts` reads from there (frontmatter `title`, `publishedAt`, `summary`, `image`).
+- Formatting: Prettier + `prettier-plugin-tailwindcss` (class sorting), runs in CI with `--write`.
+- Linting: ESLint flat config (Next core-web-vitals + TS), `eslint-plugin-simple-import-sort` for grouped imports, `eslint-plugin-tailwindcss` for class order/syntax (v4 aware).
+- Imports: Ordered react/next/external → hooks → components → lib → types → alias → relative via simple-import-sort.
+- Styles: Color tokens live in `styles/globals.css` (light/dark via CSS vars); no prose plugin.
+- Content: MDX in `src/content/blog`; parsed by `src/lib/posts.ts` (frontmatter: `title`, `publishedAt`, `summary`, `image`).
+
+## Typography & MDX
+
+Instead of using something like `@tailwindcss/typography` I opted to keep output lean and fully controlled. All text/UI primitives are React components in `src/components/typography.tsx`, rendered through `src/components/mdx-components.tsx`. This keeps bundle size small, using just `next-mdx-remote/rsc` and `sugar-high` for the entire MDX solution.
+
+- **Headings**: `Heading` adds hash anchors via `next/link`, sized with our tokens.
+- **Text**: `Text`, `Lead`, `Small`, `Quote`, `List` (`as="ol"` for ordered), `CodeInline`, `Surface` (card), `Prose` (spacing wrapper).
+- **Tables**: `Table`, `Tr`, `Th`, `Td` for consistent borders/padding.
+- **Code**: `CodeBlock` (SugarHigh highlight, supports fence `title="..."`), `CodeInline`.
+- **Images**: `img` maps to `next/image` with rounding/default sizing; remote images allowed for testing.
+- **MDX map**: `mdx-components.tsx` maps HTML tags and shortcodes to these primitives; only a tiny remark pass for code-fence meta.
+- **Why**: Granular control, consistent spacing, and token-driven colors without sprinkling `dark:` utilities or prose defaults. Theme tokens are in `styles/globals.css`; typography handles layout.
+
+Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts with `MDXComponents`.
 
 ## Scripts
 
@@ -46,17 +59,16 @@
 
 - [x] Scaffolded core routes (home, about, portfolio, blog index/detail, contact)
 - [x] SEO helpers wired (metadata, robots, sitemap)
-- [x] ESLint + Prettier configured (with Tailwind sorting, import sorting)
-- [x] Tailwind v4 base tokens/theme set up
-- [ ] Parse titles from frontmatter data/fix table styling
-- [ ] Replace placeholder page content with real sections and components
-- [ ] Introduce Portfolio detail page that dives deeper into projects (architecture, patterns, etc.)
-- [ ] Add shiki/code-hilite (e.g., Sugar High) and build code block components
-- [ ] Build blog rendering pipeline (MDX → React) and listing
-- [ ] Add per-post OG image generation
-- [ ] Add navigation/footer components wired to `NAV_LINKS`/`FOOTER_LINKS`
-- [ ] Add theme-aware components using CSS tokens; consider light toggle
-- [ ] Add tests for posts parsing and sitemap/robots output
-- [ ] Add CI badge
+- [x] ESLint + Prettier configured (Tailwind/import sorting)
+- [x] Tailwind v4 tokens/theme set up
+- [x] Blog rendering pipeline (MDX → React) and listing
+- [ ] Parse titles from frontmatter data
+- [ ] Replace placeholder page content with real sections/components
+- [ ] Portfolio detail page (architecture, patterns, etc.)
+- [ ] Add code highlight refinements and code block components
+- [ ] Per-post OG image generation
+- [ ] Navigation/footer wired to `NAV_LINKS`/`FOOTER_LINKS`
+- [ ] Theme-aware components; consider light toggle
+- [ ] Tests for posts parsing and sitemap/robots output
 - [ ] Deploy to Vercel and verify analytics
 - [ ] Post-launch performance and accessibility optimizations
