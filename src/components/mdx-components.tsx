@@ -1,6 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import NextImage, { type ImageProps } from "next/image";
 import Link, { type LinkProps } from "next/link";
+
 import { CodeBlock } from "./code-block";
 import {
   CodeInline,
@@ -28,22 +29,12 @@ const MDXImage = ({ className, ...props }: MDXImageProps) => (
 
 /* MDX element overrides */
 const components = {
-  h1: (props: React.ComponentPropsWithoutRef<"h1">) => (
-    <Heading level={1} {...props} />
-  ),
-  h2: (props: React.ComponentPropsWithoutRef<"h2">) => (
-    <Heading level={2} {...props} />
-  ),
-  h3: (props: React.ComponentPropsWithoutRef<"h3">) => (
-    <Heading level={3} {...props} />
-  ),
-  h4: (props: React.ComponentPropsWithoutRef<"h4">) => (
-    <Heading level={4} {...props} />
-  ),
+  h1: (props: React.ComponentPropsWithoutRef<"h1">) => <Heading level={1} {...props} />,
+  h2: (props: React.ComponentPropsWithoutRef<"h2">) => <Heading level={2} {...props} />,
+  h3: (props: React.ComponentPropsWithoutRef<"h3">) => <Heading level={3} {...props} />,
+  h4: (props: React.ComponentPropsWithoutRef<"h4">) => <Heading level={4} {...props} />,
   p: (props: React.ComponentPropsWithoutRef<"p">) => <Text {...props} />,
-  code: (props: React.ComponentPropsWithoutRef<"code">) => (
-    <CodeInline {...props} />
-  ),
+  code: (props: React.ComponentPropsWithoutRef<"code">) => <CodeInline {...props} />,
   a: (props: LinkProps) => <Link {...props} />,
   img: (props: ImageProps) => (
     <MDXImage

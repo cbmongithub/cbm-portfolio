@@ -4,18 +4,22 @@ publishedAt: "2025-12-05"
 summary: "Exercising headings, anchors, links, lists, tables, code, and images."
 ---
 
-<Lead>This post exercises our typography set, custom headings with anchor links, lists, tables, code fences with titles, and images.</Lead>
+<Lead>
+  This post exercises our typography set, custom headings with anchor links, lists,
+  tables, code fences with titles, and images.
+</Lead>
 
-  <Prose>
-    <img
-      src="https://cdn.sanity.io/images/599r6htc/regionalized/6dd0b818bf5d087b52c4f01736ec167558efc67b-1200x630.png"
-      alt="Testing cover"
-      width="1200"
-      height="630"
-      className="border border-border"
-    />
-    <Small className="mt-2">Figure 1. Remote test image with rounding.</Small>
-  </Prose>
+{" "}
+<Prose>
+  <img
+    src="https://cdn.sanity.io/images/599r6htc/regionalized/6dd0b818bf5d087b52c4f01736ec167558efc67b-1200x630.png"
+    alt="Testing cover"
+    width="1200"
+    height="630"
+    className="border-border border"
+  />
+  <Small className="mt-2">Figure 1. Remote test image with rounding.</Small>
+</Prose>
 
 # H1 Heading
 
@@ -25,9 +29,7 @@ summary: "Exercising headings, anchors, links, lists, tables, code, and images."
 
 #### H4 Heading
 
-<Quote>
-  Blockquote to verify styling and left border.
-</Quote>
+<Quote>Blockquote to verify styling and left border.</Quote>
 
 <List>
   <li>Unordered item one</li>
@@ -97,3 +99,4 @@ const widget = Widget.from({
 });
 
 console.log(widget.render({ title: "Demo", count: add(2, 3) }));
+```

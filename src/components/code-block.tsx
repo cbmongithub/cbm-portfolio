@@ -14,8 +14,7 @@ export function CodeBlock({ children }: CodeBlockProps) {
   if (!children) return null;
 
   const raw = children?.props?.children ?? "";
-  const lang =
-    children?.props?.className?.replace("language-", "")?.trim() || "text";
+  const lang = children?.props?.className?.replace("language-", "")?.trim() || "text";
 
   const meta = children?.props?.metastring || `example.${lang}`;
   const titleMatch = /title="([^"]+)"/.exec(meta as string);
@@ -23,7 +22,7 @@ export function CodeBlock({ children }: CodeBlockProps) {
   const code = String(raw);
 
   return (
-    <div className="py-2 mt-2">
+    <div className="mt-2 py-2">
       <div className="border-border bg-card relative overflow-hidden border">
         <div className="text-md text-foreground border-border bg-card flex items-center justify-between gap-3 border-b px-3 py-2">
           <span className="text-md">{title}</span>
