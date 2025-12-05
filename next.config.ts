@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ["ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],

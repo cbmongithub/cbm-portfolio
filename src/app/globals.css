@@ -1,25 +1,47 @@
 @import "tailwindcss";
 
-@plugin '@tailwindcss/typography';
-
 @custom-variant dark (&:is(.dark *));
 
+/* -------------------------------------------------------------------------- */
+/* Theme tokens: manage light/dark in one place                               */
+/* -------------------------------------------------------------------------- */
+
 :root {
-  --background: var(--color-neutral-50);
-  --foreground: var(--color-neutral-950);
-  --link: var(--color-blue-600);
-  --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
+  --background: oklch(98% 0.01 95);
+  --foreground: oklch(20% 0.02 260);
+  --secondary: oklch(94% 0.01 95);
+  --secondary-foreground: oklch(30% 0.02 260);
+  --muted: oklch(90% 0.01 260);
+  --muted-foreground: oklch(40% 0.03 260);
+  --border: oklch(88% 0.01 260);
+  --link: oklch(68% 0.16 240);
+  --card: oklch(94% 0.004 260);
+
+  /* SugarHigh */
+  --sh-comment: oklch(48% 0.02 250);
+  --sh-keyword: oklch(70% 0.19 305);
+  --sh-class: oklch(68% 0.16 240);
+  --sh-entity: oklch(72% 0.13 70);
+  --sh-property: oklch(64% 0.12 175);
+  --sh-string: oklch(70% 0.14 140);
+  --sh-sign: oklch(78% 0.1 220);
+  --sh-jsxliterals: oklch(68% 0.16 240);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--color-neutral-950);
-    --foreground: var(--color-neutral-50);
-    --link: var(--color-blue-500);
-  }
+.dark {
+  --background: oklch(16% 0.02 260);
+  --foreground: oklch(92% 0.02 85);
+  --secondary: oklch(22% 0.02 260);
+  --secondary-foreground: oklch(92% 0.01 85);
+  --muted: oklch(26% 0.02 260);
+  --muted-foreground: oklch(75% 0.02 260);
+  --border: oklch(32% 0.02 260);
+  --link: oklch(68% 0.16 240);
+  --card: oklch(54.361% 0.22005 265.405);
+}
+
+* {
+  border-color: var(--border);
 }
 
 html {
@@ -29,6 +51,133 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Base typography                                                            */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  a {
+    color: var(--link);
+    text-decoration: underline;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+
+  blockquote,
+  figcaption {
+    color: var(--foreground);
+  }
+
+  p,
+  li {
+    color: var(--muted-foreground);
+  }
+
+  small,
+  time {
+    color: var(--muted-foreground);
+  }
+
+  strong,
+  b {
+    font-weight: 700;
+    color: var(--foreground);
+  }
+  em,
+  i {
+    color: var(--foreground);
+  }
+
+  blockquote {
+    border-left: 2px solid;
+    padding-left: 1rem;
+    color: var(--muted-foreground);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid;
+  }
+
+  th,
+  td {
+    border: 1px solid;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid;
+    margin: 1.5rem 0;
+  }
+
+  ul,
+  ol {
+    margin-left: 1.25rem;
+    color: var(--foreground);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--foreground);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+  }
+  h2 {
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+  }
+  h3 {
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+  }
+  h4 {
+    font-size: 1.1rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Misc                                                             */
+/* -------------------------------------------------------------------------- */
+
+.anchor {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  padding-right: 2rem;
+}
+.anchor::after {
+  content: "🔗";
+  font-size: x-large;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(0.2rem);
+  opacity: 0;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+.group:hover .anchor::after,
+.anchor:hover::after {
+  opacity: 0.7;
+  transform: translateY(-50%) translateX(0);
+}
+
+::selection {
+  background: var(--link);
+  color: var(--background);
 }

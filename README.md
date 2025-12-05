@@ -48,6 +48,7 @@
 - [x] SEO helpers wired (metadata, robots, sitemap)
 - [x] ESLint + Prettier configured (with Tailwind sorting, import sorting)
 - [x] Tailwind v4 base tokens/theme set up
+- [ ] Parse titles from frontmatter data/fix table styling
 - [ ] Replace placeholder page content with real sections and components
 - [ ] Introduce Portfolio detail page that dives deeper into projects (architecture, patterns, etc.)
 - [ ] Add shiki/code-hilite (e.g., Sugar High) and build code block components

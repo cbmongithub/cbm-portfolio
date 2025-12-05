@@ -1,13 +1,70 @@
 ---
-title: "Test blog: How does hello world work?"
-publishedAt: "2025-12-04"
-summary: "In this article, we go over a hello world function."
+title: "Design system smoke test"
+publishedAt: "2025-12-05"
+summary: "Checking MDX rendering: typography, links, code highlighting, and tables."
 ---
 
-## Example:
+# H1 Heading
 
-```typescript
-export function helloWorld(param: string) {
-  return param;
+Intro paragraph with a link to [Next.js](https://nextjs.org) and some inline code `const pi = 3.14` plus **bold** and _italic_ text.
+
+## H2 Heading
+
+> Blockquote to verify prose styling.
+
+- Unordered list item one
+- Unordered list item two
+  - Nested item
+
+1. Ordered item one
+2. Ordered item two
+
+Horizontal rule:
+
+---
+
+### Table
+
+| Feature        | Status | Notes               |
+| -------------- | ------ | ------------------- |
+| Typography     | ✅     | Check headings/body |
+| Code Highlight | ✅     | SugarHigh + OKLCH   |
+| Links          | ✅     | Uses Next.js `Link` |
+
+### Code sample (SugarHigh tokens)
+
+```ts title="highlight-demo.ts"
+// comment: uses keyword, class, property, string, entity, sign
+export class Widget {
+  private id: string;
+  constructor(id: string) {
+    this.id = id ?? crypto.randomUUID();
+  }
+
+  static from(entity: { id: string; props: Record<string, unknown> }) {
+    const widget = new Widget(entity.id);
+    Object.assign(widget, entity.props);
+    return widget;
+  }
+
+  render(props: { title: string; count: number }) {
+    const { title, count } = props; // destructured properties
+    return `${title} (#${this.id}) has ${count} items`;
+  }
 }
+
+function add(a: number, b: number) {
+  return a + b; // sign
+}
+
+const widget = Widget.from({
+  id: "w-123", // string
+  props: { owner: "cbm", meta: { env: "dev" } },
+});
+
+console.log(widget.render({ title: "Demo", count: add(2, 3) }));
 ```
+
+### Another paragraph
+
+This should show standard body copy after the code block.

@@ -1,4 +1,3 @@
-import { cache } from "react";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -12,7 +11,8 @@ type PostMetadata = {
 const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
 const quotesRegex = /^['"](.*)['"]$/;
 
-function parseFrontmatter(fileContent: string) {
+// Parse a raw MDX file: extract YAML-like frontmatter and return metadata + content
+export function parseFrontmatter(fileContent: string) {
   const match = frontmatterRegex.exec(fileContent);
   const frontMatterBlock = match?.[1];
   const content = fileContent.replace(frontmatterRegex, "").trim();
@@ -29,7 +29,10 @@ function parseFrontmatter(fileContent: string) {
   return { metadata: metadata as PostMetadata, content };
 }
 
+// Read all MDX files in a directory and return slug + metadata + content
 function getMdxData(dir: string) {
+  if (!fs.existsSync(dir)) return [];
+
   const mdxFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
 
   return mdxFiles.map((file) => {
@@ -45,7 +48,18 @@ function getMdxData(dir: string) {
   });
 }
 
-export const getPosts = cache(() => {
-  const posts = getMdxData(path.join(process.cwd(), "src", "content", "blog"));
-  return posts;
-});
+const CONTENT_DIR = path.join(process.cwd(), "src", "content", "blog");
+
+// Return all blog posts from the content directory
+export function getPosts() {
+  return getMdxData(CONTENT_DIR);
+}
+
+// Read a single post by slug; returns null if the file doesn't exist
+export function getPostBySlug(slug: string) {
+  const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
+  if (!fs.existsSync(filePath)) return null;
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { metadata, content } = parseFrontmatter(raw);
+  return { slug, metadata, content };
+}
