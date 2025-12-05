@@ -53,6 +53,7 @@ const eslintConfig = defineConfig([
       // Enforce Tailwind className ordering and v4+ syntax
       "tailwindcss/classnames-order": "error",
       "tailwindcss/no-unnecessary-arbitrary-value": "warn",
+      "tailwindcss/no-custom-classname": "off",
     },
   },
 
