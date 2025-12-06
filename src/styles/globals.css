@@ -24,19 +24,17 @@
 }
 
 @layer theme {
-  :root {
-    @variant dark {
-      --color-background: oklch(16% 0.02 260);
-      --color-foreground: oklch(92% 0.02 85);
-      --color-secondary: oklch(22% 0.02 260);
-      --color-secondary-foreground: oklch(92% 0.01 85);
-      --color-muted: oklch(26% 0.02 260);
-      --color-muted-foreground: oklch(75% 0.02 260);
-      --color-border: oklch(32% 0.02 260);
-      --color-link: oklch(68% 0.16 240);
-      --color-card: oklch(14% 0.02 260);
-      --color-card-foreground: oklch(92% 0.02 85);
-    }
+  .dark {
+    --color-background: oklch(16% 0.02 260);
+    --color-foreground: oklch(92% 0.02 85);
+    --color-secondary: oklch(22% 0.02 260);
+    --color-secondary-foreground: oklch(92% 0.01 85);
+    --color-muted: oklch(26% 0.02 260);
+    --color-muted-foreground: oklch(75% 0.02 260);
+    --color-border: oklch(32% 0.02 260);
+    --color-link: oklch(68% 0.16 240);
+    --color-card: oklch(14% 0.02 260);
+    --color-card-foreground: oklch(92% 0.02 85);
   }
 }
 
