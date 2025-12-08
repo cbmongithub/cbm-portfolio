@@ -22,24 +22,23 @@
 ## Tooling
 
 - Formatting: Prettier + `prettier-plugin-tailwindcss` (class sorting), runs in CI with `--write`.
-- Linting: ESLint flat config (Next core-web-vitals + TS), `eslint-plugin-simple-import-sort` for grouped imports, `eslint-plugin-tailwindcss` for class order/syntax (v4 aware).
+- Linting: ESLint flat config (Next core-web-vitals + TS); `eslint-plugin-simple-import-sort` groups imports; `eslint-plugin-tailwindcss` enforces class order/syntax (v4 aware).
 - Imports: Ordered react/next/external → hooks → components → lib → types → alias → relative via simple-import-sort.
 - Styles: Color tokens live in `styles/globals.css` (light/dark via CSS vars); no prose plugin.
 - Content: MDX in `src/content/blog`; parsed by `src/lib/posts.ts` (frontmatter: `title`, `publishedAt`, `summary`, `image`).
 
 ## Typography & MDX
 
-Instead of using something like `@tailwindcss/typography` I opted to keep output lean and fully controlled. All text/UI primitives are React components in `src/components/typography.tsx`, rendered through `src/components/mdx-components.tsx`. This keeps bundle size small, using just `next-mdx-remote/rsc` and `sugar-high` for the entire MDX solution.
+I skipped `@tailwindcss/typography` to keep output lean and predictable. Instead, text/UI primitives live in `src/components/typography.tsx` and are wired into MDX through `src/components/mdx-components.tsx`. The only MDX-specific deps are `next-mdx-remote/rsc` plus `sugar-high` for highlighting, which keeps the pipeline tiny.
 
-- **Headings**: `Heading` adds hash anchors via `next/link`, sized with our tokens.
-- **Text**: `Text`, `Lead`, `Small`, `Quote`, `List` (`as="ol"` for ordered), `CodeInline`, `Surface` (card), `Prose` (spacing wrapper).
-- **Tables**: `Table`, `Tr`, `Th`, `Td` for consistent borders/padding.
-- **Code**: `CodeBlock` (SugarHigh highlight, supports fence `title="..."`), `CodeInline`.
-- **Images**: `img` maps to `next/image` with rounding/default sizing; remote images allowed for testing.
-- **MDX map**: `mdx-components.tsx` maps HTML tags and shortcodes to these primitives; only a tiny remark pass for code-fence meta.
-- **Why**: Granular control, consistent spacing, and token-driven colors without sprinkling `dark:` utilities or prose defaults. Theme tokens are in `styles/globals.css`; typography handles layout.
+- **Headings** add hash anchors via `next/link` and respect our spacing tokens.
+- **Text primitives**: `Text`, `Lead`, `Small`, `Quote`, `List` (`as="ol"` for ordered), `CodeInline`, `Surface` (card), `Prose` (wrapper spacing).
+- **Tables**: `Table`, `Tr`, `Th`, `Td` keep borders/padding consistent.
+- **Code**: `CodeBlock` (SugarHigh highlight), `CodeInline`.
+- **Images**: `img` maps to `next/image` with rounding/default sizing (remote allowed).
+- **Why**: One place for spacing and color decisions, no prose defaults, no scattered `dark:` utilities. Theme tokens stay in `styles/globals.css`; typography handles layout.
 
-Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts with `MDXComponents`.
+Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts through `MDXComponents`.
 
 ## Scripts
 
@@ -55,16 +54,16 @@ Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts 
 - Routes: `/home`, `/about`, `/portfolio`, `/blog`, `/blog/:slug`, `/contact`
 - SEO helpers: `robots.ts`, `sitemap.ts`, metadata in `layout.tsx`
 
-## Dependencies (at a glance)
+## Dependencies (versions)
 
-| Category  | Packages (version)                                                                                                                                  |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Core      | `next ^16.0.x`, `react ^19.x`, `react-dom ^19.x`                                                                                                    |
-| Styling   | `tailwindcss ^4.x`, `prettier-plugin-tailwindcss ^0.7.x`                                                                                            |
-| MDX       | `next-mdx-remote ^5.0.x`, `sugar-high ^0.9.x`                                                                                                       |
-| Lint/Type | `eslint ^9.x`, `eslint-config-next ^16.x`, `eslint-plugin-simple-import-sort ^12.x`, `eslint-plugin-tailwindcss ^4.0.0-beta.x`, `typescript ^5.9.x` |
-| Runtime   | `bun 1.2.x`                                                                                                                                         |
-| Analytics | `@vercel/analytics ^1.6.x`, `@vercel/speed-insights ^1.3.x`                                                                                         |
+| Category   | Packages |
+| ---------- | -------- |
+| Core       | `next 16.0.7`, `react 19.2.1`, `react-dom 19.2.1`, `@radix-ui/react-icons 1.3.2` |
+| MDX        | `next-mdx-remote 5.0.0`, `sugar-high 0.9.5` |
+| Styling    | `tailwindcss 4.1.17`, `prettier-plugin-tailwindcss 0.7.2`, `@tailwindcss/postcss 4.1.17` |
+| Lint/Type  | `eslint 9.39.1`, `eslint-config-next 16.0.7`, `eslint-plugin-simple-import-sort 12.1.1`, `eslint-plugin-tailwindcss 4.0.0-beta.0`, `typescript 5.9.3`, `@types/node 24.10.1`, `@types/react 19.2.7`, `@types/react-dom 19.2.3` |
+| Analytics  | `@vercel/analytics 1.6.1`, `@vercel/speed-insights 1.3.1` |
+| Runtime    | `bun 1.2.21` |
 
 ## Roadmap (living)
 
@@ -73,10 +72,12 @@ Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts 
 - [x] ESLint + Prettier configured (Tailwind/import sorting)
 - [x] Tailwind v4 tokens/theme set up
 - [x] Blog rendering pipeline (MDX → React) and listing
+- [x] Write tests
 - [ ] Parse titles from frontmatter data
 - [ ] Replace placeholder page content with real sections/components
+- [ ] SEO generation extracted from MDX pages
 - [ ] Portfolio detail page (architecture, patterns, etc.)
-- [ ] Add code highlight refinements and code block components
+- [ ] Code highlight refinements and code block components
 - [ ] Per-post OG image generation
 - [ ] Navigation/footer wired to `NAV_LINKS`/`FOOTER_LINKS`
 - [ ] Theme-aware components; consider light toggle

@@ -33,7 +33,9 @@ export function parseFrontmatter(fileContent: string) {
 function getMdxData(dir: string) {
   if (!fs.existsSync(dir)) return [];
 
-  const mdxFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+  const mdxFiles = fs
+    .readdirSync(dir)
+    .filter((file) => path.extname(file) === ".mdx");
 
   return mdxFiles.map((file) => {
     const { metadata, content } = parseFrontmatter(
