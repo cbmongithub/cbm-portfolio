@@ -1,34 +1,35 @@
 import { describe, expect, it } from "bun:test";
+import fs from "node:fs";
 import path from "node:path";
 
-import { getPostBySlug, getPosts, parseFrontmatter } from "@/lib/posts";
+import { getPostBySlug, getPosts } from "@/lib/posts";
 
-const TEST_SLUG = "test-blog";
-const TEST_FILE = path.join(process.cwd(), "src", "content", "blog", `${TEST_SLUG}.mdx`);
+const BLOG_PATH = path.join(process.cwd(), "src", "content", "blog");
+const DISK_SLUGS = fs.readdirSync(BLOG_PATH).map((file) => file.replace(/\.tsx?$/, ""));
+const TEST_SLUG = "test";
 
 describe("posts loader", () => {
-  it("parses frontmatter from a file", async () => {
-    const raw = await Bun.file(TEST_FILE).text();
-    const { metadata, content } = parseFrontmatter(raw);
-    expect(metadata.title.length).toBeGreaterThan(0);
-    expect(content).toContain("Widget");
-  });
-
-  it("returns a single post by slug", () => {
-    const post = getPostBySlug(TEST_SLUG);
+  it("returns a single post by slug", async () => {
+    const post = await getPostBySlug(TEST_SLUG);
     expect(post).not.toBeNull();
     if (!post) return;
     expect(post.slug).toBe(TEST_SLUG);
-    expect(post.metadata.title).toContain("Design system smoke test");
+    expect(post.title).toContain("Design system smoke test");
+    expect(post.publishedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 
-  it("lists all posts", () => {
-    const posts = getPosts();
-    expect(posts.length).toBeGreaterThan(0);
-    expect(posts.find((p) => p.slug === TEST_SLUG)).toBeDefined();
+  it("lists all posts present on disk", async () => {
+    const posts = await getPosts();
+    const slugs = posts.map((p) => p.slug).sort();
+    expect(slugs).toEqual([...DISK_SLUGS].sort());
   });
 
-  it("returns null when slug is missing", () => {
-    expect(getPostBySlug("non-existent-slug")).toBeNull();
+  it("returns meta fields for every post", async () => {
+    const posts = await getPosts();
+    for (const post of posts) {
+      expect(post.title.length).toBeGreaterThan(0);
+      expect(post.description.length).toBeGreaterThan(0);
+      expect(post.image).toBeDefined();
+    }
   });
 });

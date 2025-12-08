@@ -1,43 +1,53 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { MDXComponents } from "@/components/mdx-components";
+import { getPosts, loadPost } from "@/lib/posts";
 
-import { getPostBySlug, getPosts } from "@/lib/posts";
-
-type BlogDetailPageProps = {
+type BlogPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return getPosts().map(({ slug }) => ({ slug }));
+  const posts = await getPosts();
+  return posts.map(({ slug }) => ({ slug }));
 }
 
-export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const {
+    meta: { title, description, image },
+  } = await loadPost(slug);
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: image }],
+    },
+  };
+}
 
-  const post = getPostBySlug(slug);
+export default async function BlogPage({ params }: BlogPageProps) {
+  const { slug } = await params;
+  const {
+    Post,
+    meta: { publishedAt, title, description },
+  } = await loadPost(slug);
 
-  if (!post) return notFound();
-
-  const published = new Date(post.metadata.publishedAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  if (!Post) return notFound();
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-10">
       <article>
         <header className="space-y-2">
-          <p className="text-muted-foreground text-sm">{published}</p>
-          <h1 className="text-foreground text-3xl font-semibold">
-            {post.metadata.title}
-          </h1>
-          <p className="text-muted-foreground">{post.metadata.summary}</p>
+          <p className="text-muted-foreground text-sm">{publishedAt}</p>
+          <h1 className="text-foreground text-3xl font-semibold">{title}</h1>
+          <p className="text-muted-foreground">{description}</p>
         </header>
 
         <div className="max-w-none">
-          <MDXComponents source={post.content} />
+          <Post />
         </div>
       </article>
     </main>
