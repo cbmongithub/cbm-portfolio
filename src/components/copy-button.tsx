@@ -16,13 +16,7 @@ export function CopyButton({ code }: CopyButtonProps) {
     <Button
       onClick={handleClick}
       variant="icon"
-      icon={
-        isCopied ? (
-          <CheckIcon className="size-4" />
-        ) : (
-          <CopyIcon className="size-4" />
-        )
-      }
+      icon={isCopied ? <CheckIcon className="size-4" /> : <CopyIcon className="size-4" />}
       aria-label={isCopied ? "Copied!" : "Copy"}
     />
   );

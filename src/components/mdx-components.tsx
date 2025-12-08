@@ -21,23 +21,14 @@ import {
 
 /* MDX element overrides */
 const components = {
-  h1: (props: React.ComponentPropsWithoutRef<"h1">) => (
-    <Heading level={1} {...props} />
-  ),
-  h2: (props: React.ComponentPropsWithoutRef<"h2">) => (
-    <Heading level={2} {...props} />
-  ),
-  h3: (props: React.ComponentPropsWithoutRef<"h3">) => (
-    <Heading level={3} {...props} />
-  ),
-  h4: (props: React.ComponentPropsWithoutRef<"h4">) => (
-    <Heading level={4} {...props} />
-  ),
+  h1: (props: React.ComponentPropsWithoutRef<"h1">) => <Heading level={1} {...props} />,
+  h2: (props: React.ComponentPropsWithoutRef<"h2">) => <Heading level={2} {...props} />,
+  h3: (props: React.ComponentPropsWithoutRef<"h3">) => <Heading level={3} {...props} />,
+  h4: (props: React.ComponentPropsWithoutRef<"h4">) => <Heading level={4} {...props} />,
   p: (props: React.ComponentPropsWithoutRef<"p">) => <Text {...props} />,
-  code: (props: React.ComponentPropsWithoutRef<"code">) => (
-    <InlineCode {...props} />
-  ),
+  code: (props: React.ComponentPropsWithoutRef<"code">) => <InlineCode {...props} />,
   a: (props: LinkProps) => <Link {...props} />,
+  // eslint-disable-next-line jsx-a11y/alt-text
   img: (props: ImageProps) => <Image {...props} />,
   pre: (props: CodeBlockProps) => <CodeBlock {...props} />,
   Lead,

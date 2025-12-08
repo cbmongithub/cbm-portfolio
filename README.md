@@ -56,14 +56,14 @@ Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts 
 
 ## Dependencies (versions)
 
-| Category   | Packages |
-| ---------- | -------- |
-| Core       | `next 16.0.7`, `react 19.2.1`, `react-dom 19.2.1`, `@radix-ui/react-icons 1.3.2` |
-| MDX        | `next-mdx-remote 5.0.0`, `sugar-high 0.9.5` |
-| Styling    | `tailwindcss 4.1.17`, `prettier-plugin-tailwindcss 0.7.2`, `@tailwindcss/postcss 4.1.17` |
-| Lint/Type  | `eslint 9.39.1`, `eslint-config-next 16.0.7`, `eslint-plugin-simple-import-sort 12.1.1`, `eslint-plugin-tailwindcss 4.0.0-beta.0`, `typescript 5.9.3`, `@types/node 24.10.1`, `@types/react 19.2.7`, `@types/react-dom 19.2.3` |
-| Analytics  | `@vercel/analytics 1.6.1`, `@vercel/speed-insights 1.3.1` |
-| Runtime    | `bun 1.2.21` |
+| Category  | Packages                                                                                                                                                                                                                       |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Core      | `next 16.0.7`, `react 19.2.1`, `react-dom 19.2.1`, `@radix-ui/react-icons 1.3.2`                                                                                                                                               |
+| MDX       | `next-mdx-remote 5.0.0`, `sugar-high 0.9.5`                                                                                                                                                                                    |
+| Styling   | `tailwindcss 4.1.17`, `prettier-plugin-tailwindcss 0.7.2`, `@tailwindcss/postcss 4.1.17`                                                                                                                                       |
+| Lint/Type | `eslint 9.39.1`, `eslint-config-next 16.0.7`, `eslint-plugin-simple-import-sort 12.1.1`, `eslint-plugin-tailwindcss 4.0.0-beta.0`, `typescript 5.9.3`, `@types/node 24.10.1`, `@types/react 19.2.7`, `@types/react-dom 19.2.3` |
+| Analytics | `@vercel/analytics 1.6.1`, `@vercel/speed-insights 1.3.1`                                                                                                                                                                      |
+| Runtime   | `bun 1.2.21`                                                                                                                                                                                                                   |
 
 ## Roadmap (living)
 
@@ -73,7 +73,6 @@ Content lives in `src/content/blog/*.mdx`; `blog/[slug]/page.tsx` renders posts 
 - [x] Tailwind v4 tokens/theme set up
 - [x] Blog rendering pipeline (MDX → React) and listing
 - [x] Write tests
-- [ ] Parse titles from frontmatter data
 - [ ] Replace placeholder page content with real sections/components
 - [ ] SEO generation extracted from MDX pages
 - [ ] Portfolio detail page (architecture, patterns, etc.)

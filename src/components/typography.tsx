@@ -23,8 +23,8 @@ export function Heading({ level = 2, id, children, className }: HeadingProps) {
   const text = Array.isArray(children)
     ? children.join("")
     : typeof children === "string"
-    ? children
-    : "";
+      ? children
+      : "";
   const slug = id ?? slugify(text);
 
   return (
@@ -68,9 +68,7 @@ export function Lead(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
-      className={`text-foreground/90 py-2 text-lg leading-7 ${
-        props.className ?? ""
-      }`}
+      className={`text-foreground/90 py-2 text-lg leading-7 ${props.className ?? ""}`}
     />
   );
 }
@@ -107,9 +105,7 @@ export function List({ as = "ul", className, ...props }: ListProps) {
   return (
     <Tag
       {...props}
-      className={`text-foreground ml-5 ${marker} space-y-1 py-2 ${
-        className ?? ""
-      }`}
+      className={`text-foreground ml-5 ${marker} space-y-1 py-2 ${className ?? ""}`}
     />
   );
 }
@@ -168,9 +164,7 @@ export function Table({ className, ...props }: TableProps) {
 type TableRowProps = React.HTMLAttributes<HTMLTableRowElement>;
 
 export function Tr({ className, ...props }: TableRowProps) {
-  return (
-    <tr {...props} className={`border-border border-b ${className ?? ""}`} />
-  );
+  return <tr {...props} className={`border-border border-b ${className ?? ""}`} />;
 }
 
 type TableCellProps = React.ThHTMLAttributes<HTMLTableCellElement> &

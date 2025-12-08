@@ -4,8 +4,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { CodeBlock } from "@/components/code-block";
 
 // Build a React <code> element the component expects
-const fence = (children: string, className?: string) =>
-  <code className={className}>{children}</code>;
+const fence = (children: string, className?: string) => (
+  <code className={className}>{children}</code>
+);
 
 describe("CodeBlock", () => {
   it("renders highlighted code with the language label and data attribute", () => {
