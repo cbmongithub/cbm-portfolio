@@ -27,9 +27,9 @@ export default function TestPost() {
   return (
     <Prose>
       <Lead>
-        This post exercises our typography set without MDX parsing. Content is plain JSX,
-        code is highlighted on the server, and only the Copy button hydrates on the
-        client.
+        This post exercises our typography set without MDX parsing. Content is
+        plain JSX, code is highlighted on the server, and only the Copy button
+        hydrates on the client.
       </Lead>
 
       <Heading level={1}>H1 Heading</Heading>
@@ -56,7 +56,10 @@ export default function TestPost() {
       <Heading level={2}>Code sample (server-highlighted)</Heading>
       <CodeBlock>
         {
-          <code className="language-ts">{`// comment: uses keyword, class, property, string, entity, sign
+          <code
+            className="language-ts"
+            title="Usage in Next.js"
+          >{`// comment: uses keyword, class, property, string, entity, sign
 export class Widget {
   private id: string;
   constructor(id: string) {
@@ -97,9 +100,10 @@ console.log(widget.render({ title: "Demo", count: add(2, 3) }));`}</code>
       </CodeBlock>
 
       <Text className="mt-6">
-        Copy buttons remain client-only, but the heavy lifting (render + highlight) is
-        static at build time. If desired, you can dynamically import the CopyButton inside
-        CodeBlock; current setup keeps SSR highlighting intact.
+        Copy buttons remain client-only, but the heavy lifting (render +
+        highlight) is static at build time. If desired, you can dynamically
+        import the CopyButton inside CodeBlock; current setup keeps SSR
+        highlighting intact.
       </Text>
     </Prose>
   );

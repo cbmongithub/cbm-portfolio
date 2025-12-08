@@ -6,17 +6,19 @@ export type CodeBlockProps = {
   children: React.ReactElement<{
     className: string;
     children: string;
+    title?: string;
   }>;
 };
 
 export function CodeBlock({ children }: CodeBlockProps) {
-  const { className, children: code } = children.props;
+  const { className, children: code, title } = children.props;
   const language = className.replace(/^language-/, "");
+  const metaTitle = title ?? `example.${language}`;
   return (
     <div className="mt-2 py-2">
       <div className="border-border bg-card relative overflow-hidden border">
         <div className="text-md text-foreground border-border bg-card flex items-center justify-between gap-3 border-b px-3 py-2">
-          <span className="text-md">{language}</span>
+          <span className="text-md text-muted-foreground">{metaTitle}</span>
           <CopyButton code={code} />
         </div>
         <pre className="overflow-x-auto px-4 py-3" data-language={language}>
