@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-// Copy text to clipboard, expose a transient isCopied flag, and clean up timers on unmount
+// Copy text to clipboard, expose a transient isCopied flag, and clean up timers on unmount.
 export function useCopy(code: string) {
   const [isCopied, setIsCopied] = useState(false);
   const ref = useRef<ReturnType<typeof setTimeout> | null>(null);

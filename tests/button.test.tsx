@@ -1,8 +1,7 @@
-import React from "react";
 import { describe, expect, it } from "bun:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { Button } from "@/components/button";
+import { Button } from "@/components/ui/button";
 
 describe("Button", () => {
   it("defaults to type=button and primary styles", () => {

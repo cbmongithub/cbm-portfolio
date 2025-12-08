@@ -1,4 +1,4 @@
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/ui/code-block";
 import {
   Heading,
   Lead,
@@ -8,7 +8,7 @@ import {
   Small,
   Surface,
   Text,
-} from "@/components/typography";
+} from "@/components/ui/typography";
 
 import type { PostMeta } from "@/lib/posts";
 
@@ -27,9 +27,9 @@ export default function TestPost() {
   return (
     <Prose>
       <Lead>
-        This post exercises our typography set without MDX parsing. Content is
-        plain JSX, code is highlighted on the server, and only the Copy button
-        hydrates on the client.
+        This post exercises our typography set without MDX parsing. Content is plain JSX,
+        code is highlighted on the server, and only the Copy button hydrates on the
+        client.
       </Lead>
 
       <Heading level={1}>H1 Heading</Heading>
@@ -100,10 +100,9 @@ console.log(widget.render({ title: "Demo", count: add(2, 3) }));`}</code>
       </CodeBlock>
 
       <Text className="mt-6">
-        Copy buttons remain client-only, but the heavy lifting (render +
-        highlight) is static at build time. If desired, you can dynamically
-        import the CopyButton inside CodeBlock; current setup keeps SSR
-        highlighting intact.
+        Copy buttons remain client-only, but the heavy lifting (render + highlight) is
+        static at build time. If desired, you can dynamically import the CopyButton inside
+        CodeBlock; current setup keeps SSR highlighting intact.
       </Text>
     </Prose>
   );

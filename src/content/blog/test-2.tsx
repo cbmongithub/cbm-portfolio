@@ -1,4 +1,4 @@
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/ui/code-block";
 import {
   Heading,
   Lead,
@@ -7,7 +7,7 @@ import {
   Quote,
   Surface,
   Text,
-} from "@/components/typography";
+} from "@/components/ui/typography";
 
 import type { PostMeta } from "@/lib/posts";
 
