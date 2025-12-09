@@ -5,15 +5,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 
-import { MOTION_VARIANTS, NAV_LINKS } from "@/lib/config";
+import { NAVIGATION_VARIANTS } from "@/lib/config/variants";
 import { cn } from "@/lib/utils";
 
 import { ThemeToggle } from "./ui/theme-toggle";
+import { NAV_LINKS } from "@/lib/config/links";
 
 export function Navigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const { icon, background, ul, li } = MOTION_VARIANTS;
+  const { icon, background, ul, li } = NAVIGATION_VARIANTS;
 
   useEffect(() => setIsOpen(false), [pathname]);
 
@@ -72,23 +73,23 @@ export function Navigation() {
               animate="open"
               exit="closed"
             >
-              {NAV_LINKS.map((link, i) => (
+              {NAV_LINKS.map(({ label, link }, i) => (
                 <motion.li
-                  key={`${link.text}_${i}`}
+                  key={`${label}_${i}`}
                   className="flex flex-row items-center justify-center p-4"
                   variants={li}
                 >
                   <Link
                     className={cn(
                       "text-2xl transition ease-in-out",
-                      pathname === link.href
+                      pathname === link
                         ? "text-foreground hover:text-muted-foreground font-medium"
                         : "text-muted-foreground hover:text-foreground font-light"
                     )}
-                    href={link.href}
-                    aria-label={link.text}
+                    href={link}
+                    aria-label={label}
                   >
-                    {link.text}
+                    {label}
                   </Link>
                 </motion.li>
               ))}
