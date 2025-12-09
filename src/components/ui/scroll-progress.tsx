@@ -14,7 +14,7 @@ export function ScrollProgress() {
 
   return (
     <motion.div
-      className="bg-muted-foreground fixed inset-x-0 top-0 z-20 h-1 origin-left"
+      className="bg-link fixed inset-x-0 top-0 z-20 h-1 origin-left"
       style={{
         scaleX,
       }}

@@ -12,9 +12,7 @@ export type PostMeta = {
 const filePath = path.join(process.cwd(), "src", "content", "blog");
 
 // Eagerly snapshot available post slugs from the content directory.
-const slugs = fs
-  .readdirSync(filePath)
-  .map((files) => files.replace(/\.tsx?$/, ""));
+const slugs = fs.readdirSync(filePath).map((files) => files.replace(/\.tsx?$/, ""));
 
 type LoadedPost = { Post: React.ComponentType; meta: PostMeta };
 

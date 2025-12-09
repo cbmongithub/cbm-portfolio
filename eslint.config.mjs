@@ -55,6 +55,7 @@ const eslintConfig = defineConfig([
       "tailwindcss/classnames-order": "error",
       "tailwindcss/no-unnecessary-arbitrary-value": "warn",
       "tailwindcss/no-custom-classname": "off",
+      "react-hooks/set-state-in-effect": "off",
     },
   },
 

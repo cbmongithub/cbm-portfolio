@@ -43,7 +43,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
     <>
       <div className="bg-background pointer-events-none fixed top-0 left-0 z-10 h-12 w-full to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,var(--color-background),transparent)]" />
       <ScrollProgress />
-      <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-10">
+      <main className="flex flex-col gap-4">
         <article>
           <header className="space-y-2">
             <p className="text-muted-foreground text-sm">{publishedAt}</p>

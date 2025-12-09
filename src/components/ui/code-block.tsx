@@ -15,11 +15,9 @@ export function CodeBlock({ children }: CodeBlockProps) {
   const language = className.replace(/^language-/, "");
   return (
     <div className="mt-2 py-2">
-      <div className="border-border bg-card relative overflow-hidden border">
-        <div className="text-md text-foreground border-border bg-card flex items-center justify-between gap-3 border-b px-3 py-2">
-          <span className="text-md text-muted-foreground">
-            {title ?? `example.${language}`}
-          </span>
+      <div className="border-border bg-card relative overflow-hidden rounded-lg border">
+        <div className="md:text-md text-foreground border-border bg-card flex items-center justify-between gap-3 border-b px-3 py-2 text-sm">
+          <span className="text-muted-foreground">{title ?? `example.${language}`}</span>
           <CopyButton code={code} />
         </div>
         <pre className="overflow-x-auto px-4 py-3" data-language={language}>

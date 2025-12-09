@@ -5,10 +5,10 @@ import { slugify } from "@/lib/utils";
 export type HeadingLevel = 1 | 2 | 3 | 4;
 
 const headingSizes: Record<HeadingLevel, string> = {
-  1: "text-3xl md:text-4xl",
-  2: "text-2xl md:text-3xl",
-  3: "text-xl md:text-2xl",
-  4: "text-lg md:text-xl",
+  1: "text-3xl md:text-5xl",
+  2: "text-2xl md:text-4xl",
+  3: "text-xl md:text-3xl",
+  4: "text-lg md:text-2xl",
 };
 
 type HeadingProps = React.PropsWithChildren<{
@@ -50,7 +50,6 @@ type TextProps = React.HTMLAttributes<HTMLParagraphElement> & {
   muted?: boolean;
 };
 
-/* Body text */
 export function Text({ muted, className, ...props }: TextProps) {
   return (
     <p
@@ -62,8 +61,6 @@ export function Text({ muted, className, ...props }: TextProps) {
   );
 }
 
-/* Lead */
-// Prominent text block without forcing a <p> wrapper (avoid nested paragraphs)
 export function Lead(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
@@ -73,8 +70,6 @@ export function Lead(props: React.HTMLAttributes<HTMLDivElement>) {
   );
 }
 
-/* Small */
-// Render subtle secondary text for captions or meta info (no enforced <p>)
 export function Small(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
@@ -84,7 +79,6 @@ export function Small(props: React.HTMLAttributes<HTMLDivElement>) {
   );
 }
 
-/* Blockquote */
 export function Quote(props: React.HTMLAttributes<HTMLQuoteElement>) {
   return (
     <blockquote
@@ -96,7 +90,7 @@ export function Quote(props: React.HTMLAttributes<HTMLQuoteElement>) {
   );
 }
 
-/* Lists (supports as="ol" to switch marker style) */
+// Polymorphic List (supports as="ol")
 type ListProps = React.HTMLAttributes<HTMLUListElement> & { as?: "ul" | "ol" };
 
 export function List({ as = "ul", className, ...props }: ListProps) {
@@ -110,7 +104,6 @@ export function List({ as = "ul", className, ...props }: ListProps) {
   );
 }
 
-/* Inline code */
 export function InlineCode(props: React.HTMLAttributes<HTMLElement>) {
   return (
     <code
@@ -122,19 +115,17 @@ export function InlineCode(props: React.HTMLAttributes<HTMLElement>) {
   );
 }
 
-/* Surface / callout */
 export function Surface(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
-      className={`border-border bg-card text-foreground border px-4 py-3 ${
+      className={`border-border bg-card text-foreground rounded-lg border px-4 py-3 ${
         props.className ?? ""
       }`}
     />
   );
 }
 
-/* Prose wrapper */
 export function Prose(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
@@ -146,7 +137,6 @@ export function Prose(props: React.HTMLAttributes<HTMLDivElement>) {
   );
 }
 
-/* Table */
 type TableProps = React.TableHTMLAttributes<HTMLTableElement>;
 
 export function Table({ className, ...props }: TableProps) {
@@ -160,7 +150,6 @@ export function Table({ className, ...props }: TableProps) {
   );
 }
 
-/* Table Row */
 type TableRowProps = React.HTMLAttributes<HTMLTableRowElement>;
 
 export function Tr({ className, ...props }: TableRowProps) {
@@ -170,7 +159,6 @@ export function Tr({ className, ...props }: TableRowProps) {
 type TableCellProps = React.ThHTMLAttributes<HTMLTableCellElement> &
   React.TdHTMLAttributes<HTMLTableCellElement>;
 
-/* Table Header */
 export function Th({ className, ...props }: TableCellProps) {
   return (
     <th
@@ -182,7 +170,6 @@ export function Th({ className, ...props }: TableCellProps) {
   );
 }
 
-/* Table Data */
 export function Td({ className, ...props }: TableCellProps) {
   return (
     <td

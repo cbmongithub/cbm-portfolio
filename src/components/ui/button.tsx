@@ -1,17 +1,21 @@
+import type React from "react";
+
+import { cn } from "@/lib/utils";
+
 type ButtonProps = {
   className?: string;
   children?: React.ReactNode;
-  icon?: React.ReactElement;
-  variant: keyof typeof BUTTON_VARIANTS;
+  variant?: keyof typeof BUTTON_VARIANTS;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const BUTTON_VARIANTS = {
-  primary: "border border-border px-3 py-2",
-  icon: "border border-border p-3 size-8",
+  primary: "border border-border rounded px-3 py-2",
+  icon: "border border-border rounded p-3 size-7",
+  ghost:
+    "inline-flex size-7 items-center justify-center text-muted-foreground hover:bg-transparent transition-colors duration-100 focus-visible:outline-2 focus-visible:outline-offset-2 data-[checked=true]:text-foreground",
 };
 
 export function Button({
-  icon,
   className,
   variant = "primary",
   children,
@@ -20,16 +24,13 @@ export function Button({
   return (
     <button
       type="button"
-      className={`group text-foreground hover:bg-foreground/4 relative inline-flex cursor-pointer items-center justify-center overflow-hidden ${
-        BUTTON_VARIANTS[variant]
-      } ${className ?? ""}`}
+      className={cn(
+        "group text-muted-foreground hover:bg-muted/40 relative inline-flex cursor-pointer items-center justify-center overflow-hidden",
+        BUTTON_VARIANTS[variant],
+        className
+      )}
       {...props}
     >
-      {icon && (
-        <span className="ease text-foreground absolute flex size-full items-center justify-center">
-          {icon}
-        </span>
-      )}
       {children}
     </button>
   );
