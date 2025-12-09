@@ -1,26 +1,28 @@
 "use client";
-import { motion } from "motion/react";
+import Link from "next/link";
 import { TwitterLogoIcon } from "@radix-ui/react-icons";
-import { Spotlight } from "@/components/ui/spotlight";
+import { motion } from "motion/react";
+
+import { AnimatedBackground } from "@/components/ui/animated-background";
 import { Magnetic } from "@/components/ui/magnetic";
 import {
   MorphingDialog,
-  MorphingDialogTrigger,
-  MorphingDialogContent,
   MorphingDialogClose,
   MorphingDialogContainer,
+  MorphingDialogContent,
+  MorphingDialogTrigger,
 } from "@/components/ui/morphing-dialog";
-import Link from "next/link";
-import { AnimatedBackground } from "@/components/ui/animated-background";
+import { Spotlight } from "@/components/ui/spotlight";
 import { Heading, Text } from "@/components/ui/typography";
-import { PROJECTS, WORK_EXPERIENCE, BLOG_POSTS } from "@/lib/config/home";
-import { SOCIAL_LINKS } from "@/lib/config/links";
+
+import { BLOG_POSTS, PROJECTS, WORK_EXPERIENCE } from "@/lib/config";
+import { SOCIAL_LINKS } from "@/lib/config";
 import {
-  SECTION_DURATION_VARIANT,
   CONTAINER_VARIANTS,
+  SECTION_DURATION_VARIANT,
   SECTION_VARIANTS,
-} from "@/lib/config/variants";
-import { EMAIL_LINK } from "@/lib/config/links";
+} from "@/lib/config";
+import { EMAIL_LINK } from "@/lib/config";
 
 type ProjectVideoProps = {
   src: string;
@@ -45,7 +47,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
         />
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
-        <MorphingDialogContent className="relative aspect-video rounded-2xl bg-card p-1 ring-1 ring-border ring-inset">
+        <MorphingDialogContent className="bg-card ring-border relative aspect-video rounded-2xl p-1 ring-1 ring-inset">
           <video
             src={src}
             autoPlay
@@ -65,7 +67,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
             exit: { opacity: 0, transition: { duration: 0 } },
           }}
         >
-          <TwitterLogoIcon className="size-5 text-muted" />
+          <TwitterLogoIcon className="text-muted size-5" />
         </MorphingDialogClose>
       </MorphingDialogContainer>
     </MorphingDialog>
@@ -83,7 +85,7 @@ function MagneticSocialLink({
     <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
       <Link
         href={link}
-        className="group relative inline-flex shrink-0 items-center gap-px rounded-full bg-muted px-2.5 py-1 text-sm text-foreground transition-colors duration-200 hover:bg-foreground hover:text-background"
+        className="group bg-muted text-foreground hover:bg-foreground hover:text-background relative inline-flex shrink-0 items-center gap-px rounded-full px-2.5 py-1 text-sm transition-colors duration-200"
       >
         {children}
         <svg
@@ -114,42 +116,36 @@ export default function Personal() {
       initial="hidden"
       animate="visible"
     >
-      <motion.section
-        variants={SECTION_VARIANTS}
-        transition={SECTION_DURATION_VARIANT}
-      >
+      <motion.section variants={SECTION_VARIANTS} transition={SECTION_DURATION_VARIANT}>
         <div className="flex-1">
           <Heading asChild level={2}>
             Hi I&apos;m Christian
           </Heading>
           <Text muted>
-            Focused on creating intuitive and performant web experiences.
-            Bridging the gap between design and development.
+            Focused on creating intuitive and performant web experiences. Bridging the gap
+            between design and development.
           </Text>
         </div>
       </motion.section>
 
-      <motion.section
-        variants={SECTION_VARIANTS}
-        transition={SECTION_DURATION_VARIANT}
-      >
+      <motion.section variants={SECTION_VARIANTS} transition={SECTION_DURATION_VARIANT}>
         <Heading asChild level={4} className="mb-2">
           Selected Projects
         </Heading>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map(({ name, video, link, description }, i) => (
             <div key={`${name}_${i}`} className="space-y-2">
-              <div className="relative rounded-2xl bg-card p-1 ring-1 ring-border ring-inset">
+              <div className="bg-card ring-border relative rounded-2xl p-1 ring-1 ring-inset">
                 <ProjectVideo src={video} />
               </div>
               <div className="px-1">
                 <Link
-                  className="font-base group relative inline-block font-[450] text-foreground"
+                  className="font-base group text-foreground relative inline-block font-[450]"
                   href={link}
                   target="_blank"
                 >
                   {name}
-                  <span className="absolute bottom-0.5 left-0 block h-px w-full max-w-0 bg-foreground transition-all duration-200 group-hover:max-w-full"></span>
+                  <span className="bg-foreground absolute bottom-0.5 left-0 block h-px w-full max-w-0 transition-all duration-200 group-hover:max-w-full"></span>
                 </Link>
                 <Text muted className="text-base">
                   {description}
@@ -160,57 +156,47 @@ export default function Personal() {
         </div>
       </motion.section>
 
-      <motion.section
-        variants={SECTION_VARIANTS}
-        transition={SECTION_DURATION_VARIANT}
-      >
+      <motion.section variants={SECTION_VARIANTS} transition={SECTION_DURATION_VARIANT}>
         <Heading asChild level={4} className="mb-2">
           Work Experience
         </Heading>
         <div className="flex flex-col space-y-2">
-          {WORK_EXPERIENCE.map(
-            ({ link, id, title, company, start, end }, i) => (
-              <a
-                key={`${id}_${i}`}
-                className="relative overflow-hidden rounded-2xl bg-muted p-px"
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Spotlight
-                  className="from-link via-foreground/70 to-link blur-2xl"
-                  size={64}
-                />
-                <div className="relative h-full w-full rounded-[15px] bg-card p-4">
-                  <div className="relative flex w-full flex-row justify-between">
-                    <div>
-                      <Text className="font-medium text-foreground">
-                        {title}
-                      </Text>
-                      <Text muted>{company}</Text>
-                    </div>
-                    <Text muted>
-                      {start} - {end}
-                    </Text>
+          {WORK_EXPERIENCE.map(({ link, id, title, company, start, end }, i) => (
+            <a
+              key={`${id}_${i}`}
+              className="bg-muted relative overflow-hidden rounded-2xl p-px"
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Spotlight
+                className="from-link via-foreground/70 to-link blur-2xl"
+                size={64}
+              />
+              <div className="bg-card relative h-full w-full rounded-[15px] p-4">
+                <div className="relative flex w-full flex-row justify-between">
+                  <div>
+                    <Text className="text-foreground font-medium">{title}</Text>
+                    <Text muted>{company}</Text>
                   </div>
+                  <Text muted>
+                    {start} - {end}
+                  </Text>
                 </div>
-              </a>
-            )
-          )}
+              </div>
+            </a>
+          ))}
         </div>
       </motion.section>
 
-      <motion.section
-        variants={SECTION_VARIANTS}
-        transition={SECTION_DURATION_VARIANT}
-      >
+      <motion.section variants={SECTION_VARIANTS} transition={SECTION_DURATION_VARIANT}>
         <Heading asChild level={4} className="mb-1">
           Blog
         </Heading>
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
-            className="h-full w-full rounded-lg bg-muted"
+            className="bg-muted h-full w-full rounded-lg"
             transition={{
               type: "spring",
               bounce: 0,
@@ -225,9 +211,7 @@ export default function Personal() {
                 data-id={uid}
               >
                 <div className="flex flex-col space-y-1">
-                  <Text className="py-0 font-medium text-foreground">
-                    {title}
-                  </Text>
+                  <Text className="text-foreground py-0 font-medium">{title}</Text>
                   <Text muted>{description}</Text>
                 </div>
               </Link>
@@ -236,10 +220,7 @@ export default function Personal() {
         </div>
       </motion.section>
 
-      <motion.section
-        variants={SECTION_VARIANTS}
-        transition={SECTION_DURATION_VARIANT}
-      >
+      <motion.section variants={SECTION_VARIANTS} transition={SECTION_DURATION_VARIANT}>
         <Heading asChild level={4}>
           Connect
         </Heading>

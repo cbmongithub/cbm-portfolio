@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
-import { SITE_METADATA } from "@/lib/config/site";
+import { SITE_METADATA } from "@/lib/config";
 
 import "@/styles/globals.css";
 

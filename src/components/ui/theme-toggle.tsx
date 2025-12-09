@@ -49,10 +49,10 @@ export function ThemeToggle() {
         setTheme(id);
       }}
     >
-      {THEMES.map(({ id, label, icon }) => {
+      {THEMES.map(({ id, label, icon }, i) => {
         return (
           <Button
-            key={id}
+            key={`${id}_${i}`}
             variant="ghost"
             type="button"
             aria-label={`Switch to ${label} theme`}

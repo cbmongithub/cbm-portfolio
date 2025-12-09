@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 
-import { NAVIGATION_VARIANTS } from "@/lib/config/variants";
+import { NAVIGATION_VARIANTS } from "@/lib/config";
+import { NAV_LINKS } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 import { ThemeToggle } from "./ui/theme-toggle";
-import { NAV_LINKS } from "@/lib/config/links";
 
 export function Navigation() {
   const pathname = usePathname();

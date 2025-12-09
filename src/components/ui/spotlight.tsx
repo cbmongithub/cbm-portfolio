@@ -1,11 +1,7 @@
 "use client";
-import { useRef, useState, useCallback, useEffect } from "react";
-import {
-  motion,
-  useSpring,
-  useTransform,
-  type SpringOptions,
-} from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, type SpringOptions, useSpring, useTransform } from "motion/react";
+
 import { cn } from "@/lib/utils";
 
 export type SpotlightProps = {
@@ -60,9 +56,7 @@ export function Spotlight({
     return () => {
       parentElement.removeEventListener("mousemove", handleMouseMove);
       parentElement.removeEventListener("mouseenter", () => setIsHovered(true));
-      parentElement.removeEventListener("mouseleave", () =>
-        setIsHovered(false)
-      );
+      parentElement.removeEventListener("mouseleave", () => setIsHovered(false));
     };
   }, [parentElement, handleMouseMove]);
 

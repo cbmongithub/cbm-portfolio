@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 
-import { BASE_URL } from "@/lib/config";
+import { SITE_URL } from "@/lib/config";
 import { getPosts } from "@/lib/posts";
 
 import robots from "@/app/robots";
@@ -12,16 +12,16 @@ describe("metadata routes", () => {
     const urls = entries.map((entry) => entry.url);
     const today = new Date().toISOString().split("T")[0];
 
-    expect(urls).toContain(BASE_URL);
-    expect(urls).toContain(`${BASE_URL}/blog`);
+    expect(urls).toContain(SITE_URL);
+    expect(urls).toContain(`${SITE_URL}/blog`);
 
-    const expectedStatics = new Set([BASE_URL, `${BASE_URL}/blog`]);
+    const expectedStatics = new Set([SITE_URL, `${SITE_URL}/blog`]);
     const staticRoutes = entries.filter((entry) => expectedStatics.has(entry.url));
     staticRoutes.forEach((route) => expect(route.lastModified).toBe(today));
 
     const posts = await getPosts();
     posts.forEach((post) => {
-      expect(urls).toContain(`${BASE_URL}/blog/${post.slug}`);
+      expect(urls).toContain(`${SITE_URL}/blog/${post.slug}`);
     });
   });
 
@@ -37,6 +37,6 @@ describe("metadata routes", () => {
       expect(rule.allow).toBe("/");
     });
 
-    expect(robotsConfig.sitemap).toBe(`${BASE_URL}/sitemap.xml`);
+    expect(robotsConfig.sitemap).toBe(`${SITE_URL}/sitemap.xml`);
   });
 });
