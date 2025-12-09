@@ -89,23 +89,29 @@ export const MOTION_VARIANTS: MotionVariants = {
     },
   },
   background: {
-    open: {
-      opacity: 1,
-      transition: { duration: 0.7, ease: "easeInOut" },
-    },
-    closed: {
-      opacity: 0,
-      transition: { duration: 0.7, ease: "easeInOut" },
-    },
+    open: { opacity: 1, transition: { duration: 0.3, ease: "easeInOut" } },
+    closed: { opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } },
   },
   ul: {
     open: {
+      y: 0,
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+        delayChildren: 0.06,
+        staggerChildren: 0.08,
+      },
     },
     closed: {
+      y: -24,
       opacity: 0,
-      transition: { staggerChildren: 0.05, staggerDirection: 1 },
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+        staggerChildren: 0.06,
+        staggerDirection: -1,
+      },
     },
   },
   li: {
@@ -113,14 +119,14 @@ export const MOTION_VARIANTS: MotionVariants = {
       y: 0,
       opacity: 1,
       transition: {
-        y: { type: "spring", stiffness: 120, damping: 16 },
+        y: { duration: 0.3, ease: "easeOut" },
       },
     },
     closed: {
-      y: -100,
+      y: -24,
       opacity: 0,
       transition: {
-        y: { type: "spring", stiffness: 120, damping: 16 },
+        y: { duration: 0.3, ease: "easeIn" },
       },
     },
   },
