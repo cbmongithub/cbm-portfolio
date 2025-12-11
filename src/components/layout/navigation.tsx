@@ -87,6 +87,7 @@ export function Navigation() {
                         : "text-muted-foreground hover:text-foreground font-light"
                     )}
                     href={link}
+                    onClick={() => pathname === link && setIsOpen(false)}
                     aria-label={label}
                   >
                     {label}

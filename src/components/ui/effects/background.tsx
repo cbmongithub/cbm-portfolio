@@ -30,7 +30,9 @@ export function BackgroundEffect({
   enableHover = false,
 }: BackgroundEffectProps) {
   const isControlled = defaultValue !== undefined;
-  const [uncontrolledId, setUncontrolledId] = useState<string>(defaultValue ?? "");
+  const [uncontrolledId, setUncontrolledId] = useState<string>(
+    defaultValue ?? ""
+  );
   const activeId = isControlled ? (defaultValue as string) : uncontrolledId;
   const uniqueId = useId();
 
