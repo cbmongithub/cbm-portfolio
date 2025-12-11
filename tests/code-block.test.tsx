@@ -1,40 +1,45 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it, mock } from "bun:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { CodeBlock } from "@/components/ui";
+// Mock Bright so Bun can import CodeBlock without server-only errors
+mock.module("bright", () => ({
+  Code: ({ lang, code }: { lang: string; code: string }) => (
+    <code data-mock="bright" data-lang={lang}>
+      {code}
+    </code>
+  ),
+}));
 
-// Helper to build the expected <code> child
-const fence = (children: string, className?: string, title?: string) => (
-  <code className={className} title={title}>
-    {children}
-  </code>
-);
+const load = () => import("@/components/ui/code-block");
 
 describe("CodeBlock", () => {
-  it("defaults the title to example.<language>", () => {
+  it("defaults the title to example.<language>", async () => {
+    const { CodeBlock } = await load();
     const html = renderToStaticMarkup(
-      <CodeBlock>{fence("const x = 1;", "language-ts")}</CodeBlock>
+      await CodeBlock({ code: "const x = 1;", language: "ts" })
     );
 
-    expect(html).toContain('data-language="ts"');
+    expect(html).toContain('data-lang="ts"');
     expect(html).toContain(">example.ts<");
   });
 
-  it("uses a provided title when present", () => {
+  it("uses a provided title when present", async () => {
+    const { CodeBlock } = await load();
     const html = renderToStaticMarkup(
-      <CodeBlock>{fence("console.log('hi')", "language-js", "demo.js")}</CodeBlock>
+      await CodeBlock({ code: "console.log('hi')", language: "js", title: "demo.js" })
     );
 
-    expect(html).toContain('data-language="js"');
+    expect(html).toContain('data-lang="js"');
     expect(html).toContain(">demo.js<");
   });
 
-  it("falls back to raw className when not prefixed", () => {
+  it("accepts arbitrary language values", async () => {
+    const { CodeBlock } = await load();
     const html = renderToStaticMarkup(
-      <CodeBlock>{fence("console.log('hi')", "javascript")}</CodeBlock>
+      await CodeBlock({ code: "console.log('hi')", language: "javascript" })
     );
 
-    expect(html).toContain('data-language="javascript"');
+    expect(html).toContain('data-lang="javascript"');
     expect(html).toContain(">example.javascript<");
   });
 });

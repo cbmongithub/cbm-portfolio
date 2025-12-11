@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 
 import { Main, Section } from "@/components/layout";
@@ -19,13 +17,15 @@ export function Posts({ posts }: PostsProps) {
         text="Notes, experiments, and writeups from the build log."
       />
       <Section title={{ text: "Latest Posts", level: 4 }}>
-        {/* THE FOLLOWING DOES NOT WORK GREAT, GLITCHY ON THE FIRST ELEMENT THEN HOVERS FINE INTO SECOND ELEMENT HORIZONTALLY */}
-        <BackgroundEffect enableHover className="bg-muted size-full rounded-lg">
+        <BackgroundEffect
+          enableHover
+          className="bg-muted size-full rounded-l-none rounded-r-lg"
+        >
           {posts.map(({ slug, title, description, publishedAt }) => (
             <Link
               key={slug}
               href={`/blog/${slug}`}
-              className="border-border bg-card hover:border-foreground/30 hover:bg-card/80 flex flex-col gap-2 rounded-lg border p-4 transition-colors"
+              className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
               data-id={slug}
             >
               <div className="text-muted-foreground flex items-center justify-between text-sm">

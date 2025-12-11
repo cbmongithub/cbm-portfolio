@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ThemeToggle } from "@/components/ui";
 
 import { NAV_LINKS } from "@/lib/config/links";
 import { NAVIGATION_VARIANTS } from "@/lib/config/variants";

@@ -29,12 +29,12 @@
 
 ## Typography & Content
 
-I skipped `@tailwindcss/typography` to keep output lean and predictable. Instead, text/UI primitives live in `src/components/typography.tsx`. Posts are plain TSX files in `src/content/blog`, so no MDX pipeline is required; code highlighting stays via `sugar-high`.
+Skipped `@tailwindcss/typography` to keep output lean and predictable. Text/UI primitives live in `src/components/typography.tsx`. Posts are plain TSX files in `src/content/blog`, so no MDX pipeline is required; code highlighting now uses **Bright** (server-rendered, dual-theme aware).
 
 - **Headings** add hash anchors via `next/link` and respect our spacing tokens.
 - **Text primitives**: `Text`, `Lead`, `Small`, `Quote`, `List` (`as="ol"` for ordered), `CodeInline`, `Surface` (card), `Prose` (wrapper spacing).
 - **Tables**: `Table`, `Tr`, `Th`, `Td` keep borders/padding consistent.
-- **Code**: `CodeBlock` (SugarHigh highlight), `CodeInline`.
+- **Code**: `CodeBlock` (Bright), `CodeInline`.
 - **Images**: `img` maps to `next/image` with rounding/default sizing (remote allowed).
 - **Why**: One place for spacing and color decisions, no prose defaults, no scattered `dark:` utilities. Theme tokens stay in `styles/globals.css`; typography handles layout.
 
@@ -51,7 +51,7 @@ Content lives in `src/content/blog/*.tsx`; `blog/[slug]/page.tsx` dynamically im
 
 ## Pages
 
-- Routes: `/home`, `/about`, `/portfolio`, `/blog`, `/blog/:slug`, `/contact`
+- Routes: `/`, `/blog`, `/blog/:slug`
 - SEO helpers: `robots.ts`, `sitemap.ts`, metadata in `layout.tsx`
 
 ## Dependencies (versions)
@@ -59,7 +59,7 @@ Content lives in `src/content/blog/*.tsx`; `blog/[slug]/page.tsx` dynamically im
 | Category  | Packages                                                                                                                                                                                                                       |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Core      | `next 16.0.7`, `react 19.2.1`, `react-dom 19.2.1`, `@radix-ui/react-icons 1.3.2`                                                                                                                                               |
-| Code      | `sugar-high 0.9.5`                                                                                                                                                                                                             |
+| Code      | `bright ^1.0.0`                                                                                                                                                                                                                |
 | Styling   | `tailwindcss 4.1.17`, `prettier-plugin-tailwindcss 0.7.2`, `@tailwindcss/postcss 4.1.17`                                                                                                                                       |
 | Lint/Type | `eslint 9.39.1`, `eslint-config-next 16.0.7`, `eslint-plugin-simple-import-sort 12.1.1`, `eslint-plugin-tailwindcss 4.0.0-beta.0`, `typescript 5.9.3`, `@types/node 24.10.1`, `@types/react 19.2.7`, `@types/react-dom 19.2.3` |
 | Analytics | `@vercel/analytics 1.6.1`, `@vercel/speed-insights 1.3.1`                                                                                                                                                                      |
@@ -67,18 +67,18 @@ Content lives in `src/content/blog/*.tsx`; `blog/[slug]/page.tsx` dynamically im
 
 ## Roadmap (living)
 
-- [x] Scaffolded core routes (home, about, portfolio, blog index/detail, contact)
+- [x] Scaffolded core routes (home/index, blog index/detail)
 - [x] SEO helpers wired (metadata, robots, sitemap)
 - [x] ESLint + Prettier configured (Tailwind/import sorting)
 - [x] Tailwind v4 tokens/theme set up
 - [x] Blog rendering pipeline (TSX posts + dynamic import) and listing
 - [x] Write tests for posts parsing and sitemap/robots output
+- [x] Theme-aware components; consider light toggle
+- [x] Code highlight refinements and code block components
 - [ ] Replace placeholder page content with real sections/components
 - [ ] SEO generation extracted from post meta
 - [ ] Portfolio detail page (architecture, patterns, etc.)
-- [ ] Code highlight refinements and code block components
 - [ ] Per-post OG image generation
 - [ ] Navigation/footer wired to `NAV_LINKS`/`FOOTER_LINKS`
-- [ ] Theme-aware components; consider light toggle
 - [ ] Deploy to Vercel and verify analytics
 - [ ] Post-launch performance and accessibility optimizations

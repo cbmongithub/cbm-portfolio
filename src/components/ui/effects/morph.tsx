@@ -30,7 +30,7 @@ type MorphEffectContextType = {
 
 const MorphEffectContext = React.createContext<MorphEffectContextType | null>(null);
 
-function useMorphEffect() {
+export function useMorphEffect() {
   const context = useContext(MorphEffectContext);
   if (!context) {
     throw new Error("useMorphEffect must be used within a MorphEffectProvider");
@@ -42,7 +42,7 @@ type MorphEffectProviderProps = {
   children: React.ReactNode;
 };
 
-function MorphEffectProvider({ children }: MorphEffectProviderProps) {
+export function MorphEffectProvider({ children }: MorphEffectProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const uniqueId = useId();
   const triggerRef = useRef<HTMLDivElement>(null!);
@@ -68,7 +68,7 @@ type MorphEffectProps = {
   children: React.ReactNode;
 };
 
-function MorphEffect({ children }: MorphEffectProps) {
+export function MorphEffect({ children }: MorphEffectProps) {
   return (
     <MorphEffectProvider>
       <MotionConfig transition={BASE_TRANSITION}>{children}</MotionConfig>
@@ -80,7 +80,7 @@ type MorphEffectTriggerProps = {
   children: React.ReactNode;
 };
 
-function MorphEffectTrigger({ children }: MorphEffectTriggerProps) {
+export function MorphEffectTrigger({ children }: MorphEffectTriggerProps) {
   const { setIsOpen, isOpen, uniqueId } = useMorphEffect();
 
   const handleClick = useCallback(() => {
@@ -118,7 +118,7 @@ type MorphEffectContentProps = {
   children: React.ReactNode;
 };
 
-function MorphEffectContent({ children }: MorphEffectContentProps) {
+export function MorphEffectContent({ children }: MorphEffectContentProps) {
   const { setIsOpen, isOpen, uniqueId, triggerRef } = useMorphEffect();
   const containerRef = useRef<HTMLDivElement>(null!);
   const [firstFocusableElement, setFirstFocusableElement] = useState<HTMLElement | null>(
@@ -201,7 +201,7 @@ type MorphEffectContainerProps = {
   children: React.ReactNode;
 };
 
-function MorphEffectContainer({ children }: MorphEffectContainerProps) {
+export function MorphEffectContainer({ children }: MorphEffectContainerProps) {
   const { isOpen, uniqueId } = useMorphEffect();
   const [mounted, setMounted] = useState(false);
 
@@ -238,7 +238,7 @@ type MorphEffectImageProps = {
   alt: string;
 };
 
-function MorphEffectImage({ src, alt }: MorphEffectImageProps) {
+export function MorphEffectImage({ src, alt }: MorphEffectImageProps) {
   const { uniqueId } = useMorphEffect();
   return (
     <motion.img
@@ -250,7 +250,7 @@ function MorphEffectImage({ src, alt }: MorphEffectImageProps) {
   );
 }
 
-function MorphEffectClose() {
+export function MorphEffectClose() {
   const { setIsOpen, uniqueId } = useMorphEffect();
 
   const handleClose = useCallback(() => {
@@ -273,12 +273,3 @@ function MorphEffectClose() {
     </motion.button>
   );
 }
-
-export {
-  MorphEffect,
-  MorphEffectClose,
-  MorphEffectContainer,
-  MorphEffectContent,
-  MorphEffectImage,
-  MorphEffectTrigger,
-};

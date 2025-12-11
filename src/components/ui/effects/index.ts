@@ -1,4 +1,4 @@
 export * from "./background";
 export * from "./magnet";
 export * from "./morph";
-export * from "./spotlight";
+export * from "./text";

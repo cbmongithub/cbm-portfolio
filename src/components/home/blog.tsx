@@ -8,11 +8,14 @@ import { POSTS } from "@/lib/config/home";
 export function Blog() {
   return (
     <div className="flex flex-col">
-      <BackgroundEffect enableHover className="bg-muted size-full rounded-lg">
+      <BackgroundEffect
+        enableHover
+        className="bg-muted size-full rounded-l-none rounded-r-lg"
+      >
         {POSTS.map(({ id, link, title, description }) => (
           <Link
             key={id}
-            className="border-border mb-2 rounded-lg border p-3"
+            className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
             href={link}
             data-id={id}
           >
