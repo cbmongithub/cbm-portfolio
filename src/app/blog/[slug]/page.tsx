@@ -1,45 +1,44 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { MDXComponents } from "@/components/mdx-components";
+import { Post } from "@/components/blog";
 
-import { getPostBySlug, getPosts } from "@/lib/posts";
+import { getPosts, loadPost } from "@/lib/posts";
 
-type BlogDetailPageProps = {
+type BlogPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return getPosts().map(({ slug }) => ({ slug }));
+  const posts = await getPosts();
+  return posts.map(({ slug }) => ({ slug }));
 }
 
-export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const {
+    metadata: { title, description, image },
+  } = await loadPost(slug);
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: image }],
+    },
+  };
+}
 
-  const post = getPostBySlug(slug);
+export default async function BlogPage({ params }: BlogPageProps) {
+  const { slug } = await params;
+  const { post: BlogPost, metadata } = await loadPost(slug);
 
-  if (!post) return notFound();
-
-  const published = new Date(post.metadata.publishedAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  if (!BlogPost) return notFound();
 
   return (
-    <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-10">
-      <article>
-        <header className="space-y-2">
-          <p className="text-muted-foreground text-sm">{published}</p>
-          <h1 className="text-foreground text-3xl font-semibold">
-            {post.metadata.title}
-          </h1>
-          <p className="text-muted-foreground">{post.metadata.summary}</p>
-        </header>
-
-        <div className="max-w-none">
-          <MDXComponents source={post.content} />
-        </div>
-      </article>
-    </main>
+    <Post metadata={metadata}>
+      <BlogPost />
+    </Post>
   );
 }

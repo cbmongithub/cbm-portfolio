@@ -1,65 +1,34 @@
 import fs from "node:fs";
 import path from "node:path";
 
-type PostMetadata = {
+export type PostMetadata = {
+  slug: string;
   title: string;
   publishedAt: string;
-  summary: string;
-  image: string;
+  description: string;
+  image: string | URL;
 };
 
-const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
-const quotesRegex = /^['"](.*)['"]$/;
+const filePath = path.join(process.cwd(), "src", "content", "blog");
 
-// Parse a raw MDX file: extract YAML-like frontmatter and return metadata + content
-export function parseFrontmatter(fileContent: string) {
-  const match = frontmatterRegex.exec(fileContent);
-  const frontMatterBlock = match?.[1];
-  const content = fileContent.replace(frontmatterRegex, "").trim();
-  const frontMatterLines = frontMatterBlock?.trim().split("\n") || [];
-  const metadata: Partial<PostMetadata> = {};
+// Eagerly snapshot available post slugs from the content directory.
+const slugs = fs.readdirSync(filePath).map((files) => files.replace(/\.tsx?$/, ""));
 
-  for (const line of frontMatterLines) {
-    const [key, ...valueArr] = line.split(": ");
-    let value = valueArr.join(": ").trim();
-    value = value.replace(quotesRegex, "$1");
-    metadata[key.trim() as keyof PostMetadata] = value;
-  }
+type LoadedPost = { post: React.ComponentType; metadata: PostMetadata };
 
-  return { metadata: metadata as PostMetadata, content };
+// Dynamically import a post module and return its component + typed metadata.
+export async function loadPost(slug: string): Promise<LoadedPost> {
+  const { default: post, metadata } = await import(`@/content/blog/${slug}`);
+  return { post, metadata };
 }
 
-// Read all MDX files in a directory and return slug + metadata + content
-function getMdxData(dir: string) {
-  if (!fs.existsSync(dir)) return [];
-
-  const mdxFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-
-  return mdxFiles.map((file) => {
-    const { metadata, content } = parseFrontmatter(
-      fs.readFileSync(path.join(dir, file), "utf-8")
-    );
-    const slug = path.basename(file, path.extname(file));
-    return {
-      metadata,
-      slug,
-      content,
-    };
-  });
+// Load all posts' metadata in parallel for listings and sitemap generation.
+export async function getPosts(): Promise<PostMetadata[]> {
+  return Promise.all(slugs.map(async (slug) => (await loadPost(slug)).metadata));
 }
 
-const CONTENT_DIR = path.join(process.cwd(), "src", "content", "blog");
-
-// Return all blog posts from the content directory
-export function getPosts() {
-  return getMdxData(CONTENT_DIR);
-}
-
-// Read a single post by slug; returns null if the file doesn't exist
-export function getPostBySlug(slug: string) {
-  const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) return null;
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { metadata, content } = parseFrontmatter(raw);
-  return { slug, metadata, content };
+// Fetch metadata for a single post.
+export async function getPostBySlug(slug: string): Promise<PostMetadata> {
+  const { metadata } = await loadPost(slug);
+  return metadata;
 }
