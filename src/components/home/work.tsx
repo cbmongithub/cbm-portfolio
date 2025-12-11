@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { Text } from "@/components/ui";
@@ -10,7 +12,7 @@ export function Work() {
       {WORK.map(({ link, id, title, company, start, end }) => (
         <Link
           key={id}
-          className="relative overflow-hidden rounded-lg p-px"
+          className="relative overflow-hidden rounded-lg p-px border border-border"
           href={link}
           target="_blank"
           rel="noopener noreferrer"
