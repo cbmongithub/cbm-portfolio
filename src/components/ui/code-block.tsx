@@ -2,7 +2,7 @@ import { Code } from "bright";
 
 import { CopyButton } from "@/components/ui/copy-button";
 
-import { DARK_THEME,LIGHT_THEME } from "@/lib/config/code";
+import { DARK_THEME, LIGHT_THEME } from "@/lib/config/code";
 
 export type CodeBlockProps = {
   code: string;

@@ -3,7 +3,7 @@ export type Projects = {
   alt: string;
   description: string;
   link: string;
-  image: string;
+  src: string;
   id: string;
 };
 
@@ -13,7 +13,7 @@ export const PROJECTS: Projects[] = [
     alt: "An image of Christian B. Martinez' Cli Loaders project.",
     description: "A collection of cli loaders for the terminal, react, and beyond.",
     link: "https://cliloaders.com/",
-    image: "/cliloaders.jpg",
+    src: "/cliloaders.jpg",
     id: "project-1",
   },
   {
@@ -21,7 +21,7 @@ export const PROJECTS: Projects[] = [
     alt: "An image of Christian B. Martinez' Chattr project.",
     description: "A customizable chatgpt chatbot component library for Nextjs.",
     link: "https://github.com/cbmongithub/chattr",
-    image: "/chattr.jpg",
+    src: "/chattr.jpg",
     id: "project-2",
   },
 ];

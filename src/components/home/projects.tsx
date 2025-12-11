@@ -1,34 +1,24 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { Text } from "@/components/ui";
-import {
-  MorphEffect,
-  MorphEffectClose,
-  MorphEffectContainer,
-  MorphEffectContent,
-  MorphEffectImage,
-  MorphEffectTrigger,
-} from "@/components/ui/effects";
 
 import { PROJECTS } from "@/lib/config/home";
+
+const MorphImage = dynamic(
+  () => import("@/components/ui/morph-image").then((m) => m.MorphImage),
+  { ssr: false }
+);
 
 export function Projects() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {PROJECTS.map(({ name, image, link, alt, description, id }) => (
+      {PROJECTS.map(({ name, src, link, alt, description, id }) => (
         <div key={id} className="space-y-2">
           <div className="bg-card ring-border relative rounded-lg ring-1 ring-inset">
-            <MorphEffect>
-              <MorphEffectTrigger>
-                <MorphEffectImage src={image} alt={alt} />
-              </MorphEffectTrigger>
-              <MorphEffectContainer>
-                <MorphEffectContent>
-                  <MorphEffectImage src={image} alt={alt} />
-                </MorphEffectContent>
-                <MorphEffectClose />
-              </MorphEffectContainer>
-            </MorphEffect>
+            <MorphImage src={src} alt={alt} />
           </div>
           <div className="px-1">
             <Link

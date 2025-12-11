@@ -15,7 +15,9 @@ const load = () => import("@/components/ui/code-block");
 describe("CodeBlock", () => {
   it("defaults the title to example.<language>", async () => {
     const { CodeBlock } = await load();
-    const html = renderToStaticMarkup(<CodeBlock code="const x = 1;" language="ts" />);
+    const html = renderToStaticMarkup(
+      await CodeBlock({ code: "const x = 1;", language: "ts" })
+    );
 
     expect(html).toContain('data-lang="ts"');
     expect(html).toContain(">example.ts<");
@@ -24,7 +26,7 @@ describe("CodeBlock", () => {
   it("uses a provided title when present", async () => {
     const { CodeBlock } = await load();
     const html = renderToStaticMarkup(
-      <CodeBlock code="console.log('hi')" language="js" title="demo.js" />
+      await CodeBlock({ code: "console.log('hi')", language: "js", title: "demo.js" })
     );
 
     expect(html).toContain('data-lang="js"');
@@ -34,7 +36,7 @@ describe("CodeBlock", () => {
   it("accepts arbitrary language values", async () => {
     const { CodeBlock } = await load();
     const html = renderToStaticMarkup(
-      <CodeBlock code="console.log('hi')" language="javascript" />
+      await CodeBlock({ code: "console.log('hi')", language: "javascript" })
     );
 
     expect(html).toContain('data-lang="javascript"');
