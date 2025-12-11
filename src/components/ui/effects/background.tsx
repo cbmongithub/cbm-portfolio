@@ -1,8 +1,9 @@
 "use client";
 
 import { Children, cloneElement, isValidElement, useId, useState } from "react";
-import { AnimatePresence, motion, type Transition } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
+import { EFFECT_TRANSITION } from "@/lib/config/variants";
 import { cn } from "@/lib/utils";
 
 type ChildProps = {
@@ -13,23 +14,21 @@ type ChildProps = {
   children?: React.ReactNode;
 };
 
-type AnimatedBackgroundProps = {
+type BackgroundEffectProps = {
   children: React.ReactElement<ChildProps>[] | React.ReactElement<ChildProps>;
   defaultValue?: string;
   onValueChangeAction?: (newActiveId: string) => void;
   className?: string;
-  transition?: Transition;
   enableHover?: boolean;
 };
 
-export function AnimatedBackground({
+export function BackgroundEffect({
   children,
+  className,
   defaultValue,
   onValueChangeAction,
-  className,
-  transition,
   enableHover = false,
-}: AnimatedBackgroundProps) {
+}: BackgroundEffectProps) {
   const isControlled = defaultValue !== undefined;
   const [uncontrolledId, setUncontrolledId] = useState<string>(defaultValue ?? "");
   const activeId = isControlled ? (defaultValue as string) : uncontrolledId;
@@ -73,8 +72,8 @@ export function AnimatedBackground({
           {isActiveId && (
             <motion.div
               layoutId={`background-${uniqueId}`}
-              className={cn("absolute inset-0 rounded", className)}
-              transition={transition}
+              className={cn("absolute inset-0 rounded-sm", className)}
+              transition={EFFECT_TRANSITION}
               initial={{ opacity: defaultValue ? 1 : 0 }}
               animate={{
                 opacity: 1,

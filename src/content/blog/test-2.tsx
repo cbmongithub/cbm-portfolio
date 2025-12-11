@@ -1,5 +1,5 @@
-import { CodeBlock } from "@/components/ui/code-block";
 import {
+  CodeBlock,
   Heading,
   Lead,
   List,
@@ -7,11 +7,11 @@ import {
   Quote,
   Surface,
   Text,
-} from "@/components/ui/typography";
+} from "@/components/ui";
 
-import type { PostMeta } from "@/lib/posts";
+import type { PostMetadata } from "@/lib/posts";
 
-export const meta: PostMeta = {
+export const metadata: PostMetadata = {
   slug: "test-2",
   title: "Static data pipeline dry run",
   publishedAt: "2025-12-15",
@@ -56,7 +56,7 @@ export async function fetchUsers(): Promise<User[]> {
     { id: "u2", name: "Lin" },
     { id: "u3", name: "Mae" },
   ];
-}
+};
 
 export const pickUser = (users: User[]) =>
   users[Math.floor(Math.random() * users.length)];`}</code>

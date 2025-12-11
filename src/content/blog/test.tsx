@@ -1,5 +1,5 @@
-import { CodeBlock } from "@/components/ui/code-block";
 import {
+  CodeBlock,
   Heading,
   Lead,
   List,
@@ -8,11 +8,11 @@ import {
   Small,
   Surface,
   Text,
-} from "@/components/ui/typography";
+} from "@/components/ui";
 
-import type { PostMeta } from "@/lib/posts";
+import type { PostMetadata } from "@/lib/posts";
 
-export const meta: PostMeta = {
+export const metadata: PostMetadata = {
   slug: "test",
   title: "Design system smoke test",
   publishedAt: "2025-12-09",
@@ -21,8 +21,6 @@ export const meta: PostMeta = {
   image: "/og-image.png",
 };
 
-// Server component page for the test post (no MDX, minimal JS).
-// Code is highlighted at build time via CodeBlock; only CopyButton hydrates.
 export default function TestPost() {
   return (
     <Prose>

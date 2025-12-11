@@ -25,7 +25,7 @@ export function Button({
     <button
       type="button"
       className={cn(
-        "group text-muted-foreground hover:bg-muted/40 relative inline-flex cursor-pointer items-center justify-center overflow-hidden",
+        "bg-background group text-muted-foreground hover:bg-secondary relative inline-flex cursor-pointer items-center justify-center overflow-hidden",
         BUTTON_VARIANTS[variant],
         className
       )}

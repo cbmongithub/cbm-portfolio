@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { Post } from "@/components/blog";
 
 import { getPosts, loadPost } from "@/lib/posts";
 
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
   const {
-    meta: { title, description, image },
+    metadata: { title, description, image },
   } = await loadPost(slug);
   return {
     title,
@@ -32,30 +32,13 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
 export default async function BlogPage({ params }: BlogPageProps) {
   const { slug } = await params;
-  const {
-    Post,
-    meta: { publishedAt, title, description },
-  } = await loadPost(slug);
+  const { post: BlogPost, metadata } = await loadPost(slug);
 
-  if (!Post) return notFound();
+  if (!BlogPost) return notFound();
 
   return (
-    <>
-      <div className="bg-background pointer-events-none fixed top-0 left-0 z-10 h-12 w-full to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,var(--color-background),transparent)]" />
-      <ScrollProgress />
-      <main className="flex flex-col gap-4">
-        <article>
-          <header className="space-y-2">
-            <p className="text-muted-foreground text-sm">{publishedAt}</p>
-            <h1 className="text-foreground text-3xl font-semibold">{title}</h1>
-            <p className="text-muted-foreground">{description}</p>
-          </header>
-
-          <div className="max-w-none">
-            <Post />
-          </div>
-        </article>
-      </main>
-    </>
+    <Post metadata={metadata}>
+      <BlogPost />
+    </Post>
   );
 }

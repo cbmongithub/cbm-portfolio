@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 
-import { SITE_URL } from "@/lib/config";
+import { SITE_URL } from "@/lib/config/site";
 import { getPosts } from "@/lib/posts";
 
 import robots from "@/app/robots";

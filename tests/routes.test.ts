@@ -4,9 +4,9 @@ import path from "node:path";
 
 const ROUTE_PAGES = [
   "src/app/page.tsx",
-  "src/app/about/page.tsx",
-  "src/app/contact/page.tsx",
-  "src/app/portfolio/page.tsx",
+  // "src/app/about/page.tsx",
+  // "src/app/contact/page.tsx",
+  // "src/app/portfolio/page.tsx",
   "src/app/blog/page.tsx",
   "src/app/blog/[slug]/page.tsx",
 ];

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ThemeToggle } from "./ui/theme-toggle";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function Footer() {
   return (

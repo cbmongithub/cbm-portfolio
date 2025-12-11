@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export type PostMeta = {
+export type PostMetadata = {
   slug: string;
   title: string;
   publishedAt: string;
@@ -14,21 +14,21 @@ const filePath = path.join(process.cwd(), "src", "content", "blog");
 // Eagerly snapshot available post slugs from the content directory.
 const slugs = fs.readdirSync(filePath).map((files) => files.replace(/\.tsx?$/, ""));
 
-type LoadedPost = { Post: React.ComponentType; meta: PostMeta };
+type LoadedPost = { post: React.ComponentType; metadata: PostMetadata };
 
 // Dynamically import a post module and return its component + typed metadata.
 export async function loadPost(slug: string): Promise<LoadedPost> {
-  const { default: Post, meta } = await import(`@/content/blog/${slug}`);
-  return { Post, meta };
+  const { default: post, metadata } = await import(`@/content/blog/${slug}`);
+  return { post, metadata };
 }
 
 // Load all posts' metadata in parallel for listings and sitemap generation.
-export async function getPosts(): Promise<PostMeta[]> {
-  return Promise.all(slugs.map(async (slug) => (await loadPost(slug)).meta));
+export async function getPosts(): Promise<PostMetadata[]> {
+  return Promise.all(slugs.map(async (slug) => (await loadPost(slug)).metadata));
 }
 
 // Fetch metadata for a single post.
-export async function getPostBySlug(slug: string): Promise<PostMeta> {
-  const { meta } = await loadPost(slug);
-  return meta;
+export async function getPostBySlug(slug: string): Promise<PostMetadata> {
+  const { metadata } = await loadPost(slug);
+  return metadata;
 }

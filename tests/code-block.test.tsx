@@ -1,7 +1,7 @@
 import { describe, expect, it } from "bun:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { CodeBlock } from "@/components/ui/code-block";
+import { CodeBlock } from "@/components/ui";
 
 // Helper to build the expected <code> child
 const fence = (children: string, className?: string, title?: string) => (

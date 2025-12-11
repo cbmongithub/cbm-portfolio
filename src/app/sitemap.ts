@@ -1,4 +1,4 @@
-import { SITE_URL } from "@/lib/config";
+import { SITE_URL } from "@/lib/config/site";
 import { getPosts } from "@/lib/posts";
 
 export default async function sitemap() {

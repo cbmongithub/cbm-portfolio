@@ -1,6 +1,6 @@
 import { highlight } from "sugar-high";
 
-import { CopyButton } from "./copy-button";
+import { CopyButton } from "@/components/ui/copy-button";
 
 export type CodeBlockProps = {
   children: React.ReactElement<{

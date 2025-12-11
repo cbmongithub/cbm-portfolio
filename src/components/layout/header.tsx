@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Navigation } from "./navigation";
+import { Navigation } from "@/components/layout/navigation";
 
 export function Header() {
   return (

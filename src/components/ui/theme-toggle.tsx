@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { DesktopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
-import { AnimatedBackground } from "./animated-background";
-import { Button } from "./button";
+import { Button } from "@/components/ui";
+import { BackgroundEffect } from "@/components/ui/effects";
 
 const THEMES = [
   {
@@ -36,23 +36,18 @@ export function ThemeToggle() {
   if (!mounted) return null;
 
   return (
-    <AnimatedBackground
+    <BackgroundEffect
       className="bg-muted pointer-events-none rounded"
       defaultValue={theme}
-      transition={{
-        type: "spring",
-        bounce: 0,
-        duration: 0.2,
-      }}
       enableHover={false}
       onValueChangeAction={(id: string) => {
         setTheme(id);
       }}
     >
-      {THEMES.map(({ id, label, icon }, i) => {
+      {THEMES.map(({ id, label, icon }) => {
         return (
           <Button
-            key={`${id}_${i}`}
+            key={id}
             variant="ghost"
             type="button"
             aria-label={`Switch to ${label} theme`}
@@ -62,6 +57,6 @@ export function ThemeToggle() {
           </Button>
         );
       })}
-    </AnimatedBackground>
+    </BackgroundEffect>
   );
 }

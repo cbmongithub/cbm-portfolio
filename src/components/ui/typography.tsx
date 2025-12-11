@@ -31,7 +31,7 @@ export function Heading({ level = 2, id, children, className, asChild }: Heading
   return (
     <Tag
       id={slug}
-      className={`scroll-mt-24 py-2 font-semibold ${headingSizes[level]} ${
+      className={`scroll-mt-24 py-1 font-semibold ${headingSizes[level]} ${
         className ?? ""
       }`}
     >
@@ -60,7 +60,7 @@ export function Text({ muted, className, ...props }: TextProps) {
     <p
       className={`${
         muted ? "text-muted-foreground" : "text-foreground"
-      } py-2 leading-relaxed ${className ?? ""}`}
+      } py-1 leading-relaxed ${className ?? ""}`}
       {...props}
     />
   );
@@ -70,7 +70,7 @@ export function Lead(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
-      className={`text-foreground/90 py-2 text-lg leading-7 ${props.className ?? ""}`}
+      className={`text-foreground/90 py-1 text-lg leading-7 ${props.className ?? ""}`}
     />
   );
 }
@@ -79,7 +79,7 @@ export function Small(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
-      className={`text-muted-foreground py-2 text-sm ${props.className ?? ""}`}
+      className={`text-muted-foreground py-1 text-sm ${props.className ?? ""}`}
     />
   );
 }
@@ -88,7 +88,7 @@ export function Quote(props: React.HTMLAttributes<HTMLQuoteElement>) {
   return (
     <blockquote
       {...props}
-      className={`border-border text-muted-foreground my-2 border-l-2 py-2 pl-4 ${
+      className={`border-border text-muted-foreground my-2 border-l-2 py-1 pl-4 ${
         props.className ?? ""
       }`}
     />
@@ -104,7 +104,7 @@ export function List({ as = "ul", className, ...props }: ListProps) {
   return (
     <Tag
       {...props}
-      className={`text-foreground ml-5 ${marker} space-y-1 py-2 ${className ?? ""}`}
+      className={`text-foreground ml-5 ${marker} space-y-1 py-1 ${className ?? ""}`}
     />
   );
 }
@@ -135,7 +135,7 @@ export function Prose(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
-      className={`text-foreground space-y-4 py-2 leading-relaxed [&_ol]:ml-5 [&_ol]:list-decimal [&_ul]:ml-5 [&_ul]:list-disc ${
+      className={`text-foreground space-y-4 py-1 leading-relaxed [&_ol]:ml-5 [&_ol]:list-decimal [&_ul]:ml-5 [&_ul]:list-disc ${
         props.className ?? ""
       }`}
     />
@@ -168,7 +168,7 @@ export function Th({ className, ...props }: TableCellProps) {
   return (
     <th
       {...props}
-      className={`border-border border px-3 py-2 text-left font-semibold ${
+      className={`border-border border px-3 py-1 text-left font-semibold ${
         className ?? ""
       }`}
     />
@@ -179,7 +179,7 @@ export function Td({ className, ...props }: TableCellProps) {
   return (
     <td
       {...props}
-      className={`border-border border px-3 py-2 text-left ${className ?? ""}`}
+      className={`border-border border px-3 py-1 text-left ${className ?? ""}`}
     />
   );
 }

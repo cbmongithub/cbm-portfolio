@@ -1,6 +1,6 @@
-import { obfuscatedEmail } from "../utils";
+import { generateEmail } from "@/lib/utils";
 
-type Links = {
+export type Links = {
   link: string;
   label: string;
 };
@@ -26,24 +26,24 @@ export const NAV_LINKS: Links[] = [
     label: "home",
   },
   {
-    link: "/about",
-    label: "about",
-  },
-  {
-    link: "/portfolio",
-    label: "portfolio",
-  },
-  {
     link: "/blog",
     label: "blog",
   },
-  {
-    link: "/contact",
-    label: "contact",
-  },
+  //   {
+  //   link: "/about",
+  //   label: "about",
+  // },
+  // {
+  //   link: "/portfolio",
+  //   label: "portfolio",
+  // },
+  //   {
+  //   link: "/contact",
+  //   label: "contact",
+  // },
 ];
 
-type SocialLinks = Links & {
+export type SocialLinks = Links & {
   handle?: string;
 };
 
@@ -64,4 +64,4 @@ export const SOCIAL_LINKS: SocialLinks[] = [
   },
 ];
 
-export const EMAIL_LINK = obfuscatedEmail();
+export const EMAIL_LINK = generateEmail();

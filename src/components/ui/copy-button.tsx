@@ -4,7 +4,7 @@ import { CheckIcon, CopyIcon } from "@radix-ui/react-icons";
 
 import { useCopy } from "@/hooks/use-copy";
 
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 
 type CopyButtonProps = {
   code: string;

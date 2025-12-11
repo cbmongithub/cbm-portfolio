@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 
-import { NAVIGATION_VARIANTS } from "@/lib/config";
-import { NAV_LINKS } from "@/lib/config";
-import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-import { ThemeToggle } from "./ui/theme-toggle";
+import { NAV_LINKS } from "@/lib/config/links";
+import { NAVIGATION_VARIANTS } from "@/lib/config/variants";
+import { cn } from "@/lib/utils";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -26,7 +26,7 @@ export function Navigation() {
   }, [isOpen]);
 
   return (
-    <nav className="relative" aria-label="Main navigation">
+    <motion.nav className="relative" aria-label="Main navigation">
       <motion.button
         type="button"
         aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -60,7 +60,7 @@ export function Navigation() {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            className="size-screen bg-card fixed inset-0 z-40 flex flex-col justify-center"
+            className="size-screen bg-background fixed inset-0 z-40 flex flex-col justify-center"
             variants={background}
             initial="closed"
             animate="open"
@@ -73,10 +73,10 @@ export function Navigation() {
               animate="open"
               exit="closed"
             >
-              {NAV_LINKS.map(({ label, link }, i) => (
+              {NAV_LINKS.map(({ label, link }) => (
                 <motion.li
-                  key={`${label}_${i}`}
-                  className="flex flex-row items-center justify-center p-4"
+                  key={label}
+                  className="flex flex-row items-center justify-center p-2"
                   variants={li}
                 >
                   <Link
@@ -94,7 +94,7 @@ export function Navigation() {
                 </motion.li>
               ))}
               <motion.li
-                className="flex flex-row items-center justify-center pt-8"
+                className="flex flex-row items-center justify-center pt-2"
                 variants={li}
               >
                 <ThemeToggle />
@@ -103,6 +103,6 @@ export function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

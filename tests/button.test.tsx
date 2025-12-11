@@ -1,7 +1,7 @@
 import { describe, expect, it } from "bun:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui";
 
 describe("Button", () => {
   it("defaults to type=button and primary styles", () => {

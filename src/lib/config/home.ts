@@ -1,12 +1,32 @@
-type Project = {
+export type Projects = {
   name: string;
+  alt: string;
   description: string;
   link: string;
-  video: string;
+  image: string;
   id: string;
 };
 
-type WorkExperience = {
+export const PROJECTS: Projects[] = [
+  {
+    name: "Cli Loaders",
+    alt: "An image of Christian B. Martinez' Cli Loaders project.",
+    description: "A collection of cli loaders for the terminal, react, and beyond.",
+    link: "https://cliloaders.com/",
+    image: "/cliloaders.jpg",
+    id: "project-1",
+  },
+  {
+    name: "Chattr",
+    alt: "An image of Christian B. Martinez' Chattr project.",
+    description: "A customizable chatgpt chatbot component library for Nextjs.",
+    link: "https://github.com/cbmongithub/chattr",
+    image: "/chattr.jpg",
+    id: "project-2",
+  },
+];
+
+export type WorkExperience = {
   company: string;
   title: string;
   start: string;
@@ -15,83 +35,64 @@ type WorkExperience = {
   id: string;
 };
 
-type BlogPost = {
+export const WORK: WorkExperience[] = [
+  {
+    company: "Pointbreak",
+    title: "Technical Co-Founder",
+    start: "2025",
+    end: "Present",
+    link: "https://pointbreakapp.com",
+    id: "work-1",
+  },
+  {
+    company: "Freelance",
+    title: "Full Stack Developer",
+    start: "2020",
+    end: "2024",
+    link: "/",
+    id: "work-2",
+  },
+  {
+    company: "MMBC",
+    title: "Front End Developer",
+    start: "2017",
+    end: "2020",
+    link: "/",
+    id: "work-3",
+  },
+];
+
+export type BlogPosts = {
   title: string;
   description: string;
   link: string;
-  uid: string;
+  id: string;
 };
 
-export const PROJECTS: Project[] = [
-  {
-    name: "Motion Primitives Pro",
-    description: "Advanced components and templates to craft beautiful websites.",
-    link: "https://pro.motion-primitives.com/",
-    video:
-      "https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0",
-    id: "project1",
-  },
-  {
-    name: "Motion Primitives",
-    description: "UI kit to make beautiful, animated interfaces.",
-    link: "https://motion-primitives.com/",
-    video:
-      "https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0",
-    id: "project2",
-  },
-];
-
-export const WORK_EXPERIENCE: WorkExperience[] = [
-  {
-    company: "Reglazed Studio",
-    title: "CEO",
-    start: "2024",
-    end: "Present",
-    link: "https://ibelick.com",
-    id: "work1",
-  },
-  {
-    company: "Freelance",
-    title: "Design Engineer",
-    start: "2022",
-    end: "2024",
-    link: "https://ibelick.com",
-    id: "work2",
-  },
-  {
-    company: "Freelance",
-    title: "Front-end Developer",
-    start: "2017",
-    end: "Present",
-    link: "https://ibelick.com",
-    id: "work3",
-  },
-];
-
-export const BLOG_POSTS: BlogPost[] = [
+export const POSTS: BlogPosts[] = [
   {
     title: "Exploring the Intersection of Design, AI, and Design Engineering",
     description: "How AI is changing the way we design",
-    link: "/blog/exploring-the-intersection-of-design-ai-and-design-engineering",
-    uid: "blog-1",
+    link: "/blog/test",
+    id: "blog-1",
   },
   {
     title: "Why I left my job to start my own company",
     description: "A deep dive into my decision to leave my job and start my own company",
-    link: "/blog/exploring-the-intersection-of-design-ai-and-design-engineering",
-    uid: "blog-2",
+    link: "/blog/test-2",
+    id: "blog-2",
   },
   {
     title: "What I learned from my first year of freelancing",
     description: "A look back at my first year of freelancing and what I learned",
-    link: "/blog/exploring-the-intersection-of-design-ai-and-design-engineering",
-    uid: "blog-3",
+    link: "/blog/test",
+    id: "blog-3",
   },
   {
     title: "How to Export Metadata from MDX for Next.js SEO",
     description:
       "A guide on exporting metadata from MDX files to leverage Next.js SEO features.",
-    link: "/blog/example-mdx-metadata",
-    uid: "blog-4",
+    link: "/blog//blog/test-2",
+    id: "blog-4",
   },
 ];

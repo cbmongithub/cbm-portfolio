@@ -3,11 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Footer, Header } from "@/components/layout";
+import { ThemeProvider } from "@/components/ui";
 
-import { SITE_METADATA } from "@/lib/config";
+import { SITE_METADATA } from "@/lib/config/site";
 
 import "@/styles/globals.css";
 
@@ -94,7 +93,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} mx-auto max-w-5xl px-6 py-4 antialiased`}
+        className={`${geist.variable} ${geistMono.variable} mx-auto max-w-4xl px-6 py-4 antialiased`}
       >
         <ThemeProvider>
           <Header />

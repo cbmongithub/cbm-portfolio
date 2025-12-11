@@ -1,4 +1,4 @@
-import { SOCIAL_LINKS } from "./links";
+import { SOCIAL_LINKS } from "@/lib/config/links";
 
 export const SITE_URL =
   process.env["NEXT_PUBLIC_BASE_URL"] ?? "https://www.christianbmartinez.com";
