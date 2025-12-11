@@ -19,7 +19,6 @@ export function Posts({ posts }: PostsProps) {
         text="Notes, experiments, and writeups from the build log."
       />
       <Section title={{ text: "Latest Posts", level: 4 }}>
-        {/* THE FOLLOWING DOES NOT WORK GREAT, GLITCHY ON THE FIRST ELEMENT THEN HOVERS FINE INTO SECOND ELEMENT HORIZONTALLY */}
         <BackgroundEffect enableHover className="bg-muted size-full rounded-lg">
           {posts.map(({ slug, title, description, publishedAt }) => (
             <Link
