@@ -10,12 +10,12 @@ export function Blog() {
     <div className="flex flex-col">
       <BackgroundEffect
         enableHover
-        className="bg-muted rounded-l-none rounded-r-lg size-full"
+        className="bg-muted size-full rounded-l-none rounded-r-lg"
       >
         {POSTS.map(({ id, link, title, description }) => (
           <Link
             key={id}
-            className="mb-2 p-3 border-muted text-muted-foreground my-2 border-l pl-4"
+            className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
             href={link}
             data-id={id}
           >

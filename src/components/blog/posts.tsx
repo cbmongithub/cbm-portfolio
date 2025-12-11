@@ -19,13 +19,13 @@ export function Posts({ posts }: PostsProps) {
       <Section title={{ text: "Latest Posts", level: 4 }}>
         <BackgroundEffect
           enableHover
-          className="bg-muted rounded-l-none rounded-r-lg size-full"
+          className="bg-muted size-full rounded-l-none rounded-r-lg"
         >
           {posts.map(({ slug, title, description, publishedAt }) => (
             <Link
               key={slug}
               href={`/blog/${slug}`}
-              className="mb-2 p-3 border-muted text-muted-foreground my-2 border-l pl-4"
+              className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
               data-id={slug}
             >
               <div className="text-muted-foreground flex items-center justify-between text-sm">

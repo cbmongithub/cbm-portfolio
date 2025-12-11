@@ -28,9 +28,7 @@ type MorphEffectContextType = {
   triggerRef: React.RefObject<HTMLDivElement>;
 };
 
-const MorphEffectContext = React.createContext<MorphEffectContextType | null>(
-  null
-);
+const MorphEffectContext = React.createContext<MorphEffectContextType | null>(null);
 
 export function useMorphEffect() {
   const context = useContext(MorphEffectContext);
@@ -123,10 +121,12 @@ type MorphEffectContentProps = {
 export function MorphEffectContent({ children }: MorphEffectContentProps) {
   const { setIsOpen, isOpen, uniqueId, triggerRef } = useMorphEffect();
   const containerRef = useRef<HTMLDivElement>(null!);
-  const [firstFocusableElement, setFirstFocusableElement] =
-    useState<HTMLElement | null>(null);
-  const [lastFocusableElement, setLastFocusableElement] =
-    useState<HTMLElement | null>(null);
+  const [firstFocusableElement, setFirstFocusableElement] = useState<HTMLElement | null>(
+    null
+  );
+  const [lastFocusableElement, setLastFocusableElement] = useState<HTMLElement | null>(
+    null
+  );
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

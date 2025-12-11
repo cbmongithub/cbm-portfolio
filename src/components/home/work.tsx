@@ -12,7 +12,7 @@ export function Work() {
       {WORK.map(({ link, id, title, company, start, end }) => (
         <Link
           key={id}
-          className="relative overflow-hidden rounded-lg p-px border border-border"
+          className="border-border relative overflow-hidden rounded-lg border p-px"
           href={link}
           target="_blank"
           rel="noopener noreferrer"
