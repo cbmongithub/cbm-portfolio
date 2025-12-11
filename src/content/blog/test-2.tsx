@@ -1,13 +1,5 @@
-import {
-  CodeBlock,
-  Heading,
-  Lead,
-  List,
-  Prose,
-  Quote,
-  Surface,
-  Text,
-} from "@/components/ui";
+import { Heading, Lead, List, Prose, Quote, Surface, Text } from "@/components/ui";
+import { CodeBlock } from "@/components/ui/code-block";
 
 import type { PostMetadata } from "@/lib/posts";
 
@@ -44,9 +36,8 @@ export default function TestTwo() {
       </List>
 
       <Heading level={2}>First snippet: data fetch mock</Heading>
-      <CodeBlock>
-        {
-          <code className="language-ts">{`type User = { id: string; name: string };
+      <CodeBlock
+        code={`type User = { id: string; name: string };
 
 export async function fetchUsers(): Promise<User[]> {
   // Pretend to hit an API
@@ -59,14 +50,12 @@ export async function fetchUsers(): Promise<User[]> {
 };
 
 export const pickUser = (users: User[]) =>
-  users[Math.floor(Math.random() * users.length)];`}</code>
-        }
-      </CodeBlock>
+  users[Math.floor(Math.random() * users.length)];`.trim()}
+      />
 
       <Heading level={2}>Second snippet: render helper</Heading>
-      <CodeBlock>
-        {
-          <code className="language-ts">{`import { createElement } from "react";
+      <CodeBlock
+        code={`import { createElement } from "react";
 
 export function renderUserCard(user: { id: string; name: string }) {
   return createElement(
@@ -74,10 +63,8 @@ export function renderUserCard(user: { id: string; name: string }) {
     { "data-user": user.id, className: "rounded border p-3" },
     createElement("strong", null, user.name)
   );
-}`}</code>
-        }
-      </CodeBlock>
-
+}`.trim()}
+      />
       <Quote>
         If this renders, the pipeline works. If the copy buttons light up, the hydration
         boundary is intact. If the SEO shows up, the meta export is doing its job.

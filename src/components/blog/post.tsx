@@ -25,7 +25,6 @@ export function Post({ children, metadata }: PostProps) {
             <p className="text-muted-foreground">{description}</p>
           </header>
         </Section>
-
         <Section>
           <div className="max-w-none">{children}</div>
         </Section>
