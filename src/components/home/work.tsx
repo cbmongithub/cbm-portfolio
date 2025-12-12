@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 
-import { Text } from "@/components/ui";
+import { Arrow, Text } from "@/components/ui";
+import { BorderEffect, MagnetEffect } from "@/components/ui/effects";
 
 import { WORK } from "@/lib/config/home";
 
@@ -10,25 +11,40 @@ export function Work() {
   return (
     <div className="flex flex-col space-y-2">
       {WORK.map(({ link, id, title, company, start, end }) => (
-        <Link
-          key={id}
-          className="border-border relative overflow-hidden rounded-lg border p-px"
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="bg-card relative size-full rounded-lg p-4">
-            <div className="relative flex w-full flex-row justify-between">
-              <div>
+        <div key={id}>
+          <div className="border-border relative rounded-lg border p-4">
+            <BorderEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+            />
+            <div className="relative flex items-center justify-between gap-4">
+              <div className="flex flex-col">
                 <Text className="text-foreground font-medium">{title}</Text>
                 <Text muted>{company}</Text>
               </div>
-              <Text muted>
-                {start} - {end}
-              </Text>
+              <div>
+                <Text muted>
+                  {start} - {end}
+                </Text>
+                <MagnetEffect className="flex justify-end">
+                  <Link
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${company} link`}
+                    className="group text-link hover:text-link/80 relative inline-flex shrink-0 items-center gap-px py-1 transition-colors duration-200"
+                  >
+                    Visit
+                    <Arrow />
+                  </Link>
+                </MagnetEffect>
+              </div>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

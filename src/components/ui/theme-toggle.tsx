@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { DesktopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+
+import { useMounted } from "@/hooks/use-mounted";
 
 import { Button } from "@/components/ui";
 import { BackgroundEffect } from "@/components/ui/effects";
@@ -27,11 +28,7 @@ const THEMES = [
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { mounted } = useMounted();
 
   if (!mounted) return null;
 

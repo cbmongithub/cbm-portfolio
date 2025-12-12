@@ -14,6 +14,7 @@ import { Cross1Icon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
 import { useClickAway } from "@/hooks/use-click-away";
+import { useMounted } from "@/hooks/use-mounted";
 
 import {
   BASE_TRANSITION,
@@ -129,7 +130,7 @@ export function MorphEffectContent({ children }: MorphEffectContentProps) {
   );
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setIsOpen(false);
       }
@@ -148,7 +149,7 @@ export function MorphEffectContent({ children }: MorphEffectContentProps) {
           }
         }
       }
-    };
+    }
 
     document.addEventListener("keydown", handleKeyDown);
 
@@ -186,7 +187,7 @@ export function MorphEffectContent({ children }: MorphEffectContentProps) {
     <motion.div
       ref={containerRef}
       layoutId={`dialog-${uniqueId}`}
-      className="bg-card ring-border relative max-h-[90vh] w-5/6 max-w-4xl overflow-hidden rounded-lg ring-1 ring-inset"
+      className="relative max-h-[90vh] w-5/6 max-w-4xl overflow-hidden rounded-lg ring-1 ring-inset"
       role="dialog"
       aria-modal="true"
       aria-labelledby={`motion-ui-morphing-dialog-title-${uniqueId}`}
@@ -203,12 +204,7 @@ type MorphEffectContainerProps = {
 
 export function MorphEffectContainer({ children }: MorphEffectContainerProps) {
   const { isOpen, uniqueId } = useMorphEffect();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+  const { mounted } = useMounted();
 
   if (!mounted) return null;
 

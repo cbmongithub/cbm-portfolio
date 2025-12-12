@@ -1,6 +1,6 @@
 import { Blog, Connect, Projects, Work } from "@/components/home";
 import { Main, Section } from "@/components/layout";
-import { TextEffect } from "@/components/ui/effects/text";
+import { TextEffect } from "@/components/ui/effects";
 
 export default function HomePage() {
   return (

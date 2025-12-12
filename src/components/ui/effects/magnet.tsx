@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
 type MagnetEffectProps = {
+  className?: string;
   children: React.ReactNode;
   key?: string;
 };
 
-export function MagnetEffect({ children, key }: MagnetEffectProps) {
+export function MagnetEffect({ className, children, key }: MagnetEffectProps) {
   const [isHovered, setIsHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -18,7 +19,7 @@ export function MagnetEffect({ children, key }: MagnetEffectProps) {
   const springY = useSpring(y, springConfig);
 
   useEffect(() => {
-    const calculateDistance = (e: MouseEvent) => {
+    function calculateDistance(e: MouseEvent) {
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -39,7 +40,7 @@ export function MagnetEffect({ children, key }: MagnetEffectProps) {
           y.set(0);
         }
       }
-    };
+    }
 
     document.addEventListener("mousemove", calculateDistance);
 
@@ -48,20 +49,21 @@ export function MagnetEffect({ children, key }: MagnetEffectProps) {
     };
   }, [x, y, ref, isHovered]);
 
-  const handleMouseEnter = () => {
+  function handleMouseEnter() {
     setIsHovered(true);
-  };
+  }
 
-  const handleMouseLeave = () => {
+  function handleMouseLeave() {
     setIsHovered(false);
     x.set(0);
     y.set(0);
-  };
+  }
 
   return (
     <motion.div
       key={key}
       ref={ref}
+      className={className}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{

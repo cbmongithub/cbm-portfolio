@@ -30,13 +30,11 @@ export function BackgroundEffect({
   enableHover = false,
 }: BackgroundEffectProps) {
   const isControlled = defaultValue !== undefined;
-  const [uncontrolledId, setUncontrolledId] = useState<string>(
-    defaultValue ?? ""
-  );
+  const [uncontrolledId, setUncontrolledId] = useState<string>(defaultValue ?? "");
   const activeId = isControlled ? (defaultValue as string) : uncontrolledId;
   const uniqueId = useId();
 
-  const handleSetActiveId = (id: string) => {
+  function handleSetActiveId(id: string) {
     if (!isControlled) {
       setUncontrolledId(id);
     }
@@ -44,7 +42,7 @@ export function BackgroundEffect({
     if (onValueChangeAction) {
       onValueChangeAction(id);
     }
-  };
+  }
 
   return Children.map(children, (child, index) => {
     if (!isValidElement(child)) return child;

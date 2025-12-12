@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { memo } from "react";
 import {
   AnimatePresence,
   motion,
@@ -113,7 +113,7 @@ const AnimationComponent: React.FC<{
   variants: Variants;
   per: "line" | "word" | "char";
   segmentWrapperClassName?: string;
-}> = React.memo(({ segment, variants, per, segmentWrapperClassName }) => {
+}> = memo(({ segment, variants, per, segmentWrapperClassName }) => {
   const content =
     per === "line" ? (
       <motion.span variants={variants} className="block">
@@ -174,7 +174,7 @@ const createVariantsWithTransition = (
 ): Variants => {
   if (!transition) return baseVariants;
 
-  const { exit: _, ...mainTransition } = transition;
+  const { exit: exitTransition, ...mainTransition } = transition;
 
   return {
     ...baseVariants,
@@ -189,7 +189,7 @@ const createVariantsWithTransition = (
       ...baseVariants.exit,
       transition: {
         ...(hasTransition(baseVariants.exit) ? baseVariants.exit.transition : {}),
-        ...mainTransition,
+        ...(exitTransition ?? mainTransition),
         staggerDirection: -1,
       },
     },

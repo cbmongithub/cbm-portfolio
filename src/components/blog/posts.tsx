@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Main, Section } from "@/components/layout";
 import { BackgroundEffect } from "@/components/ui/effects";
+import { Text } from "@/components/ui/typography";
 
 import type { PostMetadata } from "@/lib/posts";
 
@@ -28,11 +29,11 @@ export function Posts({ posts }: PostsProps) {
               className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
               data-id={slug}
             >
-              <div className="text-muted-foreground flex items-center justify-between text-sm">
-                <span>{publishedAt}</span>
-              </div>
-              <h2 className="text-foreground text-xl font-semibold">{title}</h2>
-              <p className="text-muted-foreground">{description}</p>
+              <Text className="text-sm" muted>
+                {publishedAt}
+              </Text>
+              <Text>{title}</Text>
+              <Text muted>{description}</Text>
             </Link>
           ))}
         </BackgroundEffect>
