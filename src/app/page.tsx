@@ -6,13 +6,7 @@ export default function HomePage() {
   return (
     <Main className="space-y-24">
       <Section title={{ text: "Hi I'm Christian" }}>
-        <TextEffect
-          className="text-muted-foreground"
-          as="p"
-          preset="fade"
-          per="char"
-          delay={0.3}
-        >
+        <TextEffect>
           Full stack web developer from Utah focusing on modern technologies.
         </TextEffect>
       </Section>

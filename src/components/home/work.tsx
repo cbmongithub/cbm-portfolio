@@ -13,13 +13,7 @@ export function Work() {
       {WORK.map(({ link, id, title, company, start, end }) => (
         <div key={id}>
           <div className="border-border relative rounded-lg border p-4">
-            <BorderEffect
-              spread={40}
-              glow={true}
-              disabled={false}
-              proximity={64}
-              inactiveZone={0.01}
-            />
+            <BorderEffect />
             <div className="relative flex items-center justify-between gap-4">
               <div className="flex flex-col">
                 <Text className="text-foreground font-medium">{title}</Text>

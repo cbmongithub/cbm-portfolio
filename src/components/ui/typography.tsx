@@ -42,7 +42,7 @@ export function Heading({ level = 2, id, children, className, asChild }: Heading
           href={`#${slug}`}
           aria-label={`Link to heading ${text}`}
           scroll
-          className="relative pr-8 text-inherit no-underline after:absolute after:top-1/2 after:right-0 after:translate-x-1.5 after:-translate-y-1/2 after:text-xl after:opacity-0 after:transition after:duration-150 after:ease-out after:content-['🔗'] hover:after:translate-x-0 hover:after:opacity-70"
+          className="relative pr-8 text-inherit no-underline after:absolute after:top-1/2 after:right-0 after:translate-x-1.5 after:-translate-y-1/2 after:text-xl after:opacity-0 after:transition after:duration-200 after:ease-out after:content-['🔗'] hover:after:translate-x-0 hover:after:opacity-70"
         >
           {children}
         </Link>

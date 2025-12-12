@@ -16,11 +16,7 @@ import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import { useClickAway } from "@/hooks/use-click-away";
 import { useMounted } from "@/hooks/use-mounted";
 
-import {
-  BASE_TRANSITION,
-  EFFECT_TRANSITION,
-  MORPH_EFFECT_VARIANTS,
-} from "@/lib/config/variants";
+import { MORPH_EFFECT_TRANSITION, MORPH_EFFECT_VARIANTS } from "@/lib/config/variants";
 
 type MorphEffectContextType = {
   isOpen: boolean;
@@ -60,7 +56,7 @@ export function MorphEffectProvider({ children }: MorphEffectProviderProps) {
 
   return (
     <MorphEffectContext.Provider value={contextValue}>
-      <MotionConfig transition={EFFECT_TRANSITION}>{children}</MotionConfig>
+      <MotionConfig transition={MORPH_EFFECT_TRANSITION}>{children}</MotionConfig>
     </MorphEffectContext.Provider>
   );
 }
@@ -72,7 +68,9 @@ type MorphEffectProps = {
 export function MorphEffect({ children }: MorphEffectProps) {
   return (
     <MorphEffectProvider>
-      <MotionConfig transition={BASE_TRANSITION}>{children}</MotionConfig>
+      <MotionConfig transition={MORPH_EFFECT_TRANSITION} reducedMotion="user">
+        {children}
+      </MotionConfig>
     </MorphEffectProvider>
   );
 }
@@ -85,23 +83,24 @@ export function MorphEffectTrigger({ children }: MorphEffectTriggerProps) {
   const { setIsOpen, isOpen, uniqueId } = useMorphEffect();
 
   const handleClick = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen, setIsOpen]);
+    setIsOpen((prev) => !prev);
+  }, [setIsOpen]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        setIsOpen(!isOpen);
+        setIsOpen((prev) => !prev);
       }
     },
-    [isOpen, setIsOpen]
+    [setIsOpen]
   );
 
   return (
     <motion.div
       layoutId={`dialog-${uniqueId}`}
-      className="relative cursor-pointer"
+      className="relative isolate cursor-pointer"
+      style={{ zIndex: isOpen ? 10 : 0 }}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"
@@ -130,6 +129,8 @@ export function MorphEffectContent({ children }: MorphEffectContentProps) {
   );
 
   useEffect(() => {
+    if (!isOpen) return;
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setIsOpen(false);
@@ -142,39 +143,44 @@ export function MorphEffectContent({ children }: MorphEffectContentProps) {
             event.preventDefault();
             lastFocusableElement.focus();
           }
-        } else {
-          if (document.activeElement === lastFocusableElement) {
-            event.preventDefault();
-            firstFocusableElement.focus();
-          }
+        } else if (document.activeElement === lastFocusableElement) {
+          event.preventDefault();
+          firstFocusableElement.focus();
         }
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
-
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [setIsOpen, firstFocusableElement, lastFocusableElement]);
+  }, [isOpen, setIsOpen, firstFocusableElement, lastFocusableElement]);
 
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
-      const focusableElements = containerRef.current?.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      if (focusableElements && focusableElements.length > 0) {
-        setFirstFocusableElement(focusableElements[0] as HTMLElement);
-        setLastFocusableElement(
-          focusableElements[focusableElements.length - 1] as HTMLElement
+      requestAnimationFrame(() => {
+        const focusableElements = containerRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
-        (focusableElements[0] as HTMLElement).focus();
-      }
+        if (focusableElements && focusableElements.length > 0) {
+          setFirstFocusableElement(focusableElements[0] as HTMLElement);
+          setLastFocusableElement(
+            focusableElements[focusableElements.length - 1] as HTMLElement
+          );
+          (focusableElements[0] as HTMLElement).focus();
+        }
+      });
     } else {
       document.body.classList.remove("overflow-hidden");
       triggerRef.current?.focus();
+      setFirstFocusableElement(null);
+      setLastFocusableElement(null);
     }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
   }, [isOpen, triggerRef]);
 
   useClickAway(containerRef, () => {
@@ -187,7 +193,7 @@ export function MorphEffectContent({ children }: MorphEffectContentProps) {
     <motion.div
       ref={containerRef}
       layoutId={`dialog-${uniqueId}`}
-      className="relative max-h-[90vh] w-5/6 max-w-4xl overflow-hidden rounded-lg ring-1 ring-inset"
+      className="relative max-h-[90vh] w-5/6 max-w-4xl overflow-hidden rounded-2xl"
       role="dialog"
       aria-modal="true"
       aria-labelledby={`motion-ui-morphing-dialog-title-${uniqueId}`}
@@ -214,7 +220,8 @@ export function MorphEffectContainer({ children }: MorphEffectContainerProps) {
         <>
           <motion.div
             key={`backdrop-${uniqueId}`}
-            className="bg-foreground/40 fixed inset-0 h-full w-full backdrop-blur-sm"
+            className="bg-foreground/30 fixed inset-0 size-full"
+            style={{ willChange: "opacity" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -232,14 +239,20 @@ export function MorphEffectContainer({ children }: MorphEffectContainerProps) {
 type MorphEffectImageProps = {
   src: string;
   alt: string;
+  sizes?: string;
 };
 
-export function MorphEffectImage({ src, alt }: MorphEffectImageProps) {
+export function MorphEffectImage({ src, alt, sizes }: MorphEffectImageProps) {
   const { uniqueId } = useMorphEffect();
   return (
     <motion.img
       src={src}
       alt={alt}
+      sizes={sizes}
+      width={1920}
+      height={1199}
+      loading="lazy"
+      decoding="async"
       className="h-auto w-full rounded-lg"
       layoutId={`dialog-img-${uniqueId}`}
     />
@@ -259,7 +272,7 @@ export function MorphEffectClose() {
       type="button"
       aria-label="Close dialog"
       key={`dialog-close-${uniqueId}`}
-      className="border-border bg-background group text-muted-foreground hover:bg-secondary absolute top-6 right-6 z-50 size-fit rounded border p-2"
+      className="border-border bg-background group text-foreground hover:bg-muted hover:text-muted-foreground absolute top-6 right-6 z-50 size-fit rounded border p-2 transition-colors duration-200"
       initial="initial"
       animate="animate"
       exit="exit"

@@ -13,12 +13,13 @@ const MorphImage = dynamic(
 );
 
 export function Projects() {
+  const imageSizes = "(min-width: 1280px) 40vw, (min-width: 640px) 50vw, 100vw";
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {PROJECTS.map(({ name, src, link, alt, description, id }) => (
         <div key={id} className="space-y-2">
           <div className="bg-card ring-border relative rounded-lg ring-1 ring-inset">
-            <MorphImage src={src} alt={alt} />
+            <MorphImage src={src} alt={alt} sizes={imageSizes} />
           </div>
           <div className="px-1">
             <Link
