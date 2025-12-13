@@ -19,7 +19,7 @@ export default function Error({ error, reset }: ErrorProps) {
   return (
     <Main className="mx-auto flex h-160 max-w-4xl flex-col justify-center">
       <Section>
-        <div className="border-border bg-card text-foreground rounded-2xl border p-8 shadow-sm">
+        <div className="border-border bg-card text-foreground rounded-2xl border p-6 shadow-sm">
           <p className="text-muted-foreground text-sm tracking-wide uppercase">
             Something went wrong
           </p>
