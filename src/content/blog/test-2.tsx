@@ -1,15 +1,18 @@
 import { Heading, Lead, List, Prose, Quote, Surface, Text } from "@/components/ui";
 import { CodeBlock } from "@/components/ui/code-block";
 
+import { SITE_URL } from "@/lib/config/site";
 import type { PostMetadata } from "@/lib/posts";
 
+const SLUG = "test-2";
+
 export const metadata: PostMetadata = {
-  slug: "test-2",
+  slug: SLUG,
   title: "Static data pipeline dry run",
   publishedAt: "2025-12-15",
   description:
     "We ship a fake article to prove object-based content, dynamic imports, and server-side highlighting all play nicely.",
-  image: "/og-image.png",
+  image: `${SITE_URL}/blog/${SLUG}/opengraph-image`,
 };
 
 export default function TestTwo() {

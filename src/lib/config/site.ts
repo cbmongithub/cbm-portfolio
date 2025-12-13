@@ -1,7 +1,7 @@
 import { SOCIAL_LINKS } from "@/lib/config/links";
 
 export const SITE_URL =
-  process.env["NEXT_PUBLIC_BASE_URL"] ?? "https://www.christianbmartinez.com";
+  process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://www.christianbmartinez.com";
 
 export const SITE_METADATA = {
   name: "Christian B. Martinez — Full-Stack Engineer",

@@ -243,18 +243,28 @@ type MorphEffectImageProps = {
 
 export function MorphEffectImage({ src, alt, sizes }: MorphEffectImageProps) {
   const { uniqueId } = useMorphEffect();
+  const { mounted, setMounted } = useMounted();
+
   return (
-    <motion.img
-      src={src}
-      alt={alt}
-      sizes={sizes}
-      width={1920}
-      height={1199}
-      loading="lazy"
-      decoding="async"
-      className="h-auto w-full rounded-lg"
-      layoutId={`dialog-img-${uniqueId}`}
-    />
+    <div className="bg-muted relative aspect-285/178 w-full overflow-hidden rounded-lg">
+      {!mounted && (
+        <div className="bg-muted absolute inset-0 animate-pulse" aria-hidden="true" />
+      )}
+      <motion.img
+        src={src}
+        alt={alt}
+        sizes={sizes}
+        width={1920}
+        height={1199}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setMounted(true)}
+        className={`h-full w-full object-cover transition-opacity duration-300 ${
+          mounted ? "opacity-100" : "opacity-0"
+        }`}
+        layoutId={`dialog-img-${uniqueId}`}
+      />
+    </div>
   );
 }
 

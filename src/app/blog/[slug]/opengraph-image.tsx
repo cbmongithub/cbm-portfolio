@@ -1,24 +1,31 @@
-import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { createOgImage, getOgBackground, OG_CONTENT_TYPE, OG_IMAGE_SIZE } from "@/lib/og";
+import { getPosts } from "@/lib/posts";
 
-// Placeholder scaffold to be customized later (title/slug-aware, branding, etc.)
-export default async function Image() {
-  const logoData = await readFile(join(process.cwd(), "public", "apple-touch-icon.png"));
-  const logoSrc = Uint8Array.from(logoData).buffer;
+export const size = OG_IMAGE_SIZE;
+export const contentType = OG_CONTENT_TYPE;
+export const dynamicParams = false;
 
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* @ts-expect-error Satori accepts ArrayBuffer/typed arrays for <img src> at runtime */}
-        <img src={logoSrc} height="100" alt="OG Image for blog (dynamic)" />
-      </div>
-    )
-  );
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
+type ImageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function Image({ params }: ImageProps) {
+  const { slug } = await params;
+  const titleFromSlug = slug.replace(/-/g, " ");
+  const posts = await getPosts();
+  const post = posts.find((post) => post.slug === slug);
+  const title = post?.title ?? titleFromSlug;
+
+  const { image, credit } = await getOgBackground(slug);
+
+  return createOgImage({
+    title,
+    image,
+    credit,
+  });
 }

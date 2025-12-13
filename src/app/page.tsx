@@ -2,7 +2,7 @@ import { Blog, Connect, Projects, Work } from "@/components/home";
 import { Main, Section } from "@/components/layout";
 import { TextEffect } from "@/components/ui/effects";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <Main className="space-y-24">
       <Section title={{ text: "Hi I'm Christian" }}>

@@ -1,15 +1,18 @@
 import { Heading, Lead, List, Prose, Quote, Small, Surface, Text } from "@/components/ui";
 import { CodeBlock } from "@/components/ui/code-block";
 
+import { SITE_URL } from "@/lib/config/site";
 import type { PostMetadata } from "@/lib/posts";
 
+const SLUG = "test";
+
 export const metadata: PostMetadata = {
-  slug: "test",
+  slug: SLUG,
   title: "Design system smoke test",
   publishedAt: "2025-12-09",
   description:
     "Exercising headings, anchors, links, lists, tables, code, and images—rendered from plain JSX.",
-  image: "/og-image.png",
+  image: `${SITE_URL}/blog/${SLUG}/opengraph-image`,
 };
 
 export default function TestPost() {

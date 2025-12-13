@@ -1,6 +1,7 @@
 export * from "./arrow";
 export * from "./button";
 export * from "./copy-button";
+export * from "./logo";
 export * from "./morph-image";
 export * from "./scroll-progress";
 export * from "./theme-provider";

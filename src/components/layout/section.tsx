@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 
-import { Heading, type HeadingLevel, Text } from "@/components/ui";
+import { Heading, type HeadingLevel, Text } from "@/components/ui/typography";
 
 import { BASE_TRANSITION, SECTION_VARIANTS } from "@/lib/config/variants";
 
@@ -12,7 +12,6 @@ type SectionProps = {
     level?: HeadingLevel;
   };
   text?: string;
-  className?: string;
   children?: React.ReactNode;
 };
 
