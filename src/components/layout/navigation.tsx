@@ -5,8 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 
-import { ThemeToggle } from "@/components/ui";
-
 import { NAV_LINKS } from "@/lib/config/links";
 import { NAVIGATION_VARIANTS } from "@/lib/config/variants";
 import { cn } from "@/lib/utils";
@@ -87,18 +85,13 @@ export function Navigation() {
                         : "text-muted-foreground hover:text-foreground font-light"
                     )}
                     href={link}
+                    onClick={() => pathname === link && setIsOpen(false)}
                     aria-label={label}
                   >
                     {label}
                   </Link>
                 </motion.li>
               ))}
-              <motion.li
-                className="flex flex-row items-center justify-center pt-2"
-                variants={li}
-              >
-                <ThemeToggle />
-              </motion.li>
             </motion.ul>
           </motion.div>
         )}

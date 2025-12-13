@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 
-import { Heading, type HeadingLevel, Text } from "@/components/ui/typography";
+import { Heading, type HeadingLevel, Text } from "@/components/ui";
 
 import { BASE_TRANSITION, SECTION_VARIANTS } from "@/lib/config/variants";
 

@@ -92,7 +92,7 @@ export const POSTS: BlogPosts[] = [
     title: "How to Export Metadata from MDX for Next.js SEO",
     description:
       "A guide on exporting metadata from MDX files to leverage Next.js SEO features.",
-    link: "/blog//blog/test-2",
+    link: "/blog/test-2",
     id: "blog-4",
   },
 ];

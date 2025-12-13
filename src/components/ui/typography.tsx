@@ -5,10 +5,10 @@ import { slugify } from "@/lib/utils";
 export type HeadingLevel = 1 | 2 | 3 | 4;
 
 const headingSizes: Record<HeadingLevel, string> = {
-  1: "text-3xl md:text-5xl",
-  2: "text-2xl md:text-4xl",
-  3: "text-xl md:text-3xl",
-  4: "text-lg md:text-2xl",
+  1: "text-3xl md:text-4xl",
+  2: "text-2xl md:text-3xl",
+  3: "text-xl md:text-2xl",
+  4: "text-lg md:text-xl",
 };
 
 type HeadingProps = React.PropsWithChildren<{
@@ -31,7 +31,7 @@ export function Heading({ level = 2, id, children, className, asChild }: Heading
   return (
     <Tag
       id={slug}
-      className={`scroll-mt-24 py-1 font-semibold ${headingSizes[level]} ${
+      className={`scroll-mt-24 pt-8 pb-1 font-semibold ${headingSizes[level]} ${
         className ?? ""
       }`}
     >
@@ -42,7 +42,7 @@ export function Heading({ level = 2, id, children, className, asChild }: Heading
           href={`#${slug}`}
           aria-label={`Link to heading ${text}`}
           scroll
-          className="relative pr-8 text-inherit no-underline after:absolute after:top-1/2 after:right-0 after:translate-x-1.5 after:-translate-y-1/2 after:text-xl after:opacity-0 after:transition after:duration-150 after:ease-out after:content-['🔗'] hover:after:translate-x-0 hover:after:opacity-70"
+          className="relative pr-8 text-inherit no-underline after:absolute after:top-1/2 after:right-0 after:translate-x-1.5 after:-translate-y-1/2 after:text-xl after:opacity-0 after:transition after:duration-200 after:ease-out after:content-['🔗'] hover:after:translate-x-0 hover:after:opacity-70"
         >
           {children}
         </Link>
@@ -113,7 +113,7 @@ export function InlineCode(props: React.HTMLAttributes<HTMLElement>) {
   return (
     <code
       {...props}
-      className={`bg-secondary text-foreground rounded px-1 py-0.5 font-mono text-sm ${
+      className={`bg-secondary text-foreground rounded px-1 py-0.5 font-mono ${
         props.className ?? ""
       }`}
     />

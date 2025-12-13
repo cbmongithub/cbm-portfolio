@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { DesktopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+
+import { useMounted } from "@/hooks";
 
 import { Button } from "@/components/ui";
 import { BackgroundEffect } from "@/components/ui/effects";
@@ -25,13 +27,16 @@ const THEMES = [
   },
 ];
 
-export function ThemeToggle() {
+export const ThemeToggle = memo(function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { mounted } = useMounted();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const handleValueChange = useCallback(
+    (id: string) => {
+      setTheme(id);
+    },
+    [setTheme]
+  );
 
   if (!mounted) return null;
 
@@ -40,9 +45,7 @@ export function ThemeToggle() {
       className="bg-muted pointer-events-none rounded"
       defaultValue={theme}
       enableHover={false}
-      onValueChangeAction={(id: string) => {
-        setTheme(id);
-      }}
+      onValueChangeAction={handleValueChange}
     >
       {THEMES.map(({ id, label, icon }) => {
         return (
@@ -59,4 +62,4 @@ export function ThemeToggle() {
       })}
     </BackgroundEffect>
   );
-}
+});

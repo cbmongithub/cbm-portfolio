@@ -1,3 +1,4 @@
+export * from "./arrow";
 export * from "./button";
 export * from "./copy-button";
 export * from "./morph-image";

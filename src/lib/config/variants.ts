@@ -1,6 +1,8 @@
 import type { Transition, Variants } from "motion/react";
 
 export const BASE_TRANSITION: Transition = {
+  type: "spring",
+  bounce: 0,
   duration: 0.3,
   ease: "easeInOut",
 };
@@ -87,10 +89,11 @@ export const SECTION_VARIANTS: Variants = {
   visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
 
-export const EFFECT_TRANSITION: Transition = {
-  type: "spring",
-  bounce: 0,
+export const MORPH_EFFECT_TRANSITION: Transition = {
   ...BASE_TRANSITION,
+  stiffness: 220,
+  damping: 28,
+  mass: 0.9,
 };
 
 export const MORPH_EFFECT_VARIANTS: Variants = {
@@ -100,4 +103,21 @@ export const MORPH_EFFECT_VARIANTS: Variants = {
     transition: { delay: 0.3, duration: 0.1 },
   },
   exit: { opacity: 0, transition: { duration: 0 } },
+};
+
+export const TEXT_EFFECT_CONTAINER_VARIANTS: Variants = {
+  ...CONTAINER_VARIANTS,
+  visible: {
+    ...CONTAINER_VARIANTS.visible,
+    transition: {
+      staggerChildren: 0.02,
+      delayChildren: 0.4,
+    },
+  },
+};
+
+export const TEXT_EFFECT_FADE_VARIANTS: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
 };
