@@ -4,7 +4,7 @@ import { memo, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { DesktopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
-import { useMounted } from "@/hooks/use-mounted";
+import { useMounted } from "@/hooks";
 
 import { Button } from "@/components/ui";
 import { BackgroundEffect } from "@/components/ui/effects";

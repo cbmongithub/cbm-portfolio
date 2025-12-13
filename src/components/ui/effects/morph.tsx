@@ -13,8 +13,7 @@ import { createPortal } from "react-dom";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
-import { useClickAway } from "@/hooks/use-click-away";
-import { useMounted } from "@/hooks/use-mounted";
+import { useClickAway, useMounted } from "@/hooks";
 
 import { MORPH_EFFECT_TRANSITION, MORPH_EFFECT_VARIANTS } from "@/lib/config/variants";
 

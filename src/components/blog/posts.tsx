@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { Main, Section } from "@/components/layout";
+import { Text } from "@/components/ui";
 import { BackgroundEffect } from "@/components/ui/effects";
-import { Text } from "@/components/ui/typography";
 
 import type { PostMetadata } from "@/lib/posts";
 

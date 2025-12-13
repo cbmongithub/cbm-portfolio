@@ -1,6 +1,6 @@
 import { Code } from "bright";
 
-import { CopyButton } from "@/components/ui/copy-button";
+import { CopyButton } from "@/components/ui";
 
 import { DARK_THEME, LIGHT_THEME } from "@/lib/config/code";
 

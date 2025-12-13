@@ -5,10 +5,10 @@ import { slugify } from "@/lib/utils";
 export type HeadingLevel = 1 | 2 | 3 | 4;
 
 const headingSizes: Record<HeadingLevel, string> = {
-  1: "text-3xl md:text-5xl",
-  2: "text-2xl md:text-4xl",
-  3: "text-xl md:text-3xl",
-  4: "text-lg md:text-2xl",
+  1: "text-3xl md:text-4xl",
+  2: "text-2xl md:text-3xl",
+  3: "text-xl md:text-2xl",
+  4: "text-lg md:text-xl",
 };
 
 type HeadingProps = React.PropsWithChildren<{
@@ -31,7 +31,7 @@ export function Heading({ level = 2, id, children, className, asChild }: Heading
   return (
     <Tag
       id={slug}
-      className={`scroll-mt-24 py-1 font-semibold ${headingSizes[level]} ${
+      className={`scroll-mt-24 pt-8 pb-1 font-semibold ${headingSizes[level]} ${
         className ?? ""
       }`}
     >
@@ -113,7 +113,7 @@ export function InlineCode(props: React.HTMLAttributes<HTMLElement>) {
   return (
     <code
       {...props}
-      className={`bg-secondary text-foreground rounded px-1 py-0.5 font-mono text-sm ${
+      className={`bg-secondary text-foreground rounded px-1 py-0.5 font-mono ${
         props.className ?? ""
       }`}
     />
