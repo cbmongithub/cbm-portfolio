@@ -14,15 +14,18 @@ import {
   Tr,
 } from "@/components/ui/typography";
 
+import { SITE_URL } from "@/lib/config/site";
 import type { PostMetadata } from "@/lib/posts";
 
+const SLUG = "nextjs-16";
+
 export const metadata: PostMetadata = {
-  slug: "nextjs-16",
+  slug: SLUG,
   title: "What's New in Next.js 16: A Deep Dive",
   publishedAt: "2025-12-15",
   description:
     "The Next.js team just dropped version 16, and honestly, it's packed with some game-changing improvements.",
-  image: "/og-image.png",
+  image: `${SITE_URL}/blog/${SLUG}/opengraph-image`,
 };
 
 export default function NextJS16Article() {

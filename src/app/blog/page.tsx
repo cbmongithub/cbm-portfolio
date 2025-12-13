@@ -1,8 +1,40 @@
-import { Posts } from "@/components/blog";
+import Link from "next/link";
+
+import { Main, Section } from "@/components/layout";
+import { BackgroundEffect } from "@/components/ui/effects";
+import { Text } from "@/components/ui/typography";
 
 import { getPosts } from "@/lib/posts";
 
 export default async function BlogsPage() {
   const posts = await getPosts();
-  return <Posts posts={posts} />;
+  return (
+    <Main className="space-y-24">
+      <Section
+        title={{ text: "Blog" }}
+        text="Notes, experiments, and writeups from the build log."
+      />
+      <Section title={{ text: "Latest Posts", level: 4 }}>
+        <BackgroundEffect
+          enableHover
+          className="bg-muted size-full rounded-l-none rounded-r-lg"
+        >
+          {posts.map(({ slug, title, description, publishedAt }) => (
+            <Link
+              key={slug}
+              href={`/blog/${slug}`}
+              className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
+              data-id={slug}
+            >
+              <Text className="text-sm" muted>
+                {publishedAt}
+              </Text>
+              <Text>{title}</Text>
+              <Text muted>{description}</Text>
+            </Link>
+          ))}
+        </BackgroundEffect>
+      </Section>
+    </Main>
+  );
 }

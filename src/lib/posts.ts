@@ -1,19 +1,19 @@
 import { cache } from "react";
-import fs from "node:fs";
-import path from "node:path";
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
 
 export type PostMetadata = {
   slug: string;
   title: string;
   publishedAt: string;
   description: string;
-  image: string | URL;
+  image: string;
 };
 
-const filePath = path.join(process.cwd(), "src", "content", "blog");
+const filePath = join(process.cwd(), "src", "content", "blog");
 
 // Snapshot available post slugs once per server process.
-const slugs = fs.readdirSync(filePath).map((files) => files.replace(/\.tsx?$/, ""));
+const slugs = readdirSync(filePath).map((files) => files.replace(/\.tsx?$/, ""));
 
 type LoadedPost = { post: React.ComponentType; metadata: PostMetadata };
 

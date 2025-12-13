@@ -78,6 +78,8 @@ Content lives in `src/content/blog/*.tsx`; `blog/[slug]/page.tsx` dynamically im
 - [ ] Replace placeholder page content with real sections/components
 - [ ] SEO generation extracted from post meta
 - [ ] Portfolio detail page (architecture, patterns, etc.)
+- [ ] Portfolio detail page (architecture, patterns, etc.)
+- [ ] Blog rich layout enhancements - tags, filtering blogs, next/previous blog, further reading, image captions underneath blog, blog author with social links, blog footer cta?)
 - [ ] Per-post OG image generation
 - [ ] Navigation/footer wired to `NAV_LINKS`/`FOOTER_LINKS`
 - [ ] Deploy to Vercel and verify analytics
