@@ -52,7 +52,7 @@ export const ThemeToggle = memo(function ThemeToggle() {
           <Button
             key={id}
             variant="ghost"
-            type="button"
+            size="icon"
             aria-label={`Switch to ${label} theme`}
             data-id={id}
           >

@@ -1,23 +1,30 @@
 import Link from "next/link";
 
-import { Text } from "@/components/ui";
 import { BackgroundEffect } from "@/components/ui/effects";
+import { Text } from "@/components/ui/typography";
 
-import { POSTS } from "@/lib/config/home";
+import { getPosts } from "@/lib/posts";
 
-export function Blog() {
+export async function Blog() {
+  const posts = await getPosts();
+  const latest = posts
+    .sort(
+      (a, b) => new Date(b.publishedTime).getTime() - new Date(a.publishedTime).getTime()
+    )
+    .slice(0, 4);
+
   return (
     <div className="flex flex-col">
       <BackgroundEffect
         enableHover
         className="bg-muted size-full rounded-l-none rounded-r-lg"
       >
-        {POSTS.map(({ id, link, title, description }) => (
+        {latest.map(({ slug, title, description }) => (
           <Link
-            key={id}
+            key={slug}
             className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
-            href={link}
-            data-id={id}
+            href={`/blog/${slug}`}
+            data-id={slug}
           >
             <div className="flex flex-col">
               <Text className="text-foreground py-0 font-medium">{title}</Text>

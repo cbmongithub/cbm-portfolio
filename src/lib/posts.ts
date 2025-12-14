@@ -4,10 +4,13 @@ import { join } from "node:path";
 
 export type PostMetadata = {
   slug: string;
-  title: string;
-  publishedAt: string;
-  description: string;
   image: string;
+  title: string;
+  description: string;
+  publishedTime: string;
+  modifiedTime: string;
+  authors: string;
+  tags: string[];
 };
 
 const filePath = join(process.cwd(), "src", "content", "blog");

@@ -14,8 +14,13 @@ type CopyButtonProps = {
 export const CopyButton = memo(function CopyButton({ code }: CopyButtonProps) {
   const { copied, handleClick } = useCopy(code);
   return (
-    <Button onClick={handleClick} variant="icon" aria-label={copied ? "Copied!" : "Copy"}>
-      <span className="ease text-foreground absolute flex size-full items-center justify-center">
+    <Button
+      onClick={handleClick}
+      variant="ghost"
+      size="icon"
+      aria-label={copied ? "Copied!" : "Copy"}
+    >
+      <span className="ease text-foreground flex items-center justify-center">
         {copied ? <CheckIcon className="size-4" /> : <CopyIcon className="size-4" />}
       </span>
     </Button>

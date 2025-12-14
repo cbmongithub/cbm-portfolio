@@ -1,7 +1,8 @@
 import Link from "next/link";
 
-import { Arrow, Text } from "@/components/ui";
+import { Arrow } from "@/components/ui";
 import { MagnetEffect } from "@/components/ui/effects";
+import { Text } from "@/components/ui/typography";
 
 import { EMAIL_LINK, SOCIAL_LINKS } from "@/lib/config/links";
 
@@ -11,7 +12,7 @@ export function Connect() {
       <Text muted>
         Feel free to&nbsp;
         <Link
-          className="text-link hover:text-link/80 transition-colors"
+          className="text-link hover:text-link-hover transition-colors hover:underline"
           href={`mailto:${EMAIL_LINK}`}
         >
           contact me&nbsp;

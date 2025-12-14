@@ -17,18 +17,21 @@ import {
 import { SITE_URL } from "@/lib/config/site";
 import type { PostMetadata } from "@/lib/posts";
 
-const SLUG = "nextjs-16";
+const SLUG = "nextjs-16-deep-dive";
 
 export const metadata: PostMetadata = {
   slug: SLUG,
   title: "What's New in Next.js 16: A Deep Dive",
-  publishedAt: "2025-12-15",
+  publishedTime: "2025-12-14",
+  modifiedTime: "2025-12-15",
+  authors: "Christian B. Martinez",
+  tags: ["nextjs", "react", "frameworks"],
   description:
     "The Next.js team just dropped version 16, and honestly, it's packed with some game-changing improvements.",
   image: `${SITE_URL}/blog/${SLUG}/opengraph-image`,
 };
 
-export default function NextJS16Article() {
+export default function Article() {
   return (
     <>
       <Text>
@@ -810,7 +813,7 @@ export async function markNotificationAsRead(notificationId: string) {
             href="https://github.com/vercel/next.js/discussions"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-link hover:underline"
+            className="text-link hover:text-link-hover hover:underline"
           >
             GitHub Discussions
           </Link>{" "}
@@ -821,7 +824,7 @@ export async function markNotificationAsRead(notificationId: string) {
             href="https://github.com/vercel/next.js/issues"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-link hover:underline"
+            className="text-link hover:text-link-hover hover:underline"
           >
             GitHub Issues
           </Link>{" "}
@@ -832,7 +835,7 @@ export async function markNotificationAsRead(notificationId: string) {
             href="https://nextjs.org/discord"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-link hover:underline"
+            className="text-link hover:text-link-hover hover:underline"
           >
             Discord Community
           </Link>{" "}
