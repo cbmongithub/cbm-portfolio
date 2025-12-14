@@ -68,19 +68,20 @@ Content lives in `src/content/blog/*.tsx`; `blog/[slug]/page.tsx` dynamically im
 ## Roadmap (living)
 
 - [x] Scaffolded core routes (home/index, blog index/detail)
-- [x] SEO helpers wired (metadata, robots, sitemap)
+- [x] SEO helpers wired (metadata, robots, sitemap with lastModified)
 - [x] ESLint + Prettier configured (Tailwind/import sorting)
 - [x] Tailwind v4 tokens/theme set up
 - [x] Blog rendering pipeline (TSX posts + dynamic import) and listing
-- [x] Write tests for posts parsing and sitemap/robots output
+- [x] Write tests for posts parsing, sitemap/robots output, and button variants
 - [x] Theme-aware components; consider light toggle
 - [x] Code highlight refinements and code block components
-- [ ] Replace placeholder page content with real sections/components
+- [x] Unified button/badge/callout variants with shared color tokens
+- [x] Per-post OG image generation (shared generator for /blog)
+- [x] Replace placeholder page content with real sections/components
 - [ ] SEO generation extracted from post meta
 - [ ] Portfolio detail page (architecture, patterns, etc.)
-- [ ] Portfolio detail page (architecture, patterns, etc.)
 - [ ] Blog rich layout enhancements - tags, filtering blogs, next/previous blog, further reading, image captions underneath blog, blog author with social links, blog footer cta?)
-- [ ] Per-post OG image generation
+- [x] Per-post OG image generation
 - [ ] Navigation/footer wired to `NAV_LINKS`/`FOOTER_LINKS`
 - [ ] Deploy to Vercel and verify analytics
 - [ ] Post-launch performance and accessibility optimizations
