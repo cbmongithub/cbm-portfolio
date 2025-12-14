@@ -6,7 +6,7 @@ import { getPostBySlug, getPosts } from "@/lib/posts";
 
 const BLOG_PATH = path.join(process.cwd(), "src", "content", "blog");
 const DISK_SLUGS = fs.readdirSync(BLOG_PATH).map((file) => file.replace(/\.tsx?$/, ""));
-const TEST_SLUG = "test";
+const TEST_SLUG = "react-19-rce";
 
 describe("posts loader", () => {
   it("returns a single post by slug", async () => {
@@ -14,8 +14,8 @@ describe("posts loader", () => {
     expect(post).not.toBeNull();
     if (!post) return;
     expect(post.slug).toBe(TEST_SLUG);
-    expect(post.title).toContain("Design system smoke test");
-    expect(post.publishedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(post.title).toContain("Critical React 19 RCE: Patch Server Components Now");
+    expect(post.publishedTime).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 
   it("lists all posts present on disk", async () => {

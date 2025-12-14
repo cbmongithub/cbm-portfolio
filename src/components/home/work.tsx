@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 
-import { Arrow, Text } from "@/components/ui";
+import { Arrow } from "@/components/ui";
 import { BorderEffect, MagnetEffect } from "@/components/ui/effects";
+import { Text } from "@/components/ui/typography";
 
 import { WORK } from "@/lib/config/home";
 
@@ -29,7 +30,7 @@ export function Work() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Open ${company} link`}
-                    className="group text-link hover:text-link/80 relative inline-flex shrink-0 items-center gap-px py-1 transition-colors duration-200"
+                    className="group text-link hover:text-link-hover relative inline-flex shrink-0 items-center gap-px py-1 transition-colors duration-200"
                   >
                     Visit
                     <Arrow />

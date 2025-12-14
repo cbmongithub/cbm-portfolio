@@ -243,7 +243,7 @@ type MorphEffectImageProps = {
 
 export function MorphEffectImage({ src, alt, sizes }: MorphEffectImageProps) {
   const { uniqueId } = useMorphEffect();
-  const { mounted, setMounted } = useMounted();
+  const { mounted } = useMounted();
 
   return (
     <div className="bg-muted relative aspect-285/178 w-full overflow-hidden rounded-lg">
@@ -258,10 +258,7 @@ export function MorphEffectImage({ src, alt, sizes }: MorphEffectImageProps) {
         height={1199}
         loading="lazy"
         decoding="async"
-        onLoad={() => setMounted(true)}
-        className={`h-full w-full object-cover transition-opacity duration-300 ${
-          mounted ? "opacity-100" : "opacity-0"
-        }`}
+        className="size-full object-cover"
         layoutId={`dialog-img-${uniqueId}`}
       />
     </div>

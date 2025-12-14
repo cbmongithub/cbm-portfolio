@@ -9,7 +9,7 @@ import { getPosts } from "@/lib/posts";
 export default async function BlogsPage() {
   const posts = await getPosts();
   return (
-    <Main className="space-y-24">
+    <Main className="space-y-20 pt-6">
       <Section
         title={{ text: "Blog" }}
         text="Notes, experiments, and writeups from the build log."
@@ -19,7 +19,7 @@ export default async function BlogsPage() {
           enableHover
           className="bg-muted size-full rounded-l-none rounded-r-lg"
         >
-          {posts.map(({ slug, title, description, publishedAt }) => (
+          {posts.map(({ slug, title, description, publishedTime }) => (
             <Link
               key={slug}
               href={`/blog/${slug}`}
@@ -27,7 +27,7 @@ export default async function BlogsPage() {
               data-id={slug}
             >
               <Text className="text-sm" muted>
-                {publishedAt}
+                {publishedTime}
               </Text>
               <Text>{title}</Text>
               <Text muted>{description}</Text>

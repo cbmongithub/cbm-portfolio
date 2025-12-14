@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import { Text } from "@/components/ui";
+import { Text } from "@/components/ui/typography";
 
 import { PROJECTS } from "@/lib/config/home";
 

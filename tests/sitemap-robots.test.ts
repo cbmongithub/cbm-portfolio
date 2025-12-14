@@ -10,16 +10,22 @@ describe("metadata routes", () => {
   it("sitemap includes static routes and blog posts", async () => {
     const entries = await sitemap();
     const urls = entries.map((entry) => entry.url);
-    const today = new Date().toISOString().split("T")[0];
+    const posts = await getPosts();
+    const newestDate =
+      posts.length > 0
+        ? posts
+            .map((p) => p.modifiedTime ?? p.publishedTime)
+            .sort()
+            .at(-1)
+        : new Date().toISOString().split("T")[0];
 
     expect(urls).toContain(SITE_URL);
     expect(urls).toContain(`${SITE_URL}/blog`);
 
     const expectedStatics = new Set([SITE_URL, `${SITE_URL}/blog`]);
     const staticRoutes = entries.filter((entry) => expectedStatics.has(entry.url));
-    staticRoutes.forEach((route) => expect(route.lastModified).toBe(today));
+    staticRoutes.forEach((route) => expect(route.lastModified).toBe(newestDate));
 
-    const posts = await getPosts();
     posts.forEach((post) => {
       expect(urls).toContain(`${SITE_URL}/blog/${post.slug}`);
     });
