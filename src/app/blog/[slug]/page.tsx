@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
-import { Figure,Heading } from "@/components/ui/typography";
+import { Figure, Heading } from "@/components/ui/typography";
 
-import { SITE_URL } from "@/lib/config/site";
+import { BASE_URL, OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/config/metadata";
 import { getOgBackground } from "@/lib/og";
 import { getPosts, loadPost } from "@/lib/posts";
 
@@ -24,13 +24,22 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const {
     metadata: { title, description, tags, publishedTime, modifiedTime, image, authors },
   } = await loadPost(slug);
-  const url = `${SITE_URL}/blog/${slug}/opengraph-image`;
+  const url = `${BASE_URL}/blog/${slug}`;
+  const images = [
+    {
+      url: image,
+      width: 1200,
+      height: 630,
+      alt: title,
+    },
+  ];
 
   return {
     title,
     description,
     alternates: { canonical: url },
     openGraph: {
+      ...OPEN_GRAPH_DEFAULTS,
       title,
       description,
       type: "article",
@@ -39,17 +48,10 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
       modifiedTime,
       authors,
       tags,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      images,
     },
     twitter: {
-      card: "summary_large_image",
+      ...TWITTER_DEFAULTS,
       title,
       description,
       images: [image],
@@ -72,8 +74,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
     const source = image; // Falls back to gradient
     const src = source.toString();
     try {
-      const url = new URL(src, SITE_URL);
-      const siteHost = new URL(SITE_URL).host;
+      const url = new URL(src, BASE_URL);
+      const siteHost = new URL(BASE_URL).host;
       if (
         url.host === siteHost ||
         url.hostname === "localhost" ||
@@ -114,7 +116,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {tags?.length ? (
             <div className="mt-4 flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <Badge key={tag} label={tag} />
+                <Badge key={tag}>{tag}</Badge>
               ))}
             </div>
           ) : null}

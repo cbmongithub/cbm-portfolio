@@ -15,7 +15,7 @@ import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
 import { useClickAway, useMounted } from "@/hooks";
 
-import { MORPH_EFFECT_TRANSITION, MORPH_EFFECT_VARIANTS } from "@/lib/config/variants";
+import { MORPH_EFFECT_TRANSITION, MORPH_EFFECT_VARIANTS } from "@/lib/config/motion";
 
 type MorphEffectContextType = {
   isOpen: boolean;

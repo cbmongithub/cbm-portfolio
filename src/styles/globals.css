@@ -11,7 +11,7 @@
   --color-secondary: oklch(97% 0.01 95);
   --color-secondary-foreground: oklch(32.5% 0.009 260);
   --color-muted: oklch(94% 0.009 260);
-  --color-muted-foreground: oklch(40% 0.03 260);
+  --color-muted-foreground: oklch(28% 0.03 260);
   --color-border: oklch(88% 0.01 260);
   --color-link: var(--color-info);
   --color-link-hover: color-mix(

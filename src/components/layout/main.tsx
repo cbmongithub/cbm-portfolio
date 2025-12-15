@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 
-import { CONTAINER_VARIANTS } from "@/lib/config/variants";
+import { CONTAINER_VARIANTS } from "@/lib/config/motion";
 
 type MainProps = {
   className?: string;

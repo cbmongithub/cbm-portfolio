@@ -5,7 +5,7 @@ import { motion, type Variants } from "motion/react";
 import {
   TEXT_EFFECT_CONTAINER_VARIANTS,
   TEXT_EFFECT_FADE_VARIANTS,
-} from "@/lib/config/variants";
+} from "@/lib/config/motion";
 
 function AnimationSegment({
   segment,

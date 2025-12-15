@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Arrow } from "@/components/ui";
+import { Arrow, Badge } from "@/components/ui";
 import { MagnetEffect } from "@/components/ui/effects";
 import { Text } from "@/components/ui/typography";
 
@@ -22,13 +22,10 @@ export function Connect() {
       <div className="mt-2 flex flex-row space-x-3">
         {SOCIAL_LINKS.map(({ label, link }) => (
           <MagnetEffect key={label}>
-            <Link
-              href={link}
-              className="group bg-muted text-muted-foreground hover:bg-muted-foreground hover:text-muted relative inline-flex shrink-0 items-center gap-px rounded-full px-2.5 py-1 text-sm transition-colors duration-200"
-            >
-              {label}
+            <Badge>
+              <Link href={link}>{label}</Link>
               <Arrow />
-            </Link>
+            </Badge>
           </MagnetEffect>
         ))}
       </div>

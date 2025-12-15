@@ -16,7 +16,7 @@ import {
   Tr,
 } from "@/components/ui/typography";
 
-import { SITE_URL } from "@/lib/config/site";
+import { BASE_URL } from "@/lib/config/metadata";
 import type { PostMetadata } from "@/lib/posts";
 
 const SLUG = "react-19-rce";
@@ -30,7 +30,7 @@ export const metadata: PostMetadata = {
   tags: ["react", "security", "updates"],
   description:
     "A remote code execution flaw in React Server Components (19.0–19.2.0). Learn who is affected, why it's dangerous, and how to patch immediately.",
-  image: `${SITE_URL}/blog/${SLUG}/opengraph-image`,
+  image: `${BASE_URL}/blog/${SLUG}/opengraph-image`,
 };
 
 export default function Article() {

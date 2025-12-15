@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 
 import { NAV_LINKS } from "@/lib/config/links";
-import { NAVIGATION_VARIANTS } from "@/lib/config/variants";
+import { NAVIGATION_VARIANTS } from "@/lib/config/motion";
 import { cn } from "@/lib/utils";
 
 export function Navigation() {

@@ -14,7 +14,7 @@ import {
   Tr,
 } from "@/components/ui/typography";
 
-import { SITE_URL } from "@/lib/config/site";
+import { BASE_URL } from "@/lib/config/metadata";
 import type { PostMetadata } from "@/lib/posts";
 
 const SLUG = "nextjs-16-deep-dive";
@@ -28,7 +28,7 @@ export const metadata: PostMetadata = {
   tags: ["nextjs", "react", "frameworks"],
   description:
     "The Next.js team just dropped version 16, and honestly, it's packed with some game-changing improvements.",
-  image: `${SITE_URL}/blog/${SLUG}/opengraph-image`,
+  image: `${BASE_URL}/blog/${SLUG}/opengraph-image`,
 };
 
 export default function Article() {
