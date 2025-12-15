@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
-import { Figure,Heading } from "@/components/ui/typography";
+import { Figure, Heading } from "@/components/ui/typography";
 
 import { SITE_URL } from "@/lib/config/site";
 import { getOgBackground } from "@/lib/og";
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const {
     metadata: { title, description, tags, publishedTime, modifiedTime, image, authors },
   } = await loadPost(slug);
-  const url = `${SITE_URL}/blog/${slug}/opengraph-image`;
+  const url = `${SITE_URL}/blog/${slug}`;
 
   return {
     title,
@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
       publishedTime,
       modifiedTime,
       authors,
+      siteName: SITE_URL,
       tags,
       images: [
         {
@@ -114,7 +115,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {tags?.length ? (
             <div className="mt-4 flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <Badge key={tag} label={tag} />
+                <Badge key={tag}>{tag}</Badge>
               ))}
             </div>
           ) : null}

@@ -11,7 +11,7 @@ import {
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-import { BASE_TRANSITION } from "@/lib/config/variants";
+import { BASE_TRANSITION } from "@/lib/config/motion";
 import { cn } from "@/lib/utils";
 
 type ChildProps = {
