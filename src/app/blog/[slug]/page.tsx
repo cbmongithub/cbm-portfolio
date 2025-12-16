@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
-import { Figure, Heading } from "@/components/ui/typography";
+import { Heading } from "@/components/ui/typography";
 
-import { BASE_URL, OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/config/metadata";
-import { getOgBackground } from "@/lib/og";
+import {
+  BASE_URL,
+  OPEN_GRAPH_DEFAULTS,
+  TWITTER_DEFAULTS,
+} from "@/lib/config/metadata";
 import { getPosts, loadPost } from "@/lib/posts";
 
 export const dynamicParams = false;
@@ -19,10 +22,20 @@ type BlogPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
   const {
-    metadata: { title, description, tags, publishedTime, modifiedTime, image, authors },
+    metadata: {
+      title,
+      description,
+      tags,
+      publishedTime,
+      modifiedTime,
+      image,
+      authors,
+    },
   } = await loadPost(slug);
   const url = `${BASE_URL}/blog/${slug}`;
   const images = [
@@ -62,32 +75,9 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 export default async function BlogPage({ params }: BlogPageProps) {
   const { slug } = await params;
   const { post: BlogPost, metadata } = await loadPost(slug);
+  const { title, description, tags, publishedTime, authors } = metadata;
 
   if (!BlogPost) return notFound();
-
-  const { image, credit } = await getOgBackground(slug);
-  const { title, description, tags, publishedTime, authors } = metadata;
-  const blurDataURL =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23111'/%3E%3C/svg%3E";
-
-  const imageSrc = (() => {
-    const source = image; // Falls back to gradient
-    const src = source.toString();
-    try {
-      const url = new URL(src, BASE_URL);
-      const siteHost = new URL(BASE_URL).host;
-      if (
-        url.host === siteHost ||
-        url.hostname === "localhost" ||
-        url.hostname === "127.0.0.1"
-      ) {
-        return url.pathname + url.search;
-      }
-      return url.toString();
-    } catch {
-      return src;
-    }
-  })();
 
   return (
     <main className="pt-4">
@@ -120,12 +110,12 @@ export default async function BlogPage({ params }: BlogPageProps) {
               ))}
             </div>
           ) : null}
-          <Figure
+          {/* <Figure
             title={title}
             blurDataURL={blurDataURL}
             imageSrc={imageSrc}
             caption={credit}
-          />
+          /> */}
         </header>
 
         <article className="max-w-none">

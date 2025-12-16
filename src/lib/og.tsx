@@ -1,77 +1,48 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+
+import { BASE_URL } from "@/lib/config/metadata";
 
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 };
-export const OG_CONTENT_TYPE = "image/png";
+export const OG_ALT_TEXT =
+  "Open graph preview for Christian B. Martinez's portfolio";
 
-// Fallack to a gradient when Pexels isn't available or fails.
-const FALLBACK_GRADIENT =
-  "radial-gradient(circle at 18% 18%, rgba(255,255,255,0.08), transparent 35%), radial-gradient(circle at 78% 12%, rgba(90,160,255,0.16), transparent 40%), linear-gradient(135deg, #0f172a 0%, #0b1222 100%)";
-
-type OgBackground = { image: string; credit?: string };
-
-type PexelsResponse = {
-  photos?: Array<{
-    src?: { landscape?: string; large?: string };
-    photographer?: string;
-    photographer_url?: string;
-    url?: string;
-  }>;
+type OgImageOptions = {
+  title: string;
+  subtitle?: string | null;
+  route?: string | null;
 };
 
-// Fetch a single Pexels image for a query (or fall back to a gradient) and return it with photographer credits.
-export async function getOgBackground(query: string): Promise<OgBackground> {
-  const apiKey = process.env.PEXELS_API_KEY;
-  if (!apiKey) return { image: FALLBACK_GRADIENT };
+const OG_BACKGROUND =
+  "radial-gradient(circle at 20% 20%, rgba(96,165,250,0.22), transparent 55%), radial-gradient(circle at 80% 15%, rgba(14,165,233,0.28), transparent 48%), radial-gradient(circle at 80% 85%, rgba(129,140,248,0.3), transparent 52%), linear-gradient(135deg, #020617 0%, #0f172a 42%, #020b2b 100%)";
 
-  // Pull a single landscape photo for the query; cache to avoid rate limits.
-  const res = await fetch(
-    `https://api.pexels.com/v1/search?query=${encodeURIComponent(
-      query
-    )}&per_page=1&orientation=landscape`,
-    {
-      headers: { Authorization: apiKey },
-      cache: "force-cache",
-      next: { revalidate: 60 * 60 * 168 }, // 1 week
-    }
-  );
-
-  if (!res.ok) return { image: FALLBACK_GRADIENT };
-
-  const data = (await res.json()) as PexelsResponse;
-
-  const photo = data.photos?.[0];
-  const image = photo?.src?.landscape || photo?.src?.large;
-  if (!image) return { image: FALLBACK_GRADIENT };
-
-  const creditName = photo?.photographer;
-  const creditLink = photo?.photographer_url || photo?.url;
-  const credit = creditName
-    ? `Photo by ${creditName}${creditLink ? " on Pexels" : ""}`
-    : "Photo via Pexels";
-
-  return { image, credit };
+function clampText(value: string, maxLength: number) {
+  const trimmed = value.trim();
+  if (trimmed.length <= maxLength) return trimmed;
+  return `${trimmed.slice(0, maxLength - 1)}…`;
 }
 
-type OgImageProps = {
-  title: string;
-  image: string;
-  credit?: string;
-};
+function formatRoute(value?: string | null) {
+  if (!value) return "/";
+  const normalized = value.startsWith("/") ? value : `/${value}`;
+  return normalized.replace(/\/+/g, "/");
+}
 
-// Build and return an ImageResponse for OG/social cards, layering gradients and a logo over the Pexels image.
-export async function createOgImage({ title, image, credit }: OgImageProps) {
-  // Layer gradients over the fetched image to keep text legible.
-  const baseLayer = image.startsWith("http") ? `url(${image})` : image;
-  const logoData = await readFile(join(process.cwd(), "public", "apple-touch-icon.png"));
-  const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
+// Generate a dynamic image url for OG images
+export function generateOgImageUrl({ title, subtitle, route }: OgImageOptions) {
+  const params = new URLSearchParams({ title });
+  if (subtitle) params.set("subtitle", subtitle);
+  if (route) params.set("route", route);
+  return `${BASE_URL}/api/og?${params.toString()}`;
+}
 
-  const backgroundImage = [
-    "radial-gradient(circle at center, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.08) 100%)",
-    "linear-gradient(120deg, rgba(6,7,12,0.72), rgba(7,10,18,0.82))",
-    baseLayer,
-  ].join(", ");
+export async function createOgImage({
+  title,
+  subtitle,
+  route,
+}: OgImageOptions) {
+  const safeTitle = clampText(title || "Christian B. Martinez", 90);
+  const safeSubtitle = subtitle ? clampText(subtitle, 150) : null;
+  const safeRoute = clampText(formatRoute(route), 42);
 
   return new ImageResponse(
     (
@@ -82,57 +53,68 @@ export async function createOgImage({ title, image, credit }: OgImageProps) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: "48px 56px",
-          backgroundImage,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          color: "#e5e7eb",
-          fontFamily: "Inter, system-ui, -apple-system, sans-serif",
-          boxSizing: "border-box",
+          padding: "64px 72px",
+          backgroundImage: OG_BACKGROUND,
+          color: "#f8fafc",
+          fontFamily: "Geist, Inter, system-ui, -apple-system, sans-serif",
         }}
       >
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: 12,
+            justifyContent: "space-between",
             fontSize: 22,
-            letterSpacing: "0.08em",
+            letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "#a5b4fc",
+            color: "#c7d2fe",
           }}
         >
-          {logoSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={logoSrc}
-              alt="Logo"
-              width={56}
-              height={56}
-              style={{ borderRadius: 12 }}
-            />
-          ) : null}
-          <span>CBM / Blog</span>
+          <span>Christian B. Martinez</span>
+          <span style={{ color: "#94a3b8", letterSpacing: "0.08em" }}>
+            {safeRoute}
+          </span>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <h1
             style={{
-              fontSize: 52,
-              lineHeight: 1.08,
-              fontWeight: 750,
-              color: "#f8fafc",
-              maxWidth: 920,
-              textTransform: "capitalize",
+              fontSize: 68,
+              lineHeight: 1.05,
+              margin: 0,
+              color: "#f1f5f9",
             }}
           >
-            {title}
+            {safeTitle}
           </h1>
-          {credit ? <p style={{ fontSize: 16, color: "#cbd5e1" }}>{credit}</p> : null}
+          {safeSubtitle ? (
+            <p
+              style={{
+                fontSize: 30,
+                lineHeight: 1.4,
+                margin: 0,
+                color: "#cbd5f5",
+              }}
+            >
+              {safeSubtitle}
+            </p>
+          ) : null}
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 22,
+            color: "#94a3b8",
+          }}
+        >
+          <span>Full Stack Engineer</span>
+          <span>christianbmartinez.com</span>
         </div>
       </div>
     ),
-    OG_IMAGE_SIZE
+    {
+      ...OG_IMAGE_SIZE,
+    }
   );
 }

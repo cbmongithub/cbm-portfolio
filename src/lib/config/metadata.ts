@@ -49,10 +49,7 @@ export const TWITTER_DEFAULTS = {
 
 export const BASE_METADATA: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: {
-    default: METADATA.name,
-    template: `%s - ${METADATA.name}`,
-  },
+  title: METADATA.name,
   description: METADATA.description,
   keywords: [
     "Christian B. Martinez",
