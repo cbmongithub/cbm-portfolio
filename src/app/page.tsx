@@ -2,6 +2,10 @@ import { Blog, Connect, Projects, Work } from "@/components/home";
 import { Main, Section } from "@/components/layout";
 import { TextEffect } from "@/components/ui/effects";
 
+import { HOME_PAGE_METADATA as metadata } from "@/lib/config/metadata";
+
+export { metadata };
+
 export default async function HomePage() {
   return (
     <Main className="space-y-20 pt-6">

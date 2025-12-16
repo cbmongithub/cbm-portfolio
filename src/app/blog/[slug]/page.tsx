@@ -1,93 +1,25 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
-import { Figure, Heading } from "@/components/ui/typography";
+import { Heading } from "@/components/ui/typography";
 
-import { BASE_URL, OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/config/metadata";
-import { getOgBackground } from "@/lib/og";
-import { getPosts, loadPost } from "@/lib/posts";
+import {
+  type BlogMetadata,
+  generateBlogMetadata as generateMetadata,
+  generateStaticBlogParams as generateStaticParams,
+} from "@/lib/config/metadata";
+import { formatPostDate, loadPost } from "@/lib/posts";
 
 export const dynamicParams = false;
 
-export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map(({ slug }) => ({ slug }));
-}
+export { generateMetadata, generateStaticParams };
 
-type BlogPageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const {
-    metadata: { title, description, tags, publishedTime, modifiedTime, image, authors },
-  } = await loadPost(slug);
-  const url = `${BASE_URL}/blog/${slug}`;
-  const images = [
-    {
-      url: image,
-      width: 1200,
-      height: 630,
-      alt: title,
-    },
-  ];
-
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: {
-      ...OPEN_GRAPH_DEFAULTS,
-      title,
-      description,
-      type: "article",
-      url,
-      publishedTime,
-      modifiedTime,
-      authors,
-      tags,
-      images,
-    },
-    twitter: {
-      ...TWITTER_DEFAULTS,
-      title,
-      description,
-      images: [image],
-    },
-  };
-}
-
-export default async function BlogPage({ params }: BlogPageProps) {
+export default async function BlogPage({ params }: BlogMetadata) {
   const { slug } = await params;
   const { post: BlogPost, metadata } = await loadPost(slug);
+  const { title, description, tags, publishedTime, authors } = metadata;
 
   if (!BlogPost) return notFound();
-
-  const { image, credit } = await getOgBackground(slug);
-  const { title, description, tags, publishedTime, authors } = metadata;
-  const blurDataURL =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23111'/%3E%3C/svg%3E";
-
-  const imageSrc = (() => {
-    const source = image; // Falls back to gradient
-    const src = source.toString();
-    try {
-      const url = new URL(src, BASE_URL);
-      const siteHost = new URL(BASE_URL).host;
-      if (
-        url.host === siteHost ||
-        url.hostname === "localhost" ||
-        url.hostname === "127.0.0.1"
-      ) {
-        return url.pathname + url.search;
-      }
-      return url.toString();
-    } catch {
-      return src;
-    }
-  })();
 
   return (
     <main className="pt-4">
@@ -100,7 +32,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
               <Avatar />
               {authors ? <span>{authors}</span> : null}
             </div>
-            <span>{publishedTime}</span>
+            <span>{formatPostDate(publishedTime)}</span>
           </div>
 
           <div className="mt-4">
@@ -120,12 +52,12 @@ export default async function BlogPage({ params }: BlogPageProps) {
               ))}
             </div>
           ) : null}
-          <Figure
+          {/* <Figure
             title={title}
             blurDataURL={blurDataURL}
             imageSrc={imageSrc}
             caption={credit}
-          />
+          /> */}
         </header>
 
         <article className="max-w-none">

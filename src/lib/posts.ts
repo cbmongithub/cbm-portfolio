@@ -2,13 +2,15 @@ import { cache } from "react";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
 
+type ISODateTimeString = `${number}-${number}-${number}T${string}`;
+
 export type PostMetadata = {
   slug: string;
   image: string;
   title: string;
   description: string;
-  publishedTime: string;
-  modifiedTime: string;
+  publishedTime: ISODateTimeString;
+  modifiedTime: ISODateTimeString;
   authors: string;
   tags: string[];
 };
@@ -40,3 +42,12 @@ export const getPostBySlug = cache(async (slug: string): Promise<PostMetadata> =
   const { metadata } = await loadPost(slug);
   return metadata;
 });
+
+// Format the date for a post
+export function formatPostDate(value: ISODateTimeString, locale = "en-US"): string {
+  return new Intl.DateTimeFormat(locale, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(value));
+}

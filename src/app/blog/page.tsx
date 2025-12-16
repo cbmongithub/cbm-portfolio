@@ -4,7 +4,10 @@ import { Main, Section } from "@/components/layout";
 import { BackgroundEffect } from "@/components/ui/effects";
 import { Text } from "@/components/ui/typography";
 
-import { getPosts } from "@/lib/posts";
+import { BLOGS_PAGE_METADATA as metadata } from "@/lib/config/metadata";
+import { formatPostDate, getPosts } from "@/lib/posts";
+
+export { metadata };
 
 export default async function BlogsPage() {
   const posts = await getPosts();
@@ -27,7 +30,7 @@ export default async function BlogsPage() {
               data-id={slug}
             >
               <Text className="text-sm" muted>
-                {publishedTime}
+                {formatPostDate(publishedTime)}
               </Text>
               <Text>{title}</Text>
               <Text muted>{description}</Text>

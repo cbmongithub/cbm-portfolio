@@ -14,21 +14,29 @@ import {
   Tr,
 } from "@/components/ui/typography";
 
-import { BASE_URL } from "@/lib/config/metadata";
+import { generateOgImageUrl } from "@/lib/config/metadata";
 import type { PostMetadata } from "@/lib/posts";
 
 const SLUG = "nextjs-16-deep-dive";
+const TITLE = "What's New in Next.js 16: A Deep Dive";
+const DESCRIPTION =
+  "The Next.js team just dropped version 16, and honestly, it's packed with some game-changing improvements.";
+
+const OG_IMAGE = generateOgImageUrl({
+  title: TITLE,
+  description: DESCRIPTION,
+  route: `/blog/${SLUG}`,
+});
 
 export const metadata: PostMetadata = {
   slug: SLUG,
-  title: "What's New in Next.js 16: A Deep Dive",
-  publishedTime: "2025-12-14",
-  modifiedTime: "2025-12-15",
+  title: TITLE,
+  publishedTime: "2025-12-14T00:00:00.000Z",
+  modifiedTime: "2025-12-16T00:00:00.000Z",
   authors: "Christian B. Martinez",
   tags: ["nextjs", "react", "frameworks"],
-  description:
-    "The Next.js team just dropped version 16, and honestly, it's packed with some game-changing improvements.",
-  image: `${BASE_URL}/blog/${SLUG}/opengraph-image`,
+  description: DESCRIPTION,
+  image: OG_IMAGE,
 };
 
 export default function Article() {
@@ -47,21 +55,21 @@ export default function Article() {
 
       <List>
         <li>
-          <strong>Cache Components</strong> – A completely new approach to caching that
+          <strong>Cache Components</strong> - A completely new approach to caching that
           leverages Partial Pre-Rendering and gives you explicit control over what gets
           cached
         </li>
         <li>
-          <strong>Next.js Devtools MCP</strong> – AI-powered debugging tools that
+          <strong>Next.js Devtools MCP</strong> - AI-powered debugging tools that
           understand your Next.js app's context
         </li>
         <li>
-          <strong>The Great Middleware Rename</strong> –{" "}
+          <strong>The Great Middleware Rename</strong> -{" "}
           <InlineCode>middleware.ts</InlineCode> becomes <InlineCode>proxy.ts</InlineCode>{" "}
           for better clarity
         </li>
         <li>
-          <strong>Developer Experience Wins</strong> – Way better logging so you can
+          <strong>Developer Experience Wins</strong> - Way better logging so you can
           actually see where your build time goes
         </li>
       </List>
@@ -73,31 +81,31 @@ export default function Article() {
 
       <List>
         <li>
-          <strong>Turbopack is now the default</strong> – Say goodbye to webpack (unless
+          <strong>Turbopack is now the default</strong> - Say goodbye to webpack (unless
           you need it) and hello to 5-10x faster Fast Refresh
         </li>
         <li>
-          <strong>File system caching for Turbopack</strong> – Your dev server restarts
+          <strong>File system caching for Turbopack</strong> - Your dev server restarts
           just got way faster
         </li>
         <li>
-          <strong>React Compiler support</strong> – Automatic memoization without lifting
+          <strong>React Compiler support</strong> - Automatic memoization without lifting
           a finger
         </li>
         <li>
-          <strong>Build Adapters API</strong> – For deployment platforms to hook into the
+          <strong>Build Adapters API</strong> - For deployment platforms to hook into the
           build process
         </li>
         <li>
-          <strong>Smarter routing</strong> – Layout deduplication and incremental
+          <strong>Smarter routing</strong> - Layout deduplication and incremental
           prefetching make navigation feel instant
         </li>
         <li>
-          <strong>New caching APIs</strong> – <InlineCode>updateTag()</InlineCode> and an
+          <strong>New caching APIs</strong> - <InlineCode>updateTag()</InlineCode> and an
           updated <InlineCode>revalidateTag()</InlineCode>
         </li>
         <li>
-          <strong>React 19.2 goodies</strong> – View Transitions,{" "}
+          <strong>React 19.2 goodies</strong> - View Transitions,{" "}
           <InlineCode>useEffectEvent()</InlineCode>, and more
         </li>
       </List>
@@ -144,13 +152,13 @@ npx create-next-app@latest`}
       <Text>
         Now, everything is dynamic by default. Pages, layouts, and API routes all execute
         at request time unless you explicitly cache them. This is a huge win for developer
-        expectations – what you write is what runs, no surprises.
+        expectations - what you write is what runs, no surprises.
       </Text>
 
       <Text>
         But here's where it gets really interesting: Cache Components complete the vision
         of Partial Pre-Rendering (PPR) that the team introduced back in 2023. Before PPR,
-        you had to choose whether a route was static or dynamic – there was no middle
+        you had to choose whether a route was static or dynamic - there was no middle
         ground. PPR let you mix static and dynamic content on the same page using Suspense
         boundaries, but now Cache Components give you fine-grained control over exactly
         what gets cached and for how long.
@@ -190,25 +198,25 @@ export default nextConfig;`}
 
       <List>
         <li>
-          <strong>Understand your Next.js app</strong> – They know about routing, caching,
+          <strong>Understand your Next.js app</strong> - They know about routing, caching,
           and rendering behaviors specific to Next.js
         </li>
         <li>
-          <strong>Access unified logs</strong> – No more switching between browser and
+          <strong>Access unified logs</strong> - No more switching between browser and
           server console tabs
         </li>
         <li>
-          <strong>Read your errors automatically</strong> – Stack traces get sent to your
+          <strong>Read your errors automatically</strong> - Stack traces get sent to your
           AI assistant without you copying and pasting
         </li>
         <li>
-          <strong>Know what page you're on</strong> – Context-aware debugging based on
+          <strong>Know what page you're on</strong> - Context-aware debugging based on
           your current route
         </li>
       </List>
 
       <Text>
-        This isn't just about making debugging easier – it's about letting AI tools
+        This isn't just about making debugging easier - it's about letting AI tools
         understand the full context of your Next.js application so they can give you
         better, more specific help. Pretty cool stuff.
       </Text>
@@ -261,10 +269,10 @@ export default nextConfig;`}
 
       <List>
         <li>
-          <strong>Compile time</strong> – How long routing and compilation take
+          <strong>Compile time</strong> - How long routing and compilation take
         </li>
         <li>
-          <strong>Render time</strong> – How long your code and React rendering take
+          <strong>Render time</strong> - How long your code and React rendering take
         </li>
       </List>
 
@@ -283,7 +291,7 @@ export default nextConfig;`}
       />
 
       <Text>
-        This might seem like a small thing, but trust me – when you're optimizing build
+        This might seem like a small thing, but trust me - when you're optimizing build
         times, knowing where the bottlenecks are is invaluable.
       </Text>
 
@@ -309,7 +317,7 @@ export default nextConfig;`}
 
       <Text>
         For most developers, this is a free performance win. You don't need to configure
-        anything – it just works. But if you have custom webpack configuration that you're
+        anything - it just works. But if you have custom webpack configuration that you're
         not ready to migrate, you can opt back into webpack:
       </Text>
 
@@ -364,7 +372,7 @@ export default nextConfig;`}
         If you're not familiar, the React Compiler automatically memoizes your components.
         No more manual <InlineCode>useMemo</InlineCode>,{" "}
         <InlineCode>useCallback</InlineCode>, or <InlineCode>React.memo</InlineCode> calls
-        – the compiler handles optimization for you.
+        - the compiler handles optimization for you.
       </Text>
 
       <Text>
@@ -411,7 +419,7 @@ export default nextConfig;`}
       <Text>
         Here's a common scenario: you have a product listing page with 50 links, all
         sharing the same layout. In previous versions, Next.js would prefetch that shared
-        layout 50 times – once for each link.
+        layout 50 times - once for each link.
       </Text>
 
       <Text>
@@ -448,7 +456,7 @@ export default nextConfig;`}
       </Text>
 
       <Heading level={3}>
-        <InlineCode>revalidateTag()</InlineCode> – Now with SWR
+        <InlineCode>revalidateTag()</InlineCode> - Now with SWR
       </Heading>
 
       <Text>
@@ -487,7 +495,7 @@ revalidateTag('blog-posts');`}
       </Text>
 
       <Heading level={3}>
-        <InlineCode>updateTag()</InlineCode> – For Immediate Updates
+        <InlineCode>updateTag()</InlineCode> - For Immediate Updates
       </Heading>
 
       <Text>
@@ -518,7 +526,7 @@ export async function updateUserProfile(userId: string, profile: Profile) {
       </Text>
 
       <Heading level={3}>
-        <InlineCode>refresh()</InlineCode> – For Uncached Data
+        <InlineCode>refresh()</InlineCode> - For Uncached Data
       </Heading>
 
       <Text>
@@ -556,20 +564,20 @@ export async function markNotificationAsRead(notificationId: string) {
 
       <List>
         <li>
-          <strong>View Transitions</strong> – Native browser transitions for smoother page
+          <strong>View Transitions</strong> - Native browser transitions for smoother page
           and component updates
         </li>
         <li>
           <strong>
             <InlineCode>useEffectEvent</InlineCode>
           </strong>{" "}
-          – Finally, a clean way to extract non-reactive logic from Effects
+          - Finally, a clean way to extract non-reactive logic from Effects
         </li>
         <li>
           <strong>
             <InlineCode>&lt;Activity /&gt;</InlineCode>
           </strong>{" "}
-          – Hide UI with <InlineCode>display: none</InlineCode> while preserving state
+          - Hide UI with <InlineCode>display: none</InlineCode> while preserving state
         </li>
       </List>
 
@@ -787,7 +795,7 @@ export async function markNotificationAsRead(notificationId: string) {
 
       <Text>
         For existing projects, here's my advice: read through the breaking changes
-        carefully. The async params and server functions change is the biggest one – it'll
+        carefully. The async params and server functions change is the biggest one - it'll
         require code changes throughout your app. The automated codemod will help, but
         you'll likely need to do some manual cleanup.
       </Text>
@@ -796,7 +804,7 @@ export async function markNotificationAsRead(notificationId: string) {
         The caching changes are powerful, but they do require you to think differently
         about how data flows through your app. Take some time to understand{" "}
         <InlineCode>revalidateTag()</InlineCode>, <InlineCode>updateTag()</InlineCode>,
-        and <InlineCode>refresh()</InlineCode> – choosing the right one for each use case
+        and <InlineCode>refresh()</InlineCode> - choosing the right one for each use case
         will make a big difference in user experience.
       </Text>
 
@@ -817,7 +825,7 @@ export async function markNotificationAsRead(notificationId: string) {
           >
             GitHub Discussions
           </Link>{" "}
-          – For general questions and feature discussions
+          - For general questions and feature discussions
         </li>
         <li>
           <Link
@@ -828,7 +836,7 @@ export async function markNotificationAsRead(notificationId: string) {
           >
             GitHub Issues
           </Link>{" "}
-          – For bug reports
+          - For bug reports
         </li>
         <li>
           <Link
@@ -839,7 +847,7 @@ export async function markNotificationAsRead(notificationId: string) {
           >
             Discord Community
           </Link>{" "}
-          – For real-time chat with other developers
+          - For real-time chat with other developers
         </li>
       </List>
 

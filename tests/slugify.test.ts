@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 
-import { slugify } from "@/lib/utils";
+import { slugify } from "@/components/ui/typography/heading";
 
 describe("slugify", () => {
   it("lowercases and replaces spaces with dashes", () => {

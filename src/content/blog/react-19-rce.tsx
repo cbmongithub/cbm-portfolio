@@ -16,21 +16,29 @@ import {
   Tr,
 } from "@/components/ui/typography";
 
-import { BASE_URL } from "@/lib/config/metadata";
+import { generateOgImageUrl } from "@/lib/config/metadata";
 import type { PostMetadata } from "@/lib/posts";
 
 const SLUG = "react-19-rce";
+const TITLE = "Critical React 19 RCE: Patch Server Components Now";
+const DESCRIPTION =
+  "A remote code execution flaw in React Server Components (19.0-19.2.0). Learn who is affected, why it's dangerous, and how to patch immediately.";
+
+const OG_IMAGE = generateOgImageUrl({
+  title: TITLE,
+  description: DESCRIPTION,
+  route: `/blog/${SLUG}`,
+});
 
 export const metadata: PostMetadata = {
   slug: SLUG,
-  title: "Critical React 19 RCE: Patch Server Components Now",
-  publishedTime: "2025-12-14",
-  modifiedTime: "2025-12-15",
+  title: TITLE,
+  publishedTime: "2025-12-14T00:00:00.000Z",
+  modifiedTime: "2025-12-15T00:00:00.000Z",
   authors: "Christian B. Martinez",
   tags: ["react", "security", "updates"],
-  description:
-    "A remote code execution flaw in React Server Components (19.0–19.2.0). Learn who is affected, why it's dangerous, and how to patch immediately.",
-  image: `${BASE_URL}/blog/${SLUG}/opengraph-image`,
+  description: DESCRIPTION,
+  image: OG_IMAGE,
 };
 
 export default function Article() {
@@ -46,7 +54,7 @@ export default function Article() {
       </Callout>
       <Lead>
         On December 3rd, 2025, the React team disclosed CVE-2025-55182, a critical
-        security vulnerability with a CVSS score of 10.0 – the highest possible severity
+        security vulnerability with a CVSS score of 10.0 - the highest possible severity
         rating. This isn't a theoretical issue or an edge case. It's an actively
         exploitable remote code execution vulnerability that could compromise your entire
         server.
@@ -64,18 +72,18 @@ export default function Article() {
 
       <List>
         <li>
-          <strong>It's unauthenticated</strong> – Attackers don't need to log in or have
+          <strong>It's unauthenticated</strong> - Attackers don't need to log in or have
           any credentials
         </li>
         <li>
-          <strong>It's remote</strong> – They can exploit it from anywhere on the internet
+          <strong>It's remote</strong> - They can exploit it from anywhere on the internet
         </li>
         <li>
-          <strong>It's in the framework layer</strong> – Your application code doesn't
+          <strong>It's in the framework layer</strong> - Your application code doesn't
           need to have bugs; the vulnerability is in React itself
         </li>
         <li>
-          <strong>It affects more than you think</strong> – Even if you don't explicitly
+          <strong>It affects more than you think</strong> - Even if you don't explicitly
           use Server Functions, you might still be vulnerable
         </li>
       </List>
@@ -142,7 +150,7 @@ export default function Article() {
       <Text>
         The React team has intentionally withheld full technical details of the exploit
         until most apps have been patched. This is standard practice for critical
-        vulnerabilities – publishing exploit details too early gives attackers a blueprint
+        vulnerabilities - publishing exploit details too early gives attackers a blueprint
         before defenders can patch.
       </Text>
 
@@ -382,20 +390,20 @@ npm install react-server-dom-turbopack@latest`}
 
       <List as="ol">
         <li>
-          <strong>Check your package.json</strong> – Make sure the updated versions are in
+          <strong>Check your package.json</strong> - Make sure the updated versions are in
           your dependencies
         </li>
         <li>
-          <strong>Check your lock file</strong> – Ensure{" "}
+          <strong>Check your lock file</strong> - Ensure{" "}
           <InlineCode>package-lock.json</InlineCode> or <InlineCode>yarn.lock</InlineCode>{" "}
           reflects the new versions
         </li>
         <li>
-          <strong>Rebuild and redeploy</strong> – Don't just update locally; deploy to
+          <strong>Rebuild and redeploy</strong> - Don't just update locally; deploy to
           production
         </li>
         <li>
-          <strong>Clear your build caches</strong> – Some CI/CD systems cache
+          <strong>Clear your build caches</strong> - Some CI/CD systems cache
           node_modules; make sure you're getting fresh installs
         </li>
       </List>
@@ -413,19 +421,19 @@ npm install react-server-dom-turbopack@latest`}
 
       <List>
         <li>
-          <strong>November 29th</strong> – Lachlan Davidson discovered and reported the
+          <strong>November 29th</strong> - Lachlan Davidson discovered and reported the
           vulnerability through Meta's Bug Bounty program
         </li>
         <li>
-          <strong>November 30th</strong> – Meta's security team confirmed the issue and
+          <strong>November 30th</strong> - Meta's security team confirmed the issue and
           began working with React team on a fix
         </li>
         <li>
-          <strong>December 1st</strong> – Fix created and shared with hosting providers
+          <strong>December 1st</strong> - Fix created and shared with hosting providers
           and major frameworks for validation
         </li>
         <li>
-          <strong>December 3rd</strong> – Patches published to npm and public disclosure
+          <strong>December 3rd</strong> - Patches published to npm and public disclosure
           as CVE-2025-55182
         </li>
       </List>
@@ -448,19 +456,19 @@ npm install react-server-dom-turbopack@latest`}
 
       <List>
         <li>
-          <strong>Stay up to date</strong> – Don't let your React and framework versions
+          <strong>Stay up to date</strong> - Don't let your React and framework versions
           fall too far behind
         </li>
         <li>
-          <strong>Watch for security advisories</strong> – Subscribe to your framework's
+          <strong>Watch for security advisories</strong> - Subscribe to your framework's
           security announcements
         </li>
         <li>
-          <strong>Have a rapid response plan</strong> – When critical patches drop, you
+          <strong>Have a rapid response plan</strong> - When critical patches drop, you
           need to be able to deploy quickly
         </li>
         <li>
-          <strong>Layer your security</strong> – Use authentication, rate limiting, and
+          <strong>Layer your security</strong> - Use authentication, rate limiting, and
           other defenses even when your framework is secure
         </li>
       </List>
@@ -555,7 +563,7 @@ npm install react-server-dom-turbopack@latest`}
           >
             Official React Blog
           </Link>{" "}
-          – For the original disclosure and updates
+          - For the original disclosure and updates
         </li>
         <li>
           <Link
@@ -566,7 +574,7 @@ npm install react-server-dom-turbopack@latest`}
           >
             Next.js Blog
           </Link>{" "}
-          – For Next.js-specific guidance
+          - For Next.js-specific guidance
         </li>
         <li>
           <Link
@@ -577,7 +585,7 @@ npm install react-server-dom-turbopack@latest`}
           >
             GitHub Security Advisories
           </Link>{" "}
-          – Track CVEs and security updates
+          - Track CVEs and security updates
         </li>
       </List>
 

@@ -9,7 +9,7 @@
   </div>
 </div>
 
-[![OG Image](public/og-image.png)](public/og-image.png)
+[![Github Repo Image](public/repo-image.png)](public/repo-image.png)
 
 ## Stack
 
