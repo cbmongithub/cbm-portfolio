@@ -13,17 +13,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const newestPostDate =
     posts.length > 0
-      ? new Date(
-          posts
-            .map((p) => p.modifiedTime ?? p.publishedTime)
-            .sort()
-            .at(-1) as string
-        )
-      : new Date();
+      ? (posts
+          .map((p) => p.modifiedTime ?? p.publishedTime)
+          .sort()
+          .at(-1) as string)
+      : new Date().toISOString();
 
   const routes = ["", "/blog"].map((route) => ({
     url: `${BASE_URL}${route}`,
-    lastModified: newestPostDate.toISOString().split("T")[0],
+    lastModified: newestPostDate,
   }));
 
   return [...routes, ...blogs];

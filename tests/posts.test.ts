@@ -15,7 +15,7 @@ describe("posts loader", () => {
     if (!post) return;
     expect(post.slug).toBe(TEST_SLUG);
     expect(post.title).toContain("Critical React 19 RCE: Patch Server Components Now");
-    expect(post.publishedTime).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(post.publishedTime).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
   });
 
   it("lists all posts present on disk", async () => {

@@ -1,6 +1,17 @@
 import Link from "next/link";
 
-import { cn, slugify } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+
+// Turn an arbitrary string into a URL-safe slug (lowercase, dashes, no symbols)
+export function slugify(str: string) {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/&/g, "-and-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/--+/g, "-");
+}
 
 export type HeadingLevel = 1 | 2 | 3 | 4;
 

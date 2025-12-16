@@ -13,11 +13,11 @@ describe("metadata routes", () => {
     const posts = await getPosts();
     const newestDate =
       posts.length > 0
-        ? posts
+        ? (posts
             .map((p) => p.modifiedTime ?? p.publishedTime)
             .sort()
-            .at(-1)
-        : new Date().toISOString().split("T")[0];
+            .at(-1) as string)
+        : new Date().toISOString();
 
     expect(urls).toContain(BASE_URL);
     expect(urls).toContain(`${BASE_URL}/blog`);

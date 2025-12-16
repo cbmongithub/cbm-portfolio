@@ -1,78 +1,20 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
 import { Heading } from "@/components/ui/typography";
 
 import {
-  BASE_URL,
-  OPEN_GRAPH_DEFAULTS,
-  TWITTER_DEFAULTS,
+  type BlogMetadata,
+  generateBlogMetadata as generateMetadata,
+  generateStaticBlogParams as generateStaticParams,
 } from "@/lib/config/metadata";
-import { getPosts, loadPost } from "@/lib/posts";
+import { formatPostDate, loadPost } from "@/lib/posts";
 
 export const dynamicParams = false;
 
-export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map(({ slug }) => ({ slug }));
-}
+export { generateMetadata, generateStaticParams };
 
-type BlogPageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateMetadata({
-  params,
-}: BlogPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const {
-    metadata: {
-      title,
-      description,
-      tags,
-      publishedTime,
-      modifiedTime,
-      image,
-      authors,
-    },
-  } = await loadPost(slug);
-  const url = `${BASE_URL}/blog/${slug}`;
-  const images = [
-    {
-      url: image,
-      width: 1200,
-      height: 630,
-      alt: title,
-    },
-  ];
-
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: {
-      ...OPEN_GRAPH_DEFAULTS,
-      title,
-      description,
-      type: "article",
-      url,
-      publishedTime,
-      modifiedTime,
-      authors,
-      tags,
-      images,
-    },
-    twitter: {
-      ...TWITTER_DEFAULTS,
-      title,
-      description,
-      images: [image],
-    },
-  };
-}
-
-export default async function BlogPage({ params }: BlogPageProps) {
+export default async function BlogPage({ params }: BlogMetadata) {
   const { slug } = await params;
   const { post: BlogPost, metadata } = await loadPost(slug);
   const { title, description, tags, publishedTime, authors } = metadata;
@@ -90,7 +32,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
               <Avatar />
               {authors ? <span>{authors}</span> : null}
             </div>
-            <span>{publishedTime}</span>
+            <span>{formatPostDate(publishedTime)}</span>
           </div>
 
           <div className="mt-4">
