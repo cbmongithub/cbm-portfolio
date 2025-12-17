@@ -29,7 +29,7 @@ export function Work() {
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Open ${company} link`}
+                    aria-label={`Visit ${company} link`}
                     className="group text-link hover:text-link-hover relative inline-flex shrink-0 items-center gap-px py-1 text-sm transition-colors duration-200"
                   >
                     Visit
