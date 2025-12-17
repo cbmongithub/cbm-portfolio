@@ -14,16 +14,16 @@ export default async function HomePage() {
           Full stack web developer from Utah focusing on modern technologies.
         </TextEffect>
       </Section>
-      <Section title={{ text: "Projects", level: 4 }}>
+      <Section title={{ text: "Projects", level: 3 }}>
         <Projects />
       </Section>
-      <Section title={{ text: "Work", level: 4 }}>
+      <Section title={{ text: "Work", level: 3 }}>
         <Work />
       </Section>
-      <Section title={{ text: "Blog", level: 4 }}>
+      <Section title={{ text: "Blog", level: 3 }}>
         <Blog />
       </Section>
-      <Section title={{ text: "Connect", level: 4 }}>
+      <Section title={{ text: "Connect", level: 3 }}>
         <Connect />
       </Section>
     </Main>

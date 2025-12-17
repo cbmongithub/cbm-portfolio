@@ -13,12 +13,8 @@
   --color-muted: oklch(94% 0.009 260);
   --color-muted-foreground: oklch(28% 0.03 260);
   --color-border: oklch(88% 0.01 260);
-  --color-link: var(--color-info);
-  --color-link-hover: color-mix(
-    in oklch,
-    var(--color-info) 50%,
-    var(--color-info-foreground) 50%
-  );
+  --color-link: oklch(65% 0.2 262);
+  --color-link-hover: oklch(58% 0.18 262);
   --color-card: oklch(96% 0.01 95);
   --color-card-foreground: oklch(20% 0.02 260);
   --color-info: oklch(70% 0.12 260);
@@ -49,6 +45,8 @@
     --color-muted: oklch(30% 0.02 260);
     --color-muted-foreground: oklch(75% 0.02 260);
     --color-border: oklch(32% 0.02 260);
+    --color-link: oklch(78% 0.1 262);
+    --color-link-hover: oklch(85% 0.08 262);
     --color-card: oklch(14% 0.02 260);
     --color-card-foreground: oklch(92% 0.02 85);
     --color-info: oklch(82% 0.12 260);

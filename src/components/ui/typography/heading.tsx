@@ -16,8 +16,8 @@ export function slugify(str: string) {
 export type HeadingLevel = 1 | 2 | 3 | 4;
 
 const HEADING_STYLES: Record<HeadingLevel, string> = {
-  1: "text-3xl md:text-4xl pt-8 pb-1",
-  2: "text-2xl md:text-3xl pt-8 pb-1",
+  1: "text-4xl md:text-5xl pt-8 pb-1",
+  2: "text-3xl md:text-4xl pt-8 pb-1",
   3: "text-xl md:text-2xl pt-8 pb-1",
   4: "text-lg md:text-xl pt-8 pb-1",
 };

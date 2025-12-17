@@ -36,7 +36,7 @@ export default async function BlogPage({ params }: BlogMetadata) {
           </div>
 
           <div className="mt-4">
-            <Heading level={1} asChild className="pt-0 pb-1">
+            <Heading level={2} asChild className="pt-0 pb-1">
               {title}
             </Heading>
 
