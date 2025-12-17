@@ -17,7 +17,7 @@ export default async function BlogsPage() {
         title={{ text: "Blog" }}
         text="Notes, experiments, and writeups from the build log."
       />
-      <Section title={{ text: "Latest Posts", level: 4 }}>
+      <Section title={{ text: "Latest Posts", level: 3 }}>
         <BackgroundEffect
           enableHover
           className="bg-muted size-full rounded-l-none rounded-r-lg"

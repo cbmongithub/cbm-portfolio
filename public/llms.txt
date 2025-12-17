@@ -1,0 +1,38 @@
+# Christian B. Martinez — Portfolio Overview
+
+## Who I Am
+* Christian B. Martinez, full-stack web developer based in Utah.
+* Technical Co-Founder at Pointbreak (2025—present); previously freelance (2020—2024) and Front End Developer at MMBC (2017—2020).
+* Experienced in building polished SaaS products, developer tooling, and AI-assisted workflows.
+
+## What I Do
+* Design and code modern Next.js applications with high accessibility and performance standards.
+* Lead product engineering, developer experience, and UI systems for startups and technical teams.
+* Write in-depth blog posts about React 19, Next.js 16, caching strategies, and modern frontend tooling.
+
+## Tech Stack & Tools
+* Frameworks: Next.js 16 App Router, React 19.2, TypeScript 5.9.
+* Styling: Tailwind CSS v4 tokens, custom oklch theme, Bright for code blocks.
+* Tooling: Bun runtime, ESLint (core-web-vitals, tailwindcss, simple-import-sort), Prettier with Tailwind plugin, Vercel Analytics & Speed Insights.
+* Other specialties: Cache Components, Partial Pre-Rendering, React Compiler, Vercel deployment workflows.
+
+## Featured Projects
+* Cli Loaders — a suite of animated loaders for terminals, React apps, and other runtimes (cliloaders.com).
+* Chattr — customizable ChatGPT-style chatbot components for Next.js (github.com/cbmongithub/chattr).
+* Additional experiments and OSS live throughout the GitHub profile (`cbmongithub`).
+
+## Site Structure
+* `/` — Portfolio landing page with hero intro, featured projects, work history, blog, and contact section.
+* `/blog` — Article index (currently React 19 RCE guide + “What’s New in Next.js 16: A Deep Dive”).
+* `/blog/[slug]` — Individual posts rendered as typed TSX files with Bright-powered code samples.
+* Supporting routes: `robots.ts`, `sitemap.ts`, and dynamic OG image generation under `/api/og`.
+
+## How to Reach Me
+* GitHub: https://github.com/cbmongithub
+* Twitter/X: https://twitter.com/cbmonx
+* LinkedIn: https://www.linkedin.com/in/cbmonlinkedn
+
+## Quick Facts
+* Uses Tailwind-aware design tokens stored in `src/styles/globals.css` for cohesive light/dark themes.
+* Portfolio content, blog posts, and metadata are written in TypeScript/TSX—no CMS required.
+* Tests, linting, formatting, and production builds run via Bun scripts (`bun run build:verify` for the full pipeline).
