@@ -5,8 +5,10 @@ import { motion } from "motion/react";
 import { Heading, type HeadingLevel, Text } from "@/components/ui/typography";
 
 import { BASE_TRANSITION, SECTION_VARIANTS } from "@/lib/config/motion";
+import { cn } from "@/lib/utils";
 
 type SectionProps = {
+  className?: string;
   title?: {
     text: string;
     level?: HeadingLevel;
@@ -15,10 +17,10 @@ type SectionProps = {
   children?: React.ReactNode;
 };
 
-export function Section({ title, text, children }: SectionProps) {
+export function Section({ className, title, text, children }: SectionProps) {
   return (
     <motion.section
-      className="space-y-2"
+      className={cn("space-y-2", className)}
       variants={SECTION_VARIANTS}
       initial="hidden"
       animate="visible"

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { BackButton } from "@/components/blog";
+import { BackButton, Cta } from "@/components/blog";
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
 import { Heading } from "@/components/ui/typography";
 
@@ -17,10 +17,10 @@ export { generateMetadata, generateStaticParams };
 
 export default async function BlogPage({ params }: BlogMetadata) {
   const { slug } = await params;
-  const { post: BlogPost, metadata } = await loadPost(slug);
+  const { post: Post, metadata } = await loadPost(slug);
   const { title, description, tags, publishedTime, authors } = metadata;
 
-  if (!BlogPost) return notFound();
+  if (!Post) return notFound();
 
   return (
     <main className="w-full pt-12">
@@ -61,8 +61,10 @@ export default async function BlogPage({ params }: BlogMetadata) {
         </header>
 
         <article className="max-w-none">
-          <BlogPost />
+          <Post />
         </article>
+
+        <Cta title={title} />
       </section>
     </main>
   );

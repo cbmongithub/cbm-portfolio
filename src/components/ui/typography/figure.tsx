@@ -6,7 +6,7 @@ type FigcaptionProps = {
 
 function Figcaption({ text }: FigcaptionProps) {
   return (
-    <figcaption className="bg-muted/50 text-muted-foreground absolute bottom-0 left-0 w-full px-3 py-1 text-xs">
+    <figcaption className="bg-muted/60 text-muted-foreground absolute bottom-0 left-0 w-full px-3 py-1 text-xs">
       {text}
     </figcaption>
   );
