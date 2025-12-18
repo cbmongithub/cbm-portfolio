@@ -13,6 +13,11 @@ export type PostMetadata = {
   modifiedTime: ISODateTimeString;
   authors: string;
   tags: string[];
+  ogImageData: {
+    title: string;
+    description: string;
+    route: string;
+  };
 };
 
 const filePath = join(process.cwd(), "src", "content", "blog");
@@ -43,11 +48,27 @@ export const getPostBySlug = cache(async (slug: string): Promise<PostMetadata> =
   return metadata;
 });
 
-// Format the date for a post
-export function formatPostDate(value: ISODateTimeString, locale = "en-US"): string {
+// Return canonical ISO 8601 timestamp
+export function formatIsoDate(
+  dateTime: string | number | Date = Date.now()
+): ISODateTimeString {
+  const date = dateTime instanceof Date ? dateTime : new Date(dateTime);
+  return date.toISOString() as ISODateTimeString;
+}
+
+// Use updated time when available; otherwise fall back to published date
+export function formatModifiedDate(
+  published: ISODateTimeString,
+  updated?: string | number | Date
+): ISODateTimeString {
+  return updated ? formatIsoDate(updated) : published;
+}
+
+// Format the ISO timestamp into a human readable label
+export function formatDate(dateTime: ISODateTimeString, locale = "en-US"): string {
   return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
-  }).format(new Date(value));
+  }).format(new Date(dateTime));
 }

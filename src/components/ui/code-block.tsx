@@ -21,7 +21,7 @@ export function CodeBlock({ code, title, language = "ts" }: CodeBlockProps) {
         <div className="-my-4 overflow-x-auto">
           <Code
             lang={language}
-            code={code}
+            code={code.trim()}
             theme={{
               dark: DARK_THEME,
               light: LIGHT_THEME,

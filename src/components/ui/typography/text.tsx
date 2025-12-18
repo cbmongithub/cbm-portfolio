@@ -7,7 +7,7 @@ export function Text({ muted, className, ...props }: TextProps) {
     <p
       className={`${
         muted ? "text-muted-foreground" : "text-foreground"
-      } py-1 leading-relaxed ${className ?? ""}`}
+      } leading-relaxed ${className ?? ""}`}
       {...props}
     />
   );

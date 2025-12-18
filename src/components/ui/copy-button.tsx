@@ -20,7 +20,7 @@ export const CopyButton = memo(function CopyButton({ code }: CopyButtonProps) {
       size="icon"
       aria-label={copied ? "Copied!" : "Copy"}
     >
-      <span className="ease text-foreground flex items-center justify-center">
+      <span className="ease text-muted-foreground flex items-center justify-center">
         {copied ? <CheckIcon className="size-4" /> : <CopyIcon className="size-4" />}
       </span>
     </Button>
