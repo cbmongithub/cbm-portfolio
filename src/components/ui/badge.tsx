@@ -5,7 +5,7 @@ type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
 export function Badge({ children, ...props }: BadgeProps) {
   return (
     <span
-      className="group bg-secondary text-secondary-foreground hover:bg-muted hover:text-muted-foreground inline-flex cursor-pointer items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-200"
+      className="group bg-secondary text-secondary-foreground inline-flex items-center rounded-lg border px-3 py-1 text-xs font-medium"
       {...props}
     >
       {children}

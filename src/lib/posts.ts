@@ -44,10 +44,10 @@ export const getPostBySlug = cache(async (slug: string): Promise<PostMetadata> =
 });
 
 // Format the date for a post
-export function formatPostDate(value: ISODateTimeString, locale = "en-US"): string {
+export function formatDate(date: ISODateTimeString, locale = "en-US"): string {
   return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
-  }).format(new Date(value));
+  }).format(new Date(date));
 }

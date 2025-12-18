@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { BackButton } from "@/components/blog/back-button";
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
 import { Heading } from "@/components/ui/typography";
 
@@ -8,7 +9,7 @@ import {
   generateBlogMetadata as generateMetadata,
   generateStaticBlogParams as generateStaticParams,
 } from "@/lib/config/metadata";
-import { formatPostDate, loadPost } from "@/lib/posts";
+import { formatDate, loadPost } from "@/lib/posts";
 
 export const dynamicParams = false;
 
@@ -22,31 +23,36 @@ export default async function BlogPage({ params }: BlogMetadata) {
   if (!BlogPost) return notFound();
 
   return (
-    <main className="pt-4">
+    <main className="mx-auto max-w-4xl pt-12">
       <div className="bg-background pointer-events-none fixed top-0 left-0 z-10 h-12 w-full to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,var(--color-background),transparent)]" />
       <ScrollProgress />
-      <section className="space-y-2">
-        <header className="space-y-2">
-          <div className="text-muted-foreground flex flex-wrap items-center justify-between text-sm">
-            <div className="flex items-center gap-2">
+      <section className="space-y-10">
+        <BackButton />
+        <header className="space-y-4">
+          <div className="text-muted-foreground flex flex-row items-center justify-between gap-3 text-sm">
+            <div className="text-foreground flex items-center gap-3">
               <Avatar />
               {authors ? <span>{authors}</span> : null}
             </div>
-            <span>{formatPostDate(publishedTime)}</span>
+            <span className="text-muted-foreground text-xs tracking-widest uppercase">
+              {formatDate(publishedTime)}
+            </span>
           </div>
 
-          <div className="mt-4">
-            <Heading level={2} asChild className="pt-0 pb-1">
+          <div className="space-y-4">
+            <Heading level={1} asChild>
               {title}
             </Heading>
 
             {description && (
-              <p className="text-muted-foreground text-lg">{description}</p>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                {description}
+              </p>
             )}
           </div>
 
-          {tags?.length ? (
-            <div className="mt-4 flex flex-wrap gap-2">
+          {tags.length ? (
+            <div className="flex flex-wrap gap-3">
               {tags.map((tag) => (
                 <Badge key={tag}>{tag}</Badge>
               ))}

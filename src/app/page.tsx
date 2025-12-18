@@ -8,7 +8,7 @@ export { metadata };
 
 export default async function HomePage() {
   return (
-    <Main className="space-y-20 pt-6">
+    <Main>
       <Section title={{ text: "Hi I'm Christian" }}>
         <TextEffect>
           Full stack web developer from Utah focusing on modern technologies.

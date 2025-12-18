@@ -78,7 +78,7 @@ Content lives in `src/content/blog/*.tsx`; `blog/[slug]/page.tsx` dynamically im
 - [x] Unified button/badge/callout variants with shared color tokens
 - [x] Per-post OG image generation (shared generator for /blog)
 - [x] Replace placeholder page content with real sections/components
-- [ ] SEO generation extracted from post meta
+- [x] SEO generation extracted from post meta
 - [ ] Portfolio detail page (architecture, patterns, etc.)
 - [ ] Blog rich layout enhancements - tags, filtering blogs, next/previous blog, further reading, image captions underneath blog, blog author with social links, blog footer cta?)
 - [x] Per-post OG image generation
