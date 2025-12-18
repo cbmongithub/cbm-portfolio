@@ -14,25 +14,26 @@ function Figcaption({ text }: FigcaptionProps) {
 
 type FigureProps = {
   imageSrc: string;
-  title: string;
-  blurDataURL: string;
-  caption?: string;
+  alt: string;
+  blurDataURL?: string;
+  caption: string;
+  priority?: boolean;
 };
 
-export function Figure({ imageSrc, title, blurDataURL, caption }: FigureProps) {
+export function Figure({ imageSrc, alt, caption, priority = false }: FigureProps) {
   return (
     <figure className="bg-muted relative mt-6 aspect-1200/630 overflow-hidden rounded-xl">
       <Image
         src={imageSrc}
-        alt={title}
+        alt={alt}
         fill
         sizes="100vw"
-        priority
+        priority={priority}
         className="object-cover"
         placeholder="blur"
-        blurDataURL={blurDataURL}
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="
       />
-      {caption ? <Figcaption text={caption} /> : null}
+      <Figcaption text={caption} />
     </figure>
   );
 }

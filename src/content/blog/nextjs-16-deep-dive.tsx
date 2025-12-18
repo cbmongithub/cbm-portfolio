@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { CodeBlock } from "@/components/ui/code-block";
 import {
+  Figure,
   Heading,
   InlineCode,
   List,
@@ -15,33 +16,42 @@ import {
 } from "@/components/ui/typography";
 
 import { generateOgImageUrl } from "@/lib/config/metadata";
-import type { PostMetadata } from "@/lib/posts";
-
-const SLUG = "nextjs-16-deep-dive";
-const TITLE = "What's New in Next.js 16: A Deep Dive";
-const DESCRIPTION =
-  "The Next.js team just dropped version 16, and honestly, it's packed with some game-changing improvements.";
-
-const OG_IMAGE = generateOgImageUrl({
-  title: TITLE,
-  description: DESCRIPTION,
-  route: `/blog/${SLUG}`,
-});
+import { formatIsoDate, formatModifiedDate, type PostMetadata } from "@/lib/posts";
 
 export const metadata: PostMetadata = {
-  slug: SLUG,
-  title: TITLE,
-  publishedTime: "2025-12-14T00:00:00.000Z",
-  modifiedTime: "2025-12-16T00:00:00.000Z",
+  slug: "nextjs-16-deep-dive",
+  title: "What's New in Next.js 16: A Deep Dive",
+  get publishedTime() {
+    return formatIsoDate("2025-12-14");
+  },
+  get modifiedTime() {
+    return formatModifiedDate(this.publishedTime, "2025-12-18");
+  },
   authors: "Christian B. Martinez",
   tags: ["nextjs", "react", "frameworks"],
-  description: DESCRIPTION,
-  image: OG_IMAGE,
+  description:
+    "The Next.js team just dropped version 16, and honestly, it's packed with some game-changing improvements.",
+  get ogImageData() {
+    return {
+      title: this.title,
+      description: this.description,
+      route: `/blog/${this.slug}`,
+    };
+  },
+  get image() {
+    return generateOgImageUrl(this.ogImageData);
+  },
 };
 
 export default function Article() {
   return (
     <div className="space-y-6">
+      <Figure
+        alt="Image showing a computer mouse pointer hovering over a security button in a browser."
+        imageSrc="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg"
+        caption="Photo by Pixabay via Pexels"
+        priority
+      />
       <Text>
         This isn't just another incremental update. We're talking major improvements to
         Turbopack performance, a complete rethinking of how caching works, and some

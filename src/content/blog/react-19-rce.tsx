@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CodeBlock } from "@/components/ui/code-block";
 import {
   Callout,
+  Figure,
   Heading,
   InlineCode,
   Lead,
@@ -17,33 +18,42 @@ import {
 } from "@/components/ui/typography";
 
 import { generateOgImageUrl } from "@/lib/config/metadata";
-import type { PostMetadata } from "@/lib/posts";
-
-const SLUG = "react-19-rce";
-const TITLE = "Critical React 19 RCE: Patch Server Components Now";
-const DESCRIPTION =
-  "A remote code execution flaw in React Server Components (19.0-19.2.0). Learn who is affected, why it's dangerous, and how to patch immediately.";
-
-const OG_IMAGE = generateOgImageUrl({
-  title: TITLE,
-  description: DESCRIPTION,
-  route: `/blog/${SLUG}`,
-});
+import { formatIsoDate, formatModifiedDate, type PostMetadata } from "@/lib/posts";
 
 export const metadata: PostMetadata = {
-  slug: SLUG,
-  title: TITLE,
-  publishedTime: "2025-12-14T00:00:00.000Z",
-  modifiedTime: "2025-12-15T00:00:00.000Z",
+  slug: "react-19-rce",
+  title: "Critical React 19 RCE: Patch Server Components Now",
+  get publishedTime() {
+    return formatIsoDate("2025-12-14");
+  },
+  get modifiedTime() {
+    return formatModifiedDate(this.publishedTime, "2025-12-18");
+  },
   authors: "Christian B. Martinez",
   tags: ["react", "security", "updates"],
-  description: DESCRIPTION,
-  image: OG_IMAGE,
+  description:
+    "A remote code execution flaw in React Server Components (19.0-19.2.0). Learn who is affected, why it's dangerous, and how to patch immediately.",
+  get ogImageData() {
+    return {
+      title: this.title,
+      description: this.description,
+      route: `/blog/${this.slug}`,
+    };
+  },
+  get image() {
+    return generateOgImageUrl(this.ogImageData);
+  },
 };
 
 export default function Article() {
   return (
     <div className="space-y-6">
+      <Figure
+        alt="Image showing a computer mouse pointer hovering over a security button in a browser."
+        imageSrc="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg"
+        caption="Photo by Pixabay via Pexels"
+        priority
+      />
       <Callout
         title="Critical Security Alert: React Server Components Vulnerability"
         variant="danger"

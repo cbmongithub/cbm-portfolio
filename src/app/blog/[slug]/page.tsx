@@ -58,12 +58,6 @@ export default async function BlogPage({ params }: BlogMetadata) {
               ))}
             </div>
           ) : null}
-          {/* <Figure
-            title={title}
-            blurDataURL={blurDataURL}
-            imageSrc={imageSrc}
-            caption={credit}
-          /> */}
         </header>
 
         <article className="max-w-none">

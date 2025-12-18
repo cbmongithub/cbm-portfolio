@@ -27,18 +27,90 @@
 - Styles: Color tokens live in `styles/globals.css` (light/dark via CSS vars); no prose plugin.
 - Content: TSX in `src/content/blog`; metadata exported per file.
 
-## Typography & Content
+## Custom Blog Engine (“Hand-Rolled MDX”)
 
-Skipped `@tailwindcss/typography` to keep output lean and predictable. Text/UI primitives live in `src/components/typography.tsx`. Posts are plain TSX files in `src/content/blog`, so no MDX pipeline is required; code highlighting now uses **Bright** (server-rendered, dual-theme aware).
+Instead of pulling in MDX, frontmatter parsers, or `@tailwindcss/typography`, the blog is authored as plain `.tsx` modules placed in `src/content/blog`. Each post exports two things:
 
-- **Headings** add hash anchors via `next/link` and respect our spacing tokens.
-- **Text primitives**: `Text`, `Lead`, `Small`, `Quote`, `List` (`as="ol"` for ordered), `CodeInline`, `Surface` (card), `Prose` (wrapper spacing).
-- **Tables**: `Table`, `Tr`, `Th`, `Td` keep borders/padding consistent.
-- **Code**: `CodeBlock` (Bright), `CodeInline`.
-- **Images**: `img` maps to `next/image` with rounding/default sizing (remote allowed).
-- **Why**: One place for spacing and color decisions, no prose defaults, no scattered `dark:` utilities. Theme tokens stay in `styles/globals.css`; typography handles layout.
+```tsx
+import { formatIsoDate, formatModifiedDate, type PostMetadata } from "@/lib/posts";
+import { generateOgImageUrl } from "@/lib/config/metadata";
 
-Content lives in `src/content/blog/*.tsx`; `blog/[slug]/page.tsx` dynamically imports each post component and its `meta`.
+export const metadata: PostMetadata = {
+  slug: "an-example-slug",
+  title: "Example Blog Title",
+  description: "An example description",
+  tags: ["nextjs", "react"],
+  authors: "Christian B. Martinez",
+  get publishedTime() {
+    return formatIsoDate("2025-12-14");
+  },
+  get modifiedTime() {
+    return formatModifiedDate(this.publishedTime, "2025-12-16");
+  },
+  get ogImageData() {
+    return {
+      title: this.title,
+      description: this.description,
+      route: `/blog/${this.slug}`,
+    };
+  },
+  get image() {
+    return generateOgImageUrl(this.ogImageData);
+  },
+};
+
+export default function Article() {
+  return (
+    <>
+      <Figure
+        title="This is an example title"
+        imageSrc="https://example.com"
+        caption="Photo by Bob"
+        priority
+      />
+      <Heading level={2}>...</Heading>
+      <Text>...</Text>
+      <CodeBlock language="ts" code={`const nextConfig = { cacheComponents: true };`} />
+    </>
+  );
+}
+```
+
+### Why roll my own?
+
+- **Zero MDX pipeline** – No remark/rehype transforms, no shared runtime between client and server. A post is just a React Server Component, so it’s compiled once and streamed as plain HTML.
+- **Self-contained metadata** – The `metadata` object behaves like frontmatter but stays type-safe and can expose computed getters (`ogImageData`, `image`). Post pages import it and Next’s metadata helpers consume it directly.
+- **Custom typography primitives** – Components such as `Heading`, `Text`, `Lead`, `Quote`, `List`, `Table`, `Surface`, `Figure`, and `CodeBlock` live under `src/components/ui/typography`. They encapsulate spacing, anchors, color tokens, and responsive behavior. Switching design systems is a matter of editing those components, not prose CSS overrides.
+- **Tiny HTML footprint** – Because everything is server-rendered TSX, there’s no hydration cost unless a post deliberately imports a client component. Most posts deliver pure static markup.
+- **Blueprint for portfolios** – The goal is to show engineering choices, not just content. Keeping metadata, layout, and rendering logic in one module highlights the architecture in a way frontmatter/MDX often hides.
+
+### Date helpers & OG metadata
+
+- `formatIsoDate(value?)` accepts `"YYYY-MM-DD"`, `Date.now()`, or a `Date` instance and always returns a canonical ISO timestamp without forcing every post to remember the trailing `"T00:00:00.000Z"`.
+- `formatModifiedDate(published, updated?)` reuses the published timestamp when no updated date is provided so crawlers see accurate `lastModified` data.
+- `ogImageData` is a getter as well, ensuring OG routes, titles, and descriptions stay in sync with whatever the post metadata currently returns.
+
+### Comparing to Tailwind Prose + MDX
+
+| Concern       | Hand-rolled TSX                                              | Tailwind Prose / MDX                                                          |
+| ------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| Dependencies  | React + Next only                                            | `@mdx-js/loader`, remark, rehype, tailwind typography plugin                  |
+| Styling       | Explicit components ensure consistent spacing + semantics    | Global prose cascade; overriding specifics can get verbose                    |
+| Metadata      | Plain object with getters, no parsing step                   | YAML/gray-matter parsing + type guards                                        |
+| Authoring     | JSX (great for devs, less friendly for non-dev contributors) | Markdown/MDX is more approachable for large content teams                     |
+| Extensibility | Add new primitives as React components                       | Leverage existing MDX plugins for embeds/shortcodes                           |
+| Scale         | Works best for handfuls of curated posts                     | MDX/frontmatter shines when dozens of posts and multiple authors are involved |
+
+For this portfolio (targeting ~10 articles), the trade-off favors control and minimalism. If publishing volume grows or non-dev authors get involved, the architecture can pivot to MDX or a CMS-backed pipeline without rewriting the current posts.
+
+### Typography & Rendering Details
+
+- **Headings** (`Heading`) add scroll-margin anchors and optional `asChild` slots for custom tags while keeping consistent `pt/pb`.
+- **Text primitives**: `Text`, `Lead`, `Small`, `Quote`, `List` (switchable ordered/unordered), `InlineCode`, and `Surface`.
+- **Tables**: `Table`, `Tr`, `Th`, `Td` enforce consistent padding and border tokens.
+- **Code**: `CodeBlock` uses [Bright](https://github.com/codehike/bright) for dual-theme SSR highlighting; inline snippets use `InlineCode`.
+- **Figures**: `Figure` wraps `next/image`, accepts `blurDataURL`, caption, priority, and enforces the 1200×630 aspect.
+- **Content Loader**: `blog/[slug]/page.tsx` uses `loadPost()` (cached) to import the component + metadata, enforce spacing, and render `ScrollProgress`, tags, and badges.
 
 ## Scripts
 
