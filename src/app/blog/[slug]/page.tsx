@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { BackButton } from "@/components/blog/back-button";
+import { BackButton } from "@/components/blog";
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
 import { Heading } from "@/components/ui/typography";
 
@@ -23,7 +23,7 @@ export default async function BlogPage({ params }: BlogMetadata) {
   if (!BlogPost) return notFound();
 
   return (
-    <main className="mx-auto max-w-4xl pt-12">
+    <main className="w-full pt-12">
       <div className="bg-background pointer-events-none fixed top-0 left-0 z-10 h-12 w-full to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,var(--color-background),transparent)]" />
       <ScrollProgress />
       <section className="space-y-10">

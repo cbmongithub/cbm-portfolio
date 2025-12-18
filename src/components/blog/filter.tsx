@@ -2,15 +2,13 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
 
+import { Button } from "@/components/ui";
 import { BackgroundEffect } from "@/components/ui/effects";
 import { Text } from "@/components/ui/typography";
 
 import { CATEGORIES, DEFAULT_CATEGORY } from "@/lib/config/blog";
 import { cn } from "@/lib/utils";
-
-import { Button } from "../ui";
 
 type BlogFilterPost = {
   slug: string;
@@ -67,26 +65,18 @@ export function BlogFilter({ posts }: BlogFilterProps) {
           className="bg-muted size-full rounded-l-none rounded-r-lg"
         >
           {filteredPosts.map(({ slug, title, description, formattedDate }) => (
-            <motion.div
+            <Link
               key={slug}
-              layout
+              href={`/blog/${slug}`}
+              className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
               data-id={slug}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="my-2 w-full"
             >
-              <Link
-                href={`/blog/${slug}`}
-                className="border-muted text-muted-foreground block border-l p-3 pl-4"
-              >
-                <Text className="text-sm" muted>
-                  {formattedDate}
-                </Text>
-                <Text>{title}</Text>
-                <Text muted>{description}</Text>
-              </Link>
-            </motion.div>
+              <Text className="text-sm" muted>
+                {formattedDate}
+              </Text>
+              <Text>{title}</Text>
+              <Text muted>{description}</Text>
+            </Link>
           ))}
         </BackgroundEffect>
       ) : (

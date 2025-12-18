@@ -20,6 +20,8 @@ export function Section({ title, text, children }: SectionProps) {
     <motion.section
       className="space-y-2"
       variants={SECTION_VARIANTS}
+      initial="hidden"
+      animate="visible"
       transition={BASE_TRANSITION}
     >
       {title && (
