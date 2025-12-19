@@ -219,7 +219,7 @@ export function MorphEffectContainer({ children }: MorphEffectContainerProps) {
         <>
           <motion.div
             key={`backdrop-${uniqueId}`}
-            className="bg-foreground/30 fixed inset-0 z-50 size-full"
+            className="bg-card/20 fixed inset-0 z-50 size-full backdrop-blur-md"
             style={{ willChange: "opacity" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -246,9 +246,12 @@ export function MorphEffectImage({ src, alt, sizes }: MorphEffectImageProps) {
   const { mounted } = useMounted();
 
   return (
-    <div className="bg-muted relative aspect-285/178 w-full overflow-hidden">
+    <div className="bg-background border-border relative aspect-285/178 w-full overflow-hidden border">
       {!mounted && (
-        <div className="bg-muted absolute inset-0 animate-pulse" aria-hidden="true" />
+        <div
+          className="bg-background absolute inset-0 animate-pulse"
+          aria-hidden="true"
+        />
       )}
       <motion.img
         src={src}
@@ -278,7 +281,7 @@ export function MorphEffectClose() {
       type="button"
       aria-label="Close dialog"
       key={`dialog-close-${uniqueId}`}
-      className="border-border bg-background group text-foreground hover:bg-muted hover:text-muted-foreground absolute top-4 right-4 z-50 size-fit border p-2 transition-colors duration-200"
+      className="group text-foreground hover:bg-muted/70 hover:text-muted-foreground absolute top-4 right-4 z-50 size-fit bg-transparent p-2 transition-colors duration-200"
       initial="initial"
       animate="animate"
       exit="exit"

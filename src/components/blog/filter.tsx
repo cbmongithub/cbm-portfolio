@@ -1,10 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 
+import { PostsList } from "@/components/blog";
 import { Button } from "@/components/ui";
-import { BackgroundEffect } from "@/components/ui/effects";
 import { Text } from "@/components/ui/typography";
 
 import { CATEGORIES, DEFAULT_CATEGORY } from "@/lib/config/blog";
@@ -60,22 +59,7 @@ export function BlogFilter({ posts }: BlogFilterProps) {
       </div>
 
       {filteredPosts.length ? (
-        <BackgroundEffect enableHover className="bg-muted size-full">
-          {filteredPosts.map(({ slug, title, description, formattedDate }) => (
-            <Link
-              key={slug}
-              href={`/blog/${slug}`}
-              className="border-muted text-muted-foreground my-2 mb-2 border-l p-3 pl-4"
-              data-id={slug}
-            >
-              <Text className="text-sm" muted>
-                {formattedDate}
-              </Text>
-              <Text>{title}</Text>
-              <Text muted>{description}</Text>
-            </Link>
-          ))}
-        </BackgroundEffect>
+        <PostsList posts={filteredPosts} showDate />
       ) : (
         <div className="border-muted text-muted-foreground border-l p-3 pl-4">
           <Text muted>No posts yet for this category.</Text>
