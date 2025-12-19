@@ -13,7 +13,7 @@ export type CodeBlockProps = {
 export function CodeBlock({ code, title, language = "ts" }: CodeBlockProps) {
   return (
     <div className="mt-2 py-2">
-      <div className="border-border bg-card/50 relative overflow-hidden rounded-lg border">
+      <div className="border-border bg-card/50 relative overflow-hidden border">
         <div className="border-border text-foreground flex items-center justify-between gap-3 border-b px-3 py-2 text-sm">
           <span className="text-muted-foreground">{title ?? `example.${language}`}</span>
           <CopyButton code={code} />

@@ -22,11 +22,13 @@ export default function RootLayout({
         className={`${geist.variable} ${geistMono.variable} mx-auto min-h-screen max-w-4xl px-6 py-4 antialiased`}
       >
         <ThemeProvider>
-          <Header />
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1 pt-16">{children}</main>
+            <Footer />
+          </div>
           <Analytics />
           <SpeedInsights />
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

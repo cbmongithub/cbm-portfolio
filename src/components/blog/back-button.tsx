@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 
 export function BackButton() {
   const router = useRouter();
-
   return (
     <Button variant="outline" size="sm" onClick={() => router.push("/blog")}>
       <ArrowLeftIcon />

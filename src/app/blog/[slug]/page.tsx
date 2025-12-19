@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { BackButton } from "@/components/blog/back-button";
+import { BackButton, Cta } from "@/components/blog";
 import { Avatar, Badge, ScrollProgress } from "@/components/ui";
 import { Heading } from "@/components/ui/typography";
 
@@ -17,14 +17,13 @@ export { generateMetadata, generateStaticParams };
 
 export default async function BlogPage({ params }: BlogMetadata) {
   const { slug } = await params;
-  const { post: BlogPost, metadata } = await loadPost(slug);
+  const { post: Post, metadata } = await loadPost(slug);
   const { title, description, tags, publishedTime, authors } = metadata;
 
-  if (!BlogPost) return notFound();
+  if (!Post) return notFound();
 
   return (
-    <main className="mx-auto max-w-4xl pt-12">
-      <div className="bg-background pointer-events-none fixed top-0 left-0 z-10 h-12 w-full to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,var(--color-background),transparent)]" />
+    <>
       <ScrollProgress />
       <section className="space-y-10">
         <BackButton />
@@ -61,9 +60,11 @@ export default async function BlogPage({ params }: BlogMetadata) {
         </header>
 
         <article className="max-w-none">
-          <BlogPost />
+          <Post />
         </article>
+
+        <Cta title={title} />
       </section>
-    </main>
+    </>
   );
 }

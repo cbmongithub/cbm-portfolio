@@ -118,9 +118,9 @@ export const BorderEffect = memo(function BorderEffect() {
                 )`,
         } as React.CSSProperties
       }
-      className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity"
+      className="pointer-events-none absolute inset-0 opacity-100 transition-opacity"
     >
-      <div className='glow rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))] after:rounded-[inherit] after:mask-[linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))] after:bg-fixed after:mask-intersect after:[mask-clip:padding-box,border-box] after:opacity-(--active) after:transition-opacity after:duration-200 after:content-[""] after:[background:var(--gradient)] after:[border:var(--glowingeffect-border-width)_solid_transparent]' />
+      <div className='glow after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))] after:mask-[linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))] after:bg-fixed after:mask-intersect after:[mask-clip:padding-box,border-box] after:opacity-(--active) after:transition-opacity after:duration-200 after:content-[""] after:[background:var(--gradient)] after:[border:var(--glowingeffect-border-width)_solid_transparent]' />
     </div>
   );
 });

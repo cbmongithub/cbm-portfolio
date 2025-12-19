@@ -29,7 +29,7 @@ export function Navigation() {
         type="button"
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
-        className="relative z-50 inline-flex size-8 items-center justify-center"
+        className="text-foreground hover:text-muted-foreground hover:bg-muted/60 relative z-9999 inline-flex size-8 items-center justify-center"
         onClick={() => setIsOpen((p) => !p)}
       >
         <motion.svg
@@ -58,7 +58,7 @@ export function Navigation() {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            className="size-screen bg-background fixed inset-0 z-40 flex flex-col justify-center"
+            className="bg-background fixed inset-0 z-40 flex h-screen w-full flex-col justify-center"
             variants={background}
             initial="closed"
             animate="open"

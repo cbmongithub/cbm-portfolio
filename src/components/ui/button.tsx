@@ -9,12 +9,11 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const BUTTON_STYLES: Record<ButtonVariant, string> = {
-  primary:
-    "bg-foreground text-background hover:bg-foreground/90 border border-border rounded-lg",
-  ghost: "text-muted-foreground hover:bg-muted/60 rounded-lg",
-  icon: "text-muted-foreground hover:bg-muted/60 border border-border rounded-lg",
+  primary: "bg-foreground text-background hover:bg-foreground/90 border border-border",
+  ghost: "text-muted-foreground hover:bg-muted/60",
+  icon: "text-muted-foreground hover:bg-muted/60 border border-border",
   outline:
-    "text-secondary-foreground bg-secondary hover:bg-muted hover:text-foreground rounded-lg border border-border",
+    "text-secondary-foreground bg-secondary hover:bg-muted hover:text-foreground border border-border",
 };
 
 const BUTTON_SIZES: Record<ButtonSize, string> = {

@@ -5,12 +5,14 @@ import { Logo } from "@/components/ui";
 
 export function Header() {
   return (
-    <header className="flex h-12 items-center justify-between py-6">
-      <Link href="/" className="z-50 inline-flex items-center">
-        <Logo />
-        <span className="sr-only">CBM home</span>
-      </Link>
-      <Navigation />
+    <header className="border-border bg-background/40 fixed top-0 left-0 z-30 w-full border-b backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
+        <Link href="/" className="inline-flex items-center gap-2">
+          <Logo />
+          <span className="sr-only">CBM home</span>
+        </Link>
+        <Navigation />
+      </div>
     </header>
   );
 }

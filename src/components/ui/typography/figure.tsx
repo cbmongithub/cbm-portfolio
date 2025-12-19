@@ -6,7 +6,7 @@ type FigcaptionProps = {
 
 function Figcaption({ text }: FigcaptionProps) {
   return (
-    <figcaption className="bg-muted/50 text-muted-foreground absolute bottom-0 left-0 w-full px-3 py-1 text-xs">
+    <figcaption className="bg-muted/60 text-muted-foreground absolute bottom-0 left-0 w-full px-3 py-1 text-xs">
       {text}
     </figcaption>
   );
@@ -22,7 +22,7 @@ type FigureProps = {
 
 export function Figure({ imageSrc, alt, caption, priority = false }: FigureProps) {
   return (
-    <figure className="bg-muted relative mt-6 aspect-1200/630 overflow-hidden rounded-xl">
+    <figure className="bg-muted relative mt-6 aspect-1200/630 overflow-hidden">
       <Image
         src={imageSrc}
         alt={alt}
