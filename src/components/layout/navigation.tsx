@@ -58,7 +58,7 @@ export function Navigation() {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            className="bg-background fixed inset-0 z-40 flex h-screen w-full flex-col justify-center"
+            className="bg-card fixed inset-0 z-40 flex h-screen w-full flex-col justify-center"
             variants={background}
             initial="closed"
             animate="open"
