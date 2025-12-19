@@ -23,8 +23,7 @@ export default async function BlogPage({ params }: BlogMetadata) {
   if (!Post) return notFound();
 
   return (
-    <main className="space-y-10 py-6">
-      <div className="bg-background pointer-events-none fixed top-0 left-0 z-10 h-12 w-full to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,var(--color-background),transparent)]" />
+    <>
       <ScrollProgress />
       <section className="space-y-10">
         <BackButton />
@@ -66,6 +65,6 @@ export default async function BlogPage({ params }: BlogMetadata) {
 
         <Cta title={title} />
       </section>
-    </main>
+    </>
   );
 }

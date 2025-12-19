@@ -23,7 +23,7 @@ export function Connect() {
         </Link>
         anytime
       </Text>
-      <div className="mt-2 flex flex-row space-x-3">
+      <div className="flex flex-row space-x-3 pt-4">
         {SOCIAL_LINKS.map(({ label, link }) => (
           <MagnetEffect key={label}>
             <Button variant="outline" size="sm">

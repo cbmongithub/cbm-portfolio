@@ -219,7 +219,7 @@ export function MorphEffectContainer({ children }: MorphEffectContainerProps) {
         <>
           <motion.div
             key={`backdrop-${uniqueId}`}
-            className="bg-foreground/30 fixed inset-0 size-full"
+            className="bg-foreground/30 fixed inset-0 z-50 size-full"
             style={{ willChange: "opacity" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -278,7 +278,7 @@ export function MorphEffectClose() {
       type="button"
       aria-label="Close dialog"
       key={`dialog-close-${uniqueId}`}
-      className="border-border bg-background group text-foreground hover:bg-muted hover:text-muted-foreground absolute top-6 right-6 z-50 size-fit border p-2 transition-colors duration-200"
+      className="border-border bg-background group text-foreground hover:bg-muted hover:text-muted-foreground absolute top-4 right-4 z-50 size-fit border p-2 transition-colors duration-200"
       initial="initial"
       animate="animate"
       exit="exit"

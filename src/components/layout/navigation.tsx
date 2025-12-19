@@ -29,7 +29,7 @@ export function Navigation() {
         type="button"
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
-        className="text-foreground hover:text-muted-foreground hover:bg-muted/60 relative z-50 inline-flex size-8 items-center justify-center"
+        className="text-foreground hover:text-muted-foreground hover:bg-muted/60 relative z-9999 inline-flex size-8 items-center justify-center"
         onClick={() => setIsOpen((p) => !p)}
       >
         <motion.svg
