@@ -192,7 +192,7 @@ export function MorphEffectContent({ children }: MorphEffectContentProps) {
     <motion.div
       ref={containerRef}
       layoutId={`dialog-${uniqueId}`}
-      className="relative max-h-[90vh] w-5/6 max-w-4xl overflow-hidden rounded-2xl"
+      className="relative max-h-[90vh] w-5/6 max-w-4xl overflow-hidden"
       role="dialog"
       aria-modal="true"
       aria-labelledby={`motion-ui-morphing-dialog-title-${uniqueId}`}
@@ -246,7 +246,7 @@ export function MorphEffectImage({ src, alt, sizes }: MorphEffectImageProps) {
   const { mounted } = useMounted();
 
   return (
-    <div className="bg-muted relative aspect-285/178 w-full overflow-hidden rounded-lg">
+    <div className="bg-muted relative aspect-285/178 w-full overflow-hidden">
       {!mounted && (
         <div className="bg-muted absolute inset-0 animate-pulse" aria-hidden="true" />
       )}
@@ -278,7 +278,7 @@ export function MorphEffectClose() {
       type="button"
       aria-label="Close dialog"
       key={`dialog-close-${uniqueId}`}
-      className="border-border bg-background group text-foreground hover:bg-muted hover:text-muted-foreground absolute top-6 right-6 z-50 size-fit rounded border p-2 transition-colors duration-200"
+      className="border-border bg-background group text-foreground hover:bg-muted hover:text-muted-foreground absolute top-6 right-6 z-50 size-fit border p-2 transition-colors duration-200"
       initial="initial"
       animate="animate"
       exit="exit"

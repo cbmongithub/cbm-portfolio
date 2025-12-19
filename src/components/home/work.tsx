@@ -13,7 +13,7 @@ export function Work() {
     <div className="flex flex-col space-y-2">
       {WORK.map(({ link, id, title, company, start, end }) => (
         <div key={id}>
-          <div className="border-border relative rounded-lg border p-4">
+          <div className="border-border relative border p-4">
             <BorderEffect />
             <div className="relative flex items-center justify-between gap-4">
               <div className="flex flex-col">

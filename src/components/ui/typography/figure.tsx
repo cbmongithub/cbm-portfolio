@@ -22,7 +22,7 @@ type FigureProps = {
 
 export function Figure({ imageSrc, alt, caption, priority = false }: FigureProps) {
   return (
-    <figure className="bg-muted relative mt-6 aspect-1200/630 overflow-hidden rounded-xl">
+    <figure className="bg-muted relative mt-6 aspect-1200/630 overflow-hidden">
       <Image
         src={imageSrc}
         alt={alt}

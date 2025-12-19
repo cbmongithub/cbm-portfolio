@@ -42,7 +42,7 @@ export const ThemeToggle = memo(function ThemeToggle() {
 
   return (
     <BackgroundEffect
-      className="bg-muted pointer-events-none rounded"
+      className="bg-muted pointer-events-none"
       defaultValue={theme}
       enableHover={false}
       onValueChangeAction={handleValueChange}

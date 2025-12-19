@@ -60,10 +60,7 @@ export function BlogFilter({ posts }: BlogFilterProps) {
       </div>
 
       {filteredPosts.length ? (
-        <BackgroundEffect
-          enableHover
-          className="bg-muted size-full rounded-l-none rounded-r-lg"
-        >
+        <BackgroundEffect enableHover className="bg-muted size-full">
           {filteredPosts.map(({ slug, title, description, formattedDate }) => (
             <Link
               key={slug}

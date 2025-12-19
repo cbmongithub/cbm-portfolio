@@ -6,7 +6,7 @@ export function Logo() {
       height="171.5"
       preserveAspectRatio="none"
       viewBox="99.974 164.102 300.047 171.5"
-      className="h-6 w-full max-w-[41.82px]"
+      className="z-50 h-6 w-full max-w-[41.82px]"
       aria-hidden="true"
     >
       <title>Cbm Logo</title>

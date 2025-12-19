@@ -15,10 +15,7 @@ export async function Blog() {
 
   return (
     <div className="flex flex-col">
-      <BackgroundEffect
-        enableHover
-        className="bg-muted size-full rounded-l-none rounded-r-lg"
-      >
+      <BackgroundEffect enableHover className="bg-muted size-full">
         {latest.map(({ slug, title, description }) => (
           <Link
             key={slug}

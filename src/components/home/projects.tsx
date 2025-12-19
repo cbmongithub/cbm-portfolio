@@ -18,7 +18,7 @@ export function Projects() {
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {PROJECTS.map(({ name, src, link, alt, description, id }) => (
         <div key={id} className="space-y-2">
-          <div className="bg-card relative rounded-lg">
+          <div className="bg-card relative">
             <MorphImage src={src} alt={alt} sizes={imageSizes} />
           </div>
           <div className="px-1">

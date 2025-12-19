@@ -16,7 +16,7 @@ export function Cta({ title }: CtaProps) {
     `Hey Christian!\n\nI just read your blog post "${title}" and would love to chat about working together.`
   );
   return (
-    <Section className="border-border bg-muted/40 rounded-2xl border p-6">
+    <Section className="border-border bg-muted/40 border p-6">
       <Text className="text-sm tracking-widest uppercase" muted>
         Enjoyed this post?
       </Text>

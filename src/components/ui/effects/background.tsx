@@ -85,7 +85,7 @@ export function BackgroundEffect({
               {isActiveId && (
                 <motion.div
                   layoutId={`background-${uniqueId}`}
-                  className={cn("absolute inset-0 rounded-sm", className)}
+                  className={cn("absolute inset-0", className)}
                   transition={BASE_TRANSITION}
                   initial={{ opacity: defaultValue ? 1 : 0 }}
                   animate={{
