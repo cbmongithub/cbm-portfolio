@@ -1,5 +1,5 @@
+export * from "./analytics";
 export * from "./footer";
-export * from "./ga";
 export * from "./header";
 export * from "./main";
 export * from "./navigation";
