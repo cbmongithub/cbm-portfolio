@@ -13,21 +13,6 @@ type Links = {
   label: string;
 };
 
-export const FOOTER_LINKS: Links[] = [
-  {
-    link: "/",
-    label: "home",
-  },
-  {
-    link: "/blog",
-    label: "blog",
-  },
-  {
-    link: "/sitemap.xml",
-    label: "sitemap",
-  },
-];
-
 export const NAV_LINKS: Links[] = [
   {
     link: "/",
@@ -37,18 +22,6 @@ export const NAV_LINKS: Links[] = [
     link: "/blog",
     label: "blog",
   },
-  //   {
-  //   link: "/about",
-  //   label: "about",
-  // },
-  // {
-  //   link: "/portfolio",
-  //   label: "portfolio",
-  // },
-  //   {
-  //   link: "/contact",
-  //   label: "contact",
-  // },
 ];
 
 export const SOCIAL_LINKS: Links[] = [

@@ -151,9 +151,7 @@ For this portfolio (targeting ~10 articles), the trade-off favors control and mi
 - [x] Per-post OG image generation (shared generator for /blog)
 - [x] Replace placeholder page content with real sections/components
 - [x] SEO generation extracted from post meta
-- [ ] Portfolio detail page (architecture, patterns, etc.)
-- [ ] Blog rich layout enhancements - tags, filtering blogs, next/previous blog, further reading, image captions underneath blog, blog author with social links, blog footer cta?)
+- [x] Blog rich layout enhancements - tags, filtering blogs, further reading, image captions underneath blog
 - [x] Per-post OG image generation
-- [ ] Navigation/footer wired to `NAV_LINKS`/`FOOTER_LINKS`
-- [ ] Deploy to Vercel and verify analytics
+- [x] Deploy to Vercel and verify analytics
 - [ ] Post-launch performance and accessibility optimizations
