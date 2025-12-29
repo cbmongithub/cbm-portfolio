@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import { Footer, Header } from "@/components/layout";
+import { Footer,GoogleAnalytics, Header } from "@/components/layout";
 import { ThemeProvider } from "@/components/ui";
 
 import { geist, geistMono } from "@/lib/config/font";
@@ -34,6 +34,7 @@ export default function RootLayout({
             <main className="flex-1 pt-16">{children}</main>
             <Footer />
           </div>
+          <GoogleAnalytics />
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
