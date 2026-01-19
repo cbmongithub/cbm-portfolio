@@ -11,7 +11,8 @@ export const PROJECTS: Projects[] = [
   {
     name: "Cli Loaders",
     alt: "An image of Christian B. Martinez' Cli Loaders project.",
-    description: "A collection of cli loaders for the terminal, react, and beyond.",
+    description:
+      "A collection of cli loaders for the terminal, react, and beyond.",
     link: "https://cliloaders.com/",
     src: "/cliloaders.jpg",
     id: "project-1",
@@ -37,19 +38,19 @@ export type WorkExperience = {
 
 export const WORK: WorkExperience[] = [
   {
-    company: "Pointbreak",
-    title: "Technical Co-Founder",
-    start: "2025",
-    end: "Present",
-    link: "https://pointbreakapp.com",
-    id: "work-1",
-  },
-  {
     company: "Freelance",
     title: "Full Stack Developer",
     start: "2020",
-    end: "2024",
+    end: "Present",
     link: "/",
+    id: "work-1",
+  },
+  {
+    company: "Pointbreak",
+    title: "Full Stack Developer",
+    start: "2025",
+    end: "2026",
+    link: "https://pointbreakapp.com",
     id: "work-2",
   },
   {
