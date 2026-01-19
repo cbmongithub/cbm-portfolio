@@ -12,6 +12,7 @@ type NavigationVariants = {
   background: Variants;
   ul: Variants;
   li: Variants;
+  footer: Variants;
 };
 
 export const NAVIGATION_VARIANTS: NavigationVariants = {
@@ -69,6 +70,23 @@ export const NAVIGATION_VARIANTS: NavigationVariants = {
       opacity: 0,
       transition: {
         y: { ...BASE_TRANSITION },
+      },
+    },
+  },
+  footer: {
+    open: (custom = 0) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        ...BASE_TRANSITION,
+        delay: 0.06 + 0.08 * custom,
+      },
+    }),
+    closed: {
+      y: -24,
+      opacity: 0,
+      transition: {
+        ...BASE_TRANSITION,
       },
     },
   },
