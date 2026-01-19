@@ -11,7 +11,8 @@ export default async function HomePage() {
     <Main>
       <Section title={{ text: "Hi I'm Christian" }}>
         <TextEffect>
-          Full stack web developer from Utah focusing on modern technologies.
+          Full stack web developer from Utah focusing on modern technologies and
+          emerging trends.
         </TextEffect>
       </Section>
       <Section title={{ text: "Projects", level: 3 }}>
